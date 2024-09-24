@@ -1,0 +1,21 @@
+/** @type {import("prettier").Config} */
+const config = {
+  printWidth: 80,
+  tabWidth: 2,
+  useTabs: false,
+  semi: true,
+  singleQuote: true,
+  trailingComma: 'es5',
+  bracketSpacing: false,
+  arrowParens: 'always',
+  endOfLine: 'lf',
+  importOrder: ['^@/(.*)$', '^[./]'],
+  importOrderSeparation: true,
+  importOrderSortSpecifiers: true,
+  plugins: [
+    'prettier-plugin-tailwindcss',
+    '@trivago/prettier-plugin-sort-imports',
+  ],
+};
+
+export default config;
