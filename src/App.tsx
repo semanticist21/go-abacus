@@ -1,55 +1,73 @@
 import {fs, path} from '@tauri-apps/api';
-import {renderAsync} from 'docx-preview';
+import {Document, Packer, Paragraph, Table, TableCell, TableRow} from 'docx';
 import {useEffect} from 'react';
 
 import './App.css';
+import {saveFile, saveFileBlob} from './util/fs';
 
-async function saveFile(arrayBuffer: ArrayBuffer, filename: string) {
+const writeSolutionAsync = async () => {
   const resourceDir = await path.resourceDir();
+  const publicDir = await path.resolve(resourceDir, 'data');
 
-  const publicDir = await path.resolve(resourceDir, 'public/docx');
+  const createTable = () => {
+    const rows: TableRow[] = [];
+    Array.from({length: 12}).forEach((_, i) => {
+      const cells: TableCell[] = [];
 
-  // generates a path to the file if not exists
-  try {
-    await fs.readDir(publicDir);
-  } catch (error) {
-    await fs.createDir(publicDir, {recursive: true});
-  }
+      // in case of header
+      // TODO
+      if (true) {
+        Array.from({length: 6}).forEach((_, j) => {
+          cells.push(
+            new TableCell({
+              children: [new Paragraph(j.toString())],
+            })
+          );
+        });
 
-  // Convert ArrayBuffer to a Uint8Array and then to a base64 string
-  const uint8Array = new Uint8Array(arrayBuffer);
-  const fullPath = await path.join(publicDir, filename);
+        rows.push(new TableRow({children: cells}));
+      }
+    });
 
-  // Write the base64 data to the file
-  await fs.writeBinaryFile(fullPath, uint8Array);
-}
+    return new Table({rows: rows});
+  };
 
-async function renderSavedFile(filename: string) {
-  const resourceDir = await path.resourceDir();
-  const publicDir = await path.resolve(resourceDir, 'public/docx');
-
-  const fullPath = await path.join(publicDir, filename);
-
-  // Read the file as binary
-  const savedFileBuffer = await fs.readBinaryFile(fullPath);
-  const el = document.getElementById('container')!;
-  await renderAsync(savedFileBuffer, el);
-}
-
-const fetchDocxThenSave = async () => {
-  const docx = await fetch('example.docx');
-  const arrayBuffer = await docx.arrayBuffer();
-  // await saveFile(arrayBuffer, 'solutions.docx');
-
-  // renderSavedFile('solutions.docx');
+  return new Document({
+    sections: [
+      {
+        children: [
+          new Paragraph({
+            text: '4x4 Table Example',
+          }),
+          createTable(),
+        ],
+      },
+    ],
+  });
 };
 
 const App = () => {
   useEffect(() => {
-    fetchDocxThenSave();
+    const writeSolution = async () => {
+      const file = await writeSolutionAsync();
+      const blob = await Packer.toBlob(file);
+
+      saveFileBlob(blob, 'test.docx');
+    };
+
+    writeSolution();
   }, []);
 
-  return <div id="container" className="size-8 bg-red-500 text-green-400" />;
+  return (
+    <div
+      id="container"
+      className="bg-red-500 text-green-400 min-h-dvh flex flex-col"
+    >
+      <header className="flex-shrink-0 bg-blue-300">header</header>
+      <main className="flex-grow bg-green-500">main</main>
+      <footer className="flex-shrink-0 bg-yellow-300">footer</footer>
+    </div>
+  );
 };
 
 export default App;

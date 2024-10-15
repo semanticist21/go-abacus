@@ -23,7 +23,8 @@
       "fs": {
         "all": true,
         "scope": [
-          "$RESOURCE/public/docx/*"
+          "$RESOURCE/data/*",
+          "$RESOURCE/data"
         ]
       }
     },
