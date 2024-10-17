@@ -48,10 +48,6 @@ const makeTableHeader = (rows: TableRow[], length: number = 6) => {
         width: isFirst
           ? {size: noWidth, type: WidthType.PERCENTAGE}
           : {size: calWidth, type: WidthType.PERCENTAGE},
-        // margins: {
-        //   top: margin,
-        //   bottom: margin,
-        // },
         borders: {
           top: {
             size: borderThickness,
