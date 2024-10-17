@@ -18,87 +18,18 @@ import {useEffect} from 'react';
 
 import './App.css';
 import {saveFileBlob} from './util/fs';
+import pageDescRow from './widget/page-desc-row';
+import PageHeader from './widget/page-header';
+import pageTitle from './widget/page-title';
+import SolutionTableBody from './widget/solution-table-body';
+import SolutionTableHeaderCells from './widget/solution-table-header';
 
-const makeTableHeader = (rows: TableRow[], length: number = 6) => {
-  const cells: TableCell[] = [];
-
-  Array.from({length}).forEach((_, j) => {
-    const isFirst = j === 0;
-
-    const noWidth = 6;
-    const calWidth = length === 1 ? 0 : (100 - noWidth) / (length - 1);
-
-    const margin = 25;
-    const fontSize = 24;
-
-    const borderThickness = 15;
-
-    cells.push(
-      new TableCell({
-        children: [
-          new Paragraph({
-            children: [
-              isFirst
-                ? new TextRun({text: 'No.', bold: true, size: fontSize})
-                : new TextRun({text: j.toString(), size: fontSize}),
-            ],
-            alignment: isFirst ? AlignmentType.LEFT : AlignmentType.CENTER,
-          }),
-        ],
-        width: isFirst
-          ? {size: noWidth, type: WidthType.PERCENTAGE}
-          : {size: calWidth, type: WidthType.PERCENTAGE},
-        borders: {
-          top: {
-            size: borderThickness,
-            style: 'single',
-          },
-          left: {
-            size: borderThickness,
-            style: 'single',
-          },
-          right: {
-            size: borderThickness,
-            style: 'single',
-          },
-        },
-      })
-    );
-  });
-
-  rows.push(new TableRow({children: cells}));
-};
-
-const generateHeader = (text: string) => {
-  return new Header({
-    children: [
-      new Paragraph({
-        alignment: AlignmentType.RIGHT,
-        children: [
-          new TextRun({
-            text,
-            bold: true,
-            color: '000000',
-            size: 20,
-          }),
-        ],
-      }),
-    ],
-  });
-};
-
-const writeSolutionAsync = async () => {
+const writeSolutionAsync = () => {
   const createTable = () => {
     const rows: TableRow[] = [];
-    Array.from({length: 12}).forEach((_, i) => {
-      const cells: TableCell[] = [];
 
-      // in case of header
-      // TODO
-      if (i === 0) {
-        makeTableHeader(rows);
-      }
-    });
+    rows.push(SolutionTableHeaderCells());
+    SolutionTableBody().forEach((row) => rows.push(row));
 
     return new Table({
       rows: rows,
@@ -118,103 +49,15 @@ const writeSolutionAsync = async () => {
     sections: [
       {
         headers: {
-          default: generateHeader('주산암산-2자리'),
+          default: PageHeader('주산암산-2자리'),
         },
         children: [
-          new Paragraph({
-            children: [
-              new TextRun({
-                text: 'LEVEL 2',
-                bold: true,
-                size: 32,
-              }),
-            ],
-            alignment: AlignmentType.CENTER,
-          }),
+          pageTitle('LEVEL 2'),
           spacer(),
-          new Table({
-            rows: [
-              new TableRow({
-                children: [
-                  new TableCell({
-                    children: [
-                      new Paragraph({
-                        children: [
-                          new TextRun({
-                            text: '주산암산',
-                            bold: true,
-                          }),
-                        ],
-                      }),
-                    ],
-                    verticalAlign: VerticalAlign.CENTER,
-                    borders: {
-                      right: {
-                        style: 'double',
-                      },
-                    },
-                  }),
-                  new TableCell({
-                    children: [
-                      new Paragraph({
-                        children: [
-                          new TextRun({
-                            text: '점',
-                            bold: true,
-                            size: 20,
-                          }),
-                        ],
-                        alignment: AlignmentType.RIGHT,
-                        spacing: {
-                          line: 360,
-                          lineRule: 'auto',
-                        },
-                      }),
-                    ],
-                    verticalAlign: VerticalAlign.CENTER,
-                    width: {
-                      size: 15,
-                      type: WidthType.PERCENTAGE,
-                    },
-                    borders: {
-                      left: {
-                        style: 'double',
-                      },
-                      right: {
-                        style: 'double',
-                      },
-                      top: {
-                        style: 'double',
-                      },
-                      bottom: {
-                        style: 'double',
-                      },
-                    },
-                  }),
-                ],
-              }),
-            ],
-            width: {
-              size: 100,
-              type: WidthType.PERCENTAGE,
-            },
-            borders: {
-              bottom: {
-                style: 'none',
-              },
-              top: {
-                style: 'none',
-              },
-              left: {
-                style: 'none',
-              },
-              right: {
-                style: 'none',
-              },
-            },
-          }),
+          pageDescRow('주산암산'),
 
           spacer(),
+
           createTable(),
         ],
       },
