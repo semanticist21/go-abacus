@@ -30,4 +30,4 @@ export const SIZES = {
       solution: 312,
     },
   },
-};
+} as const;
