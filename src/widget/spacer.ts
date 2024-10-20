@@ -1,10 +1,10 @@
 import {Paragraph} from 'docx';
 
-const VerticalSpacer = () =>
+const spacer = (designatedSpacing: number = 100) =>
   new Paragraph({
     spacing: {
-      after: 100,
+      after: designatedSpacing,
     },
   });
 
-export default VerticalSpacer;
+export default spacer;

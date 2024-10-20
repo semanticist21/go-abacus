@@ -1,81 +1,79 @@
-import {
-  AlignmentType,
-  BorderStyle,
-  Document,
-  Header,
-  Packer,
-  Paragraph,
-  TabStopPosition,
-  TabStopType,
-  Table,
-  TableCell,
-  TableRow,
-  TextRun,
-  VerticalAlign,
-  WidthType,
-} from 'docx';
-import {useEffect} from 'react';
-
+// import {Document, Packer, Table, TableRow, WidthType} from 'docx';
+// import {useEffect} from 'react';
 import './App.css';
-import {saveFileBlob} from './util/fs';
-import pageDescRow from './widget/page-desc-row';
-import PageHeader from './widget/page-header';
-import pageTitle from './widget/page-title';
-import SolutionTableBody from './widget/solution-table-body';
-import SolutionTableHeaderCells from './widget/solution-table-header';
 
-const writeSolutionAsync = () => {
-  const createTable = () => {
-    const rows: TableRow[] = [];
+// import {saveFileBlob} from './util/fs';
+// import {breakPage} from './widget/page-break';
+// import pageDescRow from './widget/page/desc-row';
+// import PageHeader from './widget/page/header';
+// import pageTitle from './widget/page/title';
+// import SolutionTableBody from './widget/solution-table/body';
+// import SolutionTableFooterCells from './widget/solution-table/footer';
+// import SolutionTableHeaderCells from './widget/solution-table/header';
+// import spacer from './widget/spacer';
 
-    rows.push(SolutionTableHeaderCells());
-    SolutionTableBody().forEach((row) => rows.push(row));
+// const createPages = () => {
+//   const createTable = () => {
+//     const rows: TableRow[] = [];
 
-    return new Table({
-      rows: rows,
-      width: {size: 100, type: WidthType.PERCENTAGE},
-    });
-  };
+//     rows.push(SolutionTableHeaderCells());
+//     SolutionTableBody().forEach((row) => rows.push(row));
+//     rows.push(SolutionTableFooterCells());
 
-  const spacer = () => {
-    return new Paragraph({
-      spacing: {
-        after: 100,
-      },
-    });
-  };
+//     return new Table({
+//       rows: rows,
+//       width: {size: 100, type: WidthType.PERCENTAGE},
+//     });
+//   };
 
-  return new Document({
-    sections: [
-      {
-        headers: {
-          default: PageHeader('주산암산-2자리'),
-        },
-        children: [
-          pageTitle('LEVEL 2'),
-          spacer(),
-          pageDescRow('주산암산'),
+//   return new Document({
+//     sections: [
+//       {
+//         headers: {
+//           default: PageHeader('주산암산-2자리'),
+//         },
+//         children: [
+//           pageTitle('LEVEL 2'),
+//           spacer(100),
+//           pageDescRow('주산암산'),
 
-          spacer(),
+//           spacer(100),
 
-          createTable(),
-        ],
-      },
-    ],
-  });
-};
+//           createTable(),
+//           spacer(0),
+//           createTable(),
+//           spacer(0),
+//           createTable(),
+//           breakPage(),
+
+//           pageTitle(''),
+//           spacer(100),
+//           pageDescRow('주산암산'),
+
+//           spacer(100),
+
+//           createTable(),
+//           spacer(0),
+//           createTable(),
+//           spacer(0),
+//           createTable(),
+//         ],
+//       },
+//     ],
+//   });
+// };
 
 const App = () => {
-  useEffect(() => {
-    const writeSolution = async () => {
-      const file = await writeSolutionAsync();
-      const blob = await Packer.toBlob(file);
+  // useEffect(() => {
+  //   const write = async () => {
+  //     const file = createPages();
+  //     const blob = await Packer.toBlob(file);
 
-      saveFileBlob(blob, 'test.docx');
-    };
+  //     saveFileBlob(blob, 'test.docx');
+  //   };
 
-    writeSolution();
-  }, []);
+  //   write();
+  // }, []);
 
   return (
     <div

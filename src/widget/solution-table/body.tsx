@@ -14,8 +14,8 @@ const SolutionTableBody = (length: number = 10, colLength: number = 6) => {
       const noWidth = 5.5;
       const calWidth = length === 1 ? 0 : (100 - noWidth) / (length - 1);
 
-      const noFontSize = 24;
-      const solutionFontSize = 32;
+      const numberingFontSize = 24;
+      const solutionFontSize = 24;
 
       const borderThickness = 15;
 
@@ -27,15 +27,19 @@ const SolutionTableBody = (length: number = 10, colLength: number = 6) => {
                 isFirst
                   ? new TextRun({
                       text: rowOrd.toString(),
-                      size: noFontSize,
+                      size: numberingFontSize,
                     })
                   : new TextRun({
-                      text: (Math.random() * 100).toFixed(0),
+                      text: `${Math.random() < 0.5 ? '-' : ''}${(
+                        Math.random() * 100
+                      ).toFixed(0)}`,
                       size: solutionFontSize,
                       italics: true,
+                      font: 'Helvetica Neue Light Italic',
+                      characterSpacing: 70,
                     }),
               ],
-              alignment: AlignmentType.CENTER,
+              alignment: isFirst ? AlignmentType.CENTER : AlignmentType.RIGHT,
             }),
           ],
           width: isFirst
@@ -66,7 +70,7 @@ const SolutionTableBody = (length: number = 10, colLength: number = 6) => {
 
     return new TableRow({
       children: cells,
-      height: {rule: 'atLeast', value: 450},
+      height: {rule: 'atLeast', value: 312},
     });
   };
 
