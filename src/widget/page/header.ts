@@ -1,5 +1,7 @@
 import {AlignmentType, Header, Paragraph, TextRun} from 'docx';
 
+import {SIZES} from '../shared/size';
+
 const PageHeader = (text: string) => {
   return new Header({
     children: [
@@ -9,8 +11,7 @@ const PageHeader = (text: string) => {
           new TextRun({
             text,
             bold: true,
-            color: '000000',
-            size: 20,
+            size: SIZES.font.subtitle,
           }),
         ],
       }),

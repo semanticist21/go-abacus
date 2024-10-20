@@ -9,6 +9,8 @@ import {
   WidthType,
 } from 'docx';
 
+import {SIZES} from '../shared/size';
+
 const pageDescRow = (text: string) => {
   return new Table({
     rows: [
@@ -43,6 +45,9 @@ const pageDescRow = (text: string) => {
                   }),
                 ],
                 alignment: AlignmentType.RIGHT,
+                indent: {
+                  right: 100,
+                },
                 spacing: {
                   line: 360,
                   lineRule: 'auto',
@@ -56,15 +61,19 @@ const pageDescRow = (text: string) => {
             },
             borders: {
               left: {
+                size: SIZES.border.double,
                 style: 'double',
               },
               right: {
+                size: SIZES.border.double,
                 style: 'double',
               },
               top: {
+                size: SIZES.border.double,
                 style: 'double',
               },
               bottom: {
+                size: SIZES.border.double,
                 style: 'double',
               },
             },

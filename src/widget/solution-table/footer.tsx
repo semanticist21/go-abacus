@@ -3,6 +3,8 @@ import {TextRun} from 'docx';
 import {Paragraph} from 'docx';
 import {TableCell} from 'docx';
 
+import {SIZES} from '../shared/size';
+
 const SolutionTableFooterCells = (length: number = 6) => {
   const cells: TableCell[] = [];
 
@@ -10,40 +12,35 @@ const SolutionTableFooterCells = (length: number = 6) => {
     const isFirst = j === 0;
     const isLast = j === length - 1;
 
-    const noWidth = 5.5;
-    const calWidth = length === 1 ? 0 : (100 - noWidth) / (length - 1);
-
-    const firstFontSize = 24;
-    const otherFontSize = 32;
-
-    const borderThickness = 15;
-
     cells.push(
       new TableCell({
         children: [
           new Paragraph({
             children: [
               isFirst
-                ? new TextRun({text: '計', size: firstFontSize})
-                : new TextRun({text: '', size: otherFontSize}),
+                ? new TextRun({text: '計', size: SIZES.font.numbering})
+                : new TextRun({text: '', size: SIZES.font.empty}),
             ],
             alignment: AlignmentType.CENTER,
           }),
         ],
         width: isFirst
-          ? {size: noWidth, type: WidthType.PERCENTAGE}
-          : {size: calWidth, type: WidthType.PERCENTAGE},
+          ? {size: SIZES.columns.width.first, type: WidthType.PERCENTAGE}
+          : {
+              size: SIZES.columns.width.childColumn(length),
+              type: WidthType.PERCENTAGE,
+            },
         borders: {
           bottom: {
-            size: borderThickness,
+            size: SIZES.border.single,
             style: 'single',
           },
           left: {
-            size: isFirst ? borderThickness : 0,
+            size: isFirst ? SIZES.border.single : undefined,
             style: 'single',
           },
           right: {
-            size: isLast ? borderThickness : 0,
+            size: isLast ? SIZES.border.single : undefined,
             style: 'single',
           },
         },
