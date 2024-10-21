@@ -1,7 +1,27 @@
+import {isEqual} from 'lodash';
+import {useEffect, useState} from 'react';
+import toast from 'react-hot-toast';
+
 import {Button} from '../../shared/button';
+import {optionsSchema, useOptionStore} from '../../store/store';
 import {openSavedFolderAsync} from '../../util/explorer';
 
 const Header = () => {
+  const {reset, options} = useOptionStore();
+
+  // state props
+  const [isEqualToInitial, setIsEqualToInitial] = useState(true);
+  const [hasMadeChanges, setHasMadeChanges] = useState(true);
+
+  useEffect(() => {
+    const initial = optionsSchema.parse({});
+    setIsEqualToInitial(!isEqual(initial, options));
+  }, [options]);
+
+  useEffect(() => {
+    setHasMadeChanges(true);
+  }, [options]);
+
   return (
     <header
       className="px-3 bg-gray-50 flex justify-between items-center border-b border-gray-300 gap-2 h-16"
@@ -40,6 +60,17 @@ const Header = () => {
 
       <div className="flex gap-2 items-center">
         <Button
+          className="bg-gray-700 disabled:bg-gray-400 transition-all duration-300"
+          aria-labelledby="reset"
+          disabled={!isEqualToInitial}
+          onClick={() => {
+            reset();
+            toast.success('초기화되었습니다.');
+          }}
+        >
+          초기화
+        </Button>
+        <Button
           className="bg-gray-700"
           aria-labelledby="open-saved-folder"
           onClick={openSavedFolderAsync}
@@ -49,7 +80,10 @@ const Header = () => {
         <Button
           className="disabled:bg-gray-400 transition-all duration-300"
           aria-labelledby="save"
-          disabled
+          disabled={!hasMadeChanges}
+          onClick={() => {
+            setHasMadeChanges(false);
+          }}
         >
           생성 및 저장
         </Button>
