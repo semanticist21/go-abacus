@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react';
 import toast from 'react-hot-toast';
 
 import {Button} from '../../shared/button';
-import {optionsSchema, useOptionStore} from '../../store/store';
+import {initialOptions, useOptionStore} from '../../store/store';
 import {openSavedFolderAsync} from '../../util/explorer';
 
 const Header = () => {
@@ -14,8 +14,7 @@ const Header = () => {
   const [hasMadeChanges, setHasMadeChanges] = useState(true);
 
   useEffect(() => {
-    const initial = optionsSchema.parse({});
-    setIsEqualToInitial(!isEqual(initial, options));
+    setIsEqualToInitial(!isEqual(initialOptions, options));
   }, [options]);
 
   useEffect(() => {

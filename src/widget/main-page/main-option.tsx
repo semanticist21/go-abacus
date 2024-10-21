@@ -16,7 +16,7 @@ const MainOption = ({
   const id = useId();
 
   return (
-    <div className={containerClassName}>
+    <div className={containerClassName} aria-controls={id}>
       <label
         htmlFor={id}
         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"

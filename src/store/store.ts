@@ -11,6 +11,8 @@ export const optionsSchema = z.object({
   randomDigit: z.boolean().default(false),
 });
 
+export const initialOptions = optionsSchema.parse({});
+
 type Options = z.infer<typeof optionsSchema>;
 
 type StoreOptions = {
@@ -22,9 +24,9 @@ type StoreOptions = {
 export const useOptionStore = create(
   persist<StoreOptions>(
     (set, get) => ({
-      options: optionsSchema.parse({}),
+      options: initialOptions,
       setOptions: (options) => set({options: {...get().options, ...options}}),
-      reset: () => set({options: optionsSchema.parse({})}),
+      reset: () => set({options: initialOptions}),
     }),
     {
       name: 'options-storage',
