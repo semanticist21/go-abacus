@@ -32,8 +32,8 @@ const MainBody = () => {
           type="number"
           min={1}
           max={20}
-          value={options.pageCount}
-          onChange={(e) => setOptions({pageCount: Number(e.target.value)})}
+          value={options.page_count}
+          onChange={(e) => setOptions({page_count: Number(e.target.value)})}
         />
       </fieldset>
 
@@ -47,20 +47,20 @@ const MainBody = () => {
           type="number"
           min={1}
           max={8}
-          value={options.digitCount}
-          onChange={(e) => setOptions({digitCount: Number(e.target.value)})}
+          value={options.digit}
+          onChange={(e) => setOptions({digit: Number(e.target.value)})}
         />
         <MainCheckbox
           containerClassName="flex-1"
           label="마이너스 문제 포함"
-          checked={options.includeMinus}
-          onChange={(e) => setOptions({includeMinus: e.target.checked})}
+          checked={options.include_minus}
+          onChange={(e) => setOptions({include_minus: e.target.checked})}
         />
         <MainCheckbox
           containerClassName="flex-1"
           label="자리 수 무작위"
-          checked={options.randomDigit}
-          onChange={(e) => setOptions({randomDigit: e.target.checked})}
+          checked={options.random_digit}
+          onChange={(e) => setOptions({random_digit: e.target.checked})}
         />
       </fieldset>
     </main>

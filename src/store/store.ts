@@ -1,19 +1,7 @@
-import {z} from 'zod';
 import {create} from 'zustand';
 import {createJSONStorage, persist} from 'zustand/middleware';
 
-export const optionsSchema = z.object({
-  title: z.string().default('LEVEL 0'),
-  subtitle: z.string().default('주산 암산'),
-  pageCount: z.number().min(1).max(20).default(10),
-  digitCount: z.number().min(1).max(8).default(4),
-  includeMinus: z.boolean().default(false),
-  randomDigit: z.boolean().default(false),
-});
-
-export const initialOptions = optionsSchema.parse({});
-
-type Options = z.infer<typeof optionsSchema>;
+import {Options, initialOptions} from './type';
 
 type StoreOptions = {
   options: Options;

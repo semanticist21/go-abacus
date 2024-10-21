@@ -1,9 +1,11 @@
+import {invoke} from '@tauri-apps/api/tauri';
 import {isEqual} from 'lodash';
 import {useEffect, useState} from 'react';
 import toast from 'react-hot-toast';
 
 import {Button} from '../../shared/button';
-import {initialOptions, useOptionStore} from '../../store/store';
+import {useOptionStore} from '../../store/store';
+import {initialOptions} from '../../store/type';
 import {openSavedFolderAsync} from '../../util/explorer';
 
 const Header = () => {
@@ -11,14 +13,9 @@ const Header = () => {
 
   // state props
   const [isEqualToInitial, setIsEqualToInitial] = useState(true);
-  const [hasMadeChanges, setHasMadeChanges] = useState(true);
 
   useEffect(() => {
     setIsEqualToInitial(!isEqual(initialOptions, options));
-  }, [options]);
-
-  useEffect(() => {
-    setHasMadeChanges(true);
   }, [options]);
 
   return (
@@ -79,9 +76,8 @@ const Header = () => {
         <Button
           className="disabled:bg-gray-400 transition-all duration-300"
           aria-labelledby="save"
-          disabled={!hasMadeChanges}
           onClick={() => {
-            setHasMadeChanges(false);
+            invoke('generate', {options});
           }}
         >
           생성 및 저장
