@@ -76,8 +76,10 @@ const Header = () => {
         <Button
           className="disabled:bg-gray-400 transition-all duration-300"
           aria-labelledby="save"
-          onClick={() => {
-            invoke('generate', {options});
+          onClick={async () => {
+            // TODO implement creation logic
+            const result = await invoke('generate', {options});
+            console.log(result);
           }}
         >
           생성 및 저장
