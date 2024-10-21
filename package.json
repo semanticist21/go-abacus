@@ -12,11 +12,14 @@
   },
   "dependencies": {
     "@tauri-apps/api": "^1",
+    "clsx": "^2.1.1",
     "docx": "^8.5.0",
     "docx-preview": "^0.3.2",
+    "flowbite-react": "^0.10.2",
     "randomatic": "^3.1.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "tailwind-merge": "^2.5.4"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^1",

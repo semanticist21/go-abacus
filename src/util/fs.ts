@@ -1,14 +1,13 @@
 import {fs, path} from '@tauri-apps/api';
 
-export const getCurrentDir = async () => {
+export const getCurrentResourceDir = async () => {
   const resourceDir = await path.resourceDir();
-  const publicDir = await path.resolve(resourceDir, 'data');
 
-  return publicDir;
+  return await path.resolve(resourceDir, 'data');
 };
 
 const _getFullPathWithCreation = async (filename: string) => {
-  const publicDir = await getCurrentDir();
+  const publicDir = await getCurrentResourceDir();
 
   try {
     await fs.readDir(publicDir);

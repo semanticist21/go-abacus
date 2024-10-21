@@ -3,14 +3,15 @@ import {useEffect} from 'react';
 
 import './App.css';
 import {saveFileBlob} from './util/fs';
-import {breakPage} from './widget/page-break';
-import pageDescRow from './widget/page/desc-row';
-import PageHeader from './widget/page/header';
-import pageTitle from './widget/page/title';
-import SolutionTableBody from './widget/solution-table/body';
-import SolutionTableFooterCells from './widget/solution-table/footer';
-import SolutionTableHeaderCells from './widget/solution-table/header';
-import spacer from './widget/spacer';
+import {breakPage} from './widget/docx/page-break';
+import pageDescRow from './widget/docx/page/desc-row';
+import PageHeader from './widget/docx/page/header';
+import pageTitle from './widget/docx/page/title';
+import SolutionTableBody from './widget/docx/solution-table/body';
+import SolutionTableFooterCells from './widget/docx/solution-table/footer';
+import SolutionTableHeaderCells from './widget/docx/solution-table/header';
+import spacer from './widget/docx/spacer';
+import MainPage from './widget/main-page/page';
 
 const createPages = () => {
   const createTable = () => {
@@ -75,16 +76,7 @@ const App = () => {
     write();
   }, []);
 
-  return (
-    <div
-      id="container"
-      className="bg-red-500 text-green-400 min-h-dvh flex flex-col"
-    >
-      <header className="flex-shrink-0 bg-blue-300">header</header>
-      <main className="flex-grow bg-green-500">main</main>
-      <footer className="flex-shrink-0 bg-yellow-300">footer</footer>
-    </div>
-  );
+  return <MainPage />;
 };
 
 export default App;

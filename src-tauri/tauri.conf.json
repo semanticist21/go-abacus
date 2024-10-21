@@ -14,8 +14,23 @@
     "allowlist": {
       "all": false,
       "shell": {
-        "all": false,
-        "open": true
+        "all": true,
+        "scope": [
+          {
+            "name": "explorer",
+            "cmd": "explorer",
+            "args": [
+              "*"
+            ]
+          },
+          {
+            "name": "open",
+            "cmd": "open",
+            "args": [
+              "*"
+            ]
+          }
+        ]
       },
       "path": {
         "all": true
@@ -30,7 +45,7 @@
     },
     "windows": [
       {
-        "title": "go-abacus",
+        "title": "go-abacus v0.1.0",
         "width": 800,
         "height": 600
       }
