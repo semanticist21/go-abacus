@@ -59,8 +59,8 @@ const MainBody = () => {
         <MainCheckbox
           containerClassName="flex-1"
           label="자리 수 무작위"
-          checked={options.random_digit}
-          onChange={(e) => setOptions({random_digit: e.target.checked})}
+          checked={options.is_random_digit}
+          onChange={(e) => setOptions({is_random_digit: e.target.checked})}
         />
       </fieldset>
     </main>

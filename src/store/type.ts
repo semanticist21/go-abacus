@@ -4,9 +4,11 @@ export const optionsSchema = z.object({
   title: z.string().default('LEVEL 0'),
   subtitle: z.string().default('주산 암산'),
   page_count: z.number().min(1).max(20).default(10),
+  solutions_per_page: z.number().min(1).default(15),
+  number_counters_per_solution: z.number().min(1).default(10),
   digit: z.number().min(1).max(8).default(4),
   include_minus: z.boolean().default(false),
-  random_digit: z.boolean().default(false),
+  is_random_digit: z.boolean().default(false),
 });
 
 export const initialOptions = optionsSchema.parse({});
