@@ -36,8 +36,8 @@ pub fn generate(options: Options) -> Solutions {
     } = options;
 
     println!(
-        "Received options: pageCount={}, digitCount={}, includeMinus={}, randomDigit={}",
-        options.page_count, options.digit, options.include_minus, options.is_random_digit
+        "Received options: pageCount={}, digitCount={}, includeMinus={}, randomDigit={}, solutionsPerPage={}, numberCountersPerSolution={}, minOriginalDigit={}",
+        options.page_count, options.digit, options.include_minus, options.is_random_digit, options.solutions_per_page, options.number_counters_per_solution, options.min_original_digit
     );
 
     let mut current_sum = 0;
