@@ -18,7 +18,7 @@ const MainBody = () => {
           value={options.file_name}
           onChange={(e) => setOptions({file_name: e.target.value})}
           spellCheck={false}
-          aria-label="file-name"
+          aria-labelledby="file-name"
         />
       </fieldset>
 
@@ -31,7 +31,7 @@ const MainBody = () => {
           placeholder="문서 제목 (ex. LEVEL 1)"
           value={options.title}
           onChange={(e) => setOptions({title: e.target.value})}
-          aria-label="title"
+          aria-labelledby="title"
         />
         <MainOption
           containerClassName="flex-1"
@@ -39,7 +39,7 @@ const MainBody = () => {
           placeholder="문서 부제목 (ex. 주산 암산)"
           value={options.subtitle}
           onChange={(e) => setOptions({subtitle: e.target.value})}
-          aria-label="subtitle"
+          aria-labelledby="subtitle"
         />
         <MainOption
           containerClassName="flex-1"
@@ -50,7 +50,7 @@ const MainBody = () => {
           max={20}
           value={options.page_count}
           onChange={(e) => setOptions({page_count: Number(e.target.value)})}
-          aria-label="page-count"
+          aria-labelledby="page-count"
         />
       </fieldset>
 
@@ -66,21 +66,21 @@ const MainBody = () => {
           max={7}
           value={options.digit}
           onChange={(e) => setOptions({digit: Number(e.target.value)})}
-          aria-label="digit"
+          aria-labelledby="digit"
         />
         <MainCheckbox
           containerClassName="flex-1"
           label="마이너스 문제 포함"
           checked={options.include_minus}
           onChange={(e) => setOptions({include_minus: e.target.checked})}
-          aria-label="include-minus"
+          aria-labelledby="include-minus"
         />
         <MainCheckbox
           containerClassName="flex-1"
           label="자리 수 무작위"
           checked={options.is_random_digit}
           onChange={(e) => setOptions({is_random_digit: e.target.checked})}
-          aria-label="is-random-digit"
+          aria-labelledby="is-random-digit"
         />
       </fieldset>
     </main>
