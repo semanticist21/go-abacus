@@ -31,3 +31,7 @@ export const SIZES = {
     },
   },
 } as const;
+
+export const COLORS = {
+  header: '#f8fff8',
+};

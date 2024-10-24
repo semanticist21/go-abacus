@@ -29,5 +29,11 @@ export const saveFileBlob = async (blob: Blob, filename: string) => {
   const uint8Array = new Uint8Array(await blob.arrayBuffer());
   const fullPath = await _getFullPathWithCreation(filename);
 
+  const fileExists = await fs.exists(fullPath);
+
+  if (fileExists) {
+    await fs.removeFile(fullPath);
+  }
+
   await fs.writeBinaryFile(fullPath, uint8Array);
 };

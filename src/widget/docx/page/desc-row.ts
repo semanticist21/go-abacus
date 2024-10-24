@@ -9,7 +9,7 @@ import {
   WidthType,
 } from 'docx';
 
-import {SIZES} from '../shared/size';
+import {SIZES} from '../shared/const';
 
 const pageDescRow = (text: string) => {
   return new Table({

@@ -3,15 +3,23 @@ import {TextRun} from 'docx';
 import {Paragraph} from 'docx';
 import {TableCell} from 'docx';
 
-import {SIZES} from '../shared/size';
+import {Solutions} from '../../../store/type';
+import {SIZES} from '../shared/const';
 
-const SolutionTableBody = (length: number = 10, colLength: number = 6) => {
+const SolutionTableBody = (
+  solutions: Solutions[],
+  length: number = 10,
+  colLength: number = 6
+) => {
   const makeRow = (rowOrd: number) => {
     const cells: TableCell[] = [];
 
-    Array.from({length: colLength}).forEach((_, j) => {
-      const isFirst = j === 0;
-      const isLast = j === colLength - 1;
+    Array.from({length: colLength}).forEach((_, idx) => {
+      const isFirst = idx === 0;
+      const isLast = idx === colLength - 1;
+
+      const targetSolution = solutions[idx % (colLength - 1)];
+      const targetNumber = targetSolution.numbers[rowOrd].toString();
 
       cells.push(
         new TableCell({
@@ -24,9 +32,7 @@ const SolutionTableBody = (length: number = 10, colLength: number = 6) => {
                       size: SIZES.font.numbering,
                     })
                   : new TextRun({
-                      text: `${Math.random() < 0.5 ? '-' : ''}${(
-                        Math.random() * 100
-                      ).toFixed(0)}`,
+                      text: targetNumber,
                       size: SIZES.font.solution,
                       italics: true,
                       font: SIZES.family.solution,
@@ -71,7 +77,7 @@ const SolutionTableBody = (length: number = 10, colLength: number = 6) => {
     });
   };
 
-  return Array.from({length}).map((_, i) => makeRow(i + 1));
+  return Array.from({length}).map((_, i) => makeRow(i));
 };
 
 export default SolutionTableBody;

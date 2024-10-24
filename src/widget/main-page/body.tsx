@@ -1,4 +1,4 @@
-import {useOptionStore} from '../../store/store';
+import {useOptionStore} from '../../store/option-store';
 import {MainCheckbox} from './main-checkbox';
 import MainOption from './main-option';
 
@@ -9,6 +9,20 @@ const MainBody = () => {
   return (
     <main className="p-4 flex flex-col gap-4">
       <fieldset className="border w-full rounded-md p-4 flex justify-between items-center gap-2">
+        <legend className="text-gray-900 rounded-md">파일 이름</legend>
+
+        <MainOption
+          containerClassName="flex-1"
+          label="파일 이름"
+          placeholder="저장할 파일 이름 (ex. 주산덧셈뺄셈)"
+          value={options.file_name}
+          onChange={(e) => setOptions({file_name: e.target.value})}
+          spellCheck={false}
+          aria-label="file-name"
+        />
+      </fieldset>
+
+      <fieldset className="border w-full rounded-md p-4 flex justify-between items-center gap-2">
         <legend className="text-gray-900 rounded-md">문서 설정</legend>
 
         <MainOption
@@ -17,6 +31,7 @@ const MainBody = () => {
           placeholder="문서 제목 (ex. LEVEL 1)"
           value={options.title}
           onChange={(e) => setOptions({title: e.target.value})}
+          aria-label="title"
         />
         <MainOption
           containerClassName="flex-1"
@@ -24,6 +39,7 @@ const MainBody = () => {
           placeholder="문서 부제목 (ex. 주산 암산)"
           value={options.subtitle}
           onChange={(e) => setOptions({subtitle: e.target.value})}
+          aria-label="subtitle"
         />
         <MainOption
           containerClassName="flex-1"
@@ -34,6 +50,7 @@ const MainBody = () => {
           max={20}
           value={options.page_count}
           onChange={(e) => setOptions({page_count: Number(e.target.value)})}
+          aria-label="page-count"
         />
       </fieldset>
 
@@ -42,25 +59,28 @@ const MainBody = () => {
 
         <MainOption
           containerClassName="flex-1"
-          label="자리 수(최대 9자리)"
+          label="자리 수(최대 7자리)"
           placeholder="자리 수 (ex. 4)"
           type="number"
           min={1}
-          max={9}
+          max={7}
           value={options.digit}
           onChange={(e) => setOptions({digit: Number(e.target.value)})}
+          aria-label="digit"
         />
         <MainCheckbox
           containerClassName="flex-1"
           label="마이너스 문제 포함"
           checked={options.include_minus}
           onChange={(e) => setOptions({include_minus: e.target.checked})}
+          aria-label="include-minus"
         />
         <MainCheckbox
           containerClassName="flex-1"
           label="자리 수 무작위"
           checked={options.is_random_digit}
           onChange={(e) => setOptions({is_random_digit: e.target.checked})}
+          aria-label="is-random-digit"
         />
       </fieldset>
     </main>

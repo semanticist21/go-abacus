@@ -1,6 +1,6 @@
 import {AlignmentType, Paragraph, TextRun} from 'docx';
 
-import {SIZES} from '../shared/size';
+import {SIZES} from '../shared/const';
 
 const pageTitle = (text: string) => {
   return new Paragraph({

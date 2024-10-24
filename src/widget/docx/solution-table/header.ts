@@ -3,7 +3,7 @@ import {TextRun} from 'docx';
 import {Paragraph} from 'docx';
 import {TableCell} from 'docx';
 
-import {SIZES} from '../shared/size';
+import {COLORS, SIZES} from '../shared/const';
 
 const SolutionTableHeaderCells = (length: number = 6) => {
   const cells: TableCell[] = [];
@@ -28,6 +28,9 @@ const SolutionTableHeaderCells = (length: number = 6) => {
             alignment: isFirst ? AlignmentType.LEFT : AlignmentType.CENTER,
           }),
         ],
+        shading: {
+          fill: COLORS.header,
+        },
         width: isFirst
           ? {size: SIZES.columns.width.first, type: WidthType.PERCENTAGE}
           : {

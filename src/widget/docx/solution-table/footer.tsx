@@ -3,7 +3,7 @@ import {TextRun} from 'docx';
 import {Paragraph} from 'docx';
 import {TableCell} from 'docx';
 
-import {SIZES} from '../shared/size';
+import {SIZES} from '../shared/const';
 
 const SolutionTableFooterCells = (length: number = 6) => {
   const cells: TableCell[] = [];

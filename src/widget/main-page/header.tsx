@@ -4,11 +4,13 @@ import {useEffect, useState} from 'react';
 import toast from 'react-hot-toast';
 
 import {Button} from '../../shared/button';
-import {useOptionStore} from '../../store/store';
-import {initialOptions} from '../../store/type';
+import {useOptionStore} from '../../store/option-store';
+import {ISolutions, initialOptions, optionsSchema} from '../../store/type';
 import {openSavedFolderAsync} from '../../util/explorer';
+import {createPages} from '../docx/create-pages';
 
 const Header = () => {
+  // store
   const {reset, options} = useOptionStore();
 
   // state props
@@ -77,13 +79,16 @@ const Header = () => {
           className="disabled:bg-gray-400 transition-all duration-300"
           aria-labelledby="save"
           onClick={async () => {
-            // TODO implement creation logic
             try {
-              console.log(options);
-              const result = await invoke('generate', {options});
-              console.log(result);
+              const {success} = await optionsSchema.safeParseAsync(options);
+              if (!success) {
+                toast.error('옵션 검증에 실패했습니다.');
+                return;
+              }
+
+              const result: ISolutions = await invoke('generate', {options});
+              createPages(options, result.solutions);
             } catch (_e) {
-              console.error(_e);
               toast.error('생성 중 오류가 발생했습니다.');
             }
           }}
