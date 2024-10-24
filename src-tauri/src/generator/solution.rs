@@ -3,12 +3,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Deserialize)]
 pub struct Options {
-    page_count: u8,
+    page_count: u16,
     digit: u32,
     include_minus: bool,
     is_random_digit: bool,
-    solutions_per_page: u8,
-    number_counters_per_solution: u8,
+    solutions_per_page: u16,
+    number_counters_per_solution: u16,
+    min_original_digit: u16,
 }
 
 #[derive(Serialize)]
@@ -31,6 +32,7 @@ pub fn generate(options: Options) -> Solutions {
         is_random_digit,
         solutions_per_page,
         number_counters_per_solution,
+        min_original_digit,
     } = options;
 
     println!(
@@ -43,6 +45,9 @@ pub fn generate(options: Options) -> Solutions {
 
     let solutions = (0..solutions_per_page * page_count)
         .map(|_i| {
+            let mut is_force_original_digit = false;
+            let mut current_original_digit = 0;
+
             let questions = (0..number_counters_per_solution)
                 .map(|i| {
                     let is_first: bool = i == 0;
@@ -51,10 +56,37 @@ pub fn generate(options: Options) -> Solutions {
                         current_sum = 0;
                     }
 
+                    let remaining_count = number_counters_per_solution - i;
+
+                    if remaining_count < min_original_digit {
+                        is_force_original_digit = true;
+                    }
+
                     let mut _digit = digit;
 
-                    if is_random_digit {
-                        _digit = rng.gen_range(1..=digit);
+                    if is_random_digit && !is_force_original_digit && !is_first {
+                        let weights = (1..=digit).map(|x| x.pow(2)).collect::<Vec<u32>>();
+                        let total_weight = weights.iter().sum::<u32>();
+
+                        let mut random_value = rng.gen_range(0..=total_weight);
+
+                        for (i, &weight) in weights.iter().enumerate() {
+                            // if digit diff is greater than 3, skip the first digit.
+                            if digit > 3 && i == 0 {
+                                continue;
+                            }
+
+                            if random_value < weight {
+                                _digit = i as u32 + 1;
+                                break;
+                            }
+
+                            random_value -= weight;
+                        }
+                    }
+
+                    if _digit == digit {
+                        current_original_digit += 1;
                     }
 
                     let min = 10_u64.pow(_digit - 1);
@@ -67,16 +99,15 @@ pub fn generate(options: Options) -> Solutions {
                     }
 
                     let is_plus: bool = is_first || rng.gen_bool(0.5);
-
                     random_number = random_number * if is_plus { 1 } else { -1 };
 
-                    let estimated_sum = current_sum + random_number;
-
-                    if estimated_sum < 0 {
-                        random_number.abs()
-                    } else {
-                        random_number
+                    if current_sum + random_number < 0 {
+                        random_number = random_number.abs();
                     }
+
+                    current_sum += random_number;
+
+                    random_number
                 })
                 .collect::<Vec<i64>>();
 

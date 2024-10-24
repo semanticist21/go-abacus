@@ -1,7 +1,7 @@
 import {create} from 'zustand';
 import {createJSONStorage, persist} from 'zustand/middleware';
 
-import {Options, initialOptions} from './type';
+import {Options, initialOptions, optionsSchema} from './type';
 
 type StoreOptions = {
   options: Options;
@@ -19,6 +19,14 @@ export const useOptionStore = create(
     {
       name: 'options-storage',
       storage: createJSONStorage(() => localStorage),
+      onRehydrateStorage: () => (state) => {
+        if (!state) return;
+
+        useOptionStore.setState((prev) => ({
+          ...prev,
+          options: optionsSchema.parse(state),
+        }));
+      },
     }
   )
 );

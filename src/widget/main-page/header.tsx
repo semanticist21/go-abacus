@@ -78,8 +78,14 @@ const Header = () => {
           aria-labelledby="save"
           onClick={async () => {
             // TODO implement creation logic
-            const result = await invoke('generate', {options});
-            console.log(result);
+            try {
+              console.log(options);
+              const result = await invoke('generate', {options});
+              console.log(result);
+            } catch (_e) {
+              console.error(_e);
+              toast.error('생성 중 오류가 발생했습니다.');
+            }
           }}
         >
           생성 및 저장

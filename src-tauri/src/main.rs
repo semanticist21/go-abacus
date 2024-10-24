@@ -5,7 +5,7 @@ mod generator;
 
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![generator::def::generate])
+        .invoke_handler(tauri::generate_handler![generator::solution::generate])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

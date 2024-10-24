@@ -1,1 +1,1 @@
-pub mod def;
+pub mod solution;

@@ -42,11 +42,11 @@ const MainBody = () => {
 
         <MainOption
           containerClassName="flex-1"
-          label="자리 수(최대 8자리)"
+          label="자리 수(최대 9자리)"
           placeholder="자리 수 (ex. 4)"
           type="number"
           min={1}
-          max={8}
+          max={9}
           value={options.digit}
           onChange={(e) => setOptions({digit: Number(e.target.value)})}
         />

@@ -9,6 +9,7 @@ export const optionsSchema = z.object({
   digit: z.number().min(1).max(9).default(4),
   include_minus: z.boolean().default(false),
   is_random_digit: z.boolean().default(false),
+  min_original_digit: z.number().min(1).max(10).default(3),
 });
 
 export const initialOptions = optionsSchema.parse({});
