@@ -19,10 +19,10 @@ const SolutionTableBody = (
       const isFirst = idx === 0;
       const isLast = idx === colLength - 1;
 
-      const targetSolution = solutions[idx % (colLength - 1)];
+      const targetSolution = solutions.at((idx - 1) % (colLength - 1));
       const targetNumber = includeComma
-        ? targetSolution.numbers[rowOrd].toLocaleString()
-        : targetSolution.numbers[rowOrd].toString();
+        ? targetSolution?.numbers[rowOrd].toLocaleString()
+        : targetSolution?.numbers[rowOrd].toString();
 
       cells.push(
         new TableCell({
