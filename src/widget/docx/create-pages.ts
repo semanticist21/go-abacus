@@ -70,7 +70,7 @@ export const createPagesThenSave = async (
   const getPageHeaderTitle = (order: number) => {
     return `${options.title.replaceAll(' ', '_')}-${order
       .toString()
-      .padStart(6, '0')}`;
+      .padStart(3, '0')}`;
   };
 
   // solution table
