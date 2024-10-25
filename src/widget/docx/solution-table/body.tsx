@@ -3,12 +3,12 @@ import {TextRun} from 'docx';
 import {Paragraph} from 'docx';
 import {TableCell} from 'docx';
 
-import {Solutions} from '../../../store/type';
+import {Options, Solutions} from '../../../store/type';
 import {SIZES} from '../shared/const';
 
 const SolutionTableBody = (
   solutions: Solutions[],
-  includeComma: boolean,
+  options: Options,
   length: number = 10,
   colLength: number = 6
 ) => {
@@ -20,9 +20,11 @@ const SolutionTableBody = (
       const isLast = idx === colLength - 1;
 
       const targetSolution = solutions.at((idx - 1) % (colLength - 1));
-      const targetNumber = includeComma
+      const targetNumber = options.include_comma
         ? targetSolution?.numbers[rowOrd].toLocaleString()
         : targetSolution?.numbers[rowOrd].toString();
+
+      const cSpacing = options.digit >= 4 ? 30 : options.digit === 3 ? 50 : 70;
 
       cells.push(
         new TableCell({
@@ -39,7 +41,7 @@ const SolutionTableBody = (
                       size: SIZES.font.solution,
                       italics: true,
                       font: SIZES.family.solution,
-                      characterSpacing: 70,
+                      characterSpacing: cSpacing,
                     }),
               ],
               alignment: isFirst ? AlignmentType.CENTER : AlignmentType.RIGHT,

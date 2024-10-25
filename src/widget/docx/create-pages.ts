@@ -24,9 +24,7 @@ const _make1Solution = (solutions: Solutions[], options: Options) => {
   const rows: TableRow[] = [];
 
   rows.push(SolutionTableHeaderCells());
-  SolutionTableBody(solutions, options.include_comma).forEach((row) =>
-    rows.push(row)
-  );
+  SolutionTableBody(solutions, options).forEach((row) => rows.push(row));
   rows.push(SolutionTableFooterCells());
 
   return new Table({
