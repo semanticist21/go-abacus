@@ -28,18 +28,22 @@ const MainBody = () => {
         <MainOption
           containerClassName="flex-1"
           label="문서 제목"
+          textCount={options.title.length.toLocaleString()}
           placeholder="문서 제목 (ex. LEVEL 1)"
           value={options.title}
           onChange={(e) => setOptions({title: e.target.value})}
           aria-labelledby="title"
+          spellCheck={false}
         />
         <MainOption
           containerClassName="flex-1"
           label="문서 부제목"
+          textCount={options.subtitle.length.toLocaleString()}
           placeholder="문서 부제목 (ex. 주산 암산)"
           value={options.subtitle}
           onChange={(e) => setOptions({subtitle: e.target.value})}
           aria-labelledby="subtitle"
+          spellCheck={false}
         />
         <MainOption
           containerClassName="flex-1"

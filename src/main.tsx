@@ -6,7 +6,14 @@ import App from './App';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <Toaster position="bottom-center" />
+    <Toaster
+      position="bottom-center"
+      toastOptions={{
+        style: {
+          fontSize: '0.875rem',
+        },
+      }}
+    />
     <App />
   </React.StrictMode>
 );

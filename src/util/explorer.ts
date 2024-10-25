@@ -2,6 +2,9 @@ import {Command} from '@tauri-apps/api/shell';
 
 import {getCurrentResourceDir} from './fs';
 
+/**
+ * @deprecated
+ */
 export const openSavedFolderAsync = async () => {
   const curPath = (await getCurrentResourceDir()).replaceAll('\\\\?\\', '');
 

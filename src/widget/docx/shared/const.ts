@@ -1,6 +1,6 @@
 export const SIZES = {
   font: {
-    title: 32,
+    title: 28,
     solution: 24,
     subtitle: 20,
     numbering: 24,

@@ -4,11 +4,13 @@ import {cn} from '../../util/cn';
 
 interface MainOptionProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
+  textCount?: string;
   containerClassName?: string;
 }
 
 const MainOption = ({
   label,
+  textCount,
   containerClassName,
   className,
   ...rest
@@ -19,9 +21,19 @@ const MainOption = ({
     <div className={containerClassName} aria-controls={id}>
       <label
         htmlFor={id}
-        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        className="mb-2 text-sm font-medium text-gray-900 dark:text-white flex justify-between items-center pr-3"
       >
         {label}
+
+        {textCount && (
+          <output
+            className="text-gray-500 text-sm"
+            name={id}
+            aria-label="현재 입력된 텍스트 길이"
+          >
+            {textCount}
+          </output>
+        )}
       </label>
       <input
         id={id}

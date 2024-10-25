@@ -14,8 +14,8 @@ export const optionsSchema = z.object({
     .min(1, {
       message: '제목은 최소한 1자 이상 입력해야 합니다.',
     })
-    .max(100, {
-      message: '제목은 최대 100자까지 입력할 수 있습니다.',
+    .max(30, {
+      message: '제목은 최대 30자까지 입력할 수 있습니다.',
     })
     .default('LEVEL 0'),
   subtitle: z
@@ -23,8 +23,8 @@ export const optionsSchema = z.object({
     .min(1, {
       message: '부제목은 최소한 1자 이상 입력해야 합니다.',
     })
-    .max(100, {
-      message: '부제목은 최대 100자까지 입력할 수 있습니다.',
+    .max(30, {
+      message: '부제목은 최대 30자까지 입력할 수 있습니다.',
     })
     .default('주산 암산'),
   page_count: z

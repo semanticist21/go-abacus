@@ -1,4 +1,4 @@
-use rand::Rng;
+use rand::{random, Rng};
 use serde::{Deserialize, Serialize};
 
 #[derive(Deserialize)]
@@ -42,6 +42,8 @@ pub fn generate(options: Options) -> Solutions {
 
     let mut current_sum = 0;
     let mut rng = rand::thread_rng();
+
+    let mut prev_num = 0;
 
     let solutions = (0..solutions_per_page * page_count)
         .map(|_i| {
@@ -94,11 +96,6 @@ pub fn generate(options: Options) -> Solutions {
 
                     let mut random_number: i64 = rng.gen_range(min..=max) as i64;
 
-                    // prevent zero
-                    while current_sum + random_number == 0 {
-                        random_number = rng.gen_range(min..=max) as i64;
-                    }
-
                     if !include_minus {
                         return random_number;
                     }
@@ -106,11 +103,18 @@ pub fn generate(options: Options) -> Solutions {
                     let is_plus: bool = is_first || rng.gen_bool(0.5);
                     random_number = random_number * if is_plus { 1 } else { -1 };
 
+                    // prevent zero
+                    while current_sum + random_number == 0 || prev_num + random_number == 0 {
+                        random_number =
+                            rng.gen_range(min..=max) as i64 * if is_plus { 1 } else { -1 };
+                    }
+
                     if current_sum + random_number < 0 {
                         random_number = random_number.abs();
                     }
 
                     current_sum += random_number;
+                    prev_num = random_number;
 
                     random_number
                 })
