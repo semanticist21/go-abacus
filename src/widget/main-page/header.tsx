@@ -29,27 +29,27 @@ const Header = () => {
           <li className="group" aria-label="creator">
             <span className="font-semibold not-italic">• 제작: </span>
             <a
-              className="group-hover:underline rounded-md border-none bg-transparent"
+              className="group-hover:underline rounded-md border-none bg-transparent px-0"
               type="email"
               href="mailto:semanticist0@gmail.com"
               target="_blank"
               rel="noopener noreferrer"
             >
-              semanticist0
+              semanticist0@gmail.com
             </a>
           </li>
 
           <li className="group" aria-label="bug-inquiry">
             <span className="font-semibold not-italic">• 버그 문의: </span>
             <a
-              className="group-hover:underline rounded-md border-none bg-transparent"
+              className="group-hover:underline rounded-md border-none bg-transparent not-italic"
               id="kakaotalk-link"
               type="link"
               href="https://open.kakao.com/o/s6LPfYJg"
               target="_blank"
               rel="noopener noreferrer"
             >
-              KakaoTalk
+              카카오톡
             </a>
           </li>
         </ul>
