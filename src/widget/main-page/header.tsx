@@ -6,8 +6,7 @@ import toast from 'react-hot-toast';
 import {Button} from '../../shared/button';
 import {useOptionStore} from '../../store/option-store';
 import {ISolutions, initialOptions, optionsSchema} from '../../store/type';
-import {openSavedFolderAsync} from '../../util/explorer';
-import {createPages} from '../docx/create-pages';
+import {createPagesThenSave} from '../docx/create-pages';
 
 const Header = () => {
   // store
@@ -69,13 +68,6 @@ const Header = () => {
           초기화
         </Button>
         <Button
-          className="bg-gray-700"
-          aria-labelledby="open-saved-folder"
-          onClick={openSavedFolderAsync}
-        >
-          저장 폴더 열기
-        </Button>
-        <Button
           className="disabled:bg-gray-400 transition-all duration-300"
           aria-labelledby="save"
           onClick={async () => {
@@ -90,7 +82,7 @@ const Header = () => {
               }
 
               const result: ISolutions = await invoke('generate', {options});
-              createPages(options, result.solutions);
+              createPagesThenSave(options, result.solutions);
             } catch (_e) {
               toast.error('생성 중 오류가 발생했습니다.');
             }

@@ -1,9 +1,15 @@
+import {dialog} from '@tauri-apps/api';
 import {Document, Packer, Table, TableRow, WidthType} from 'docx';
 import toast from 'react-hot-toast';
 
 import {useOptionStore} from '../../store/option-store';
-import {Options, Solutions, makeRandomFileName} from '../../store/type';
-import {saveFileBlob} from '../../util/fs';
+import {
+  Options,
+  Solutions,
+  defaultFileNameRegex,
+  makeRandomFileName,
+} from '../../store/type';
+import {getCurrentResourceDir, saveFileBlob} from '../../util/fs';
 import AnswerTableBodyCells from './answer-table/body';
 import AnswerTableHeaderCells from './answer-table/header';
 import pageDescRow from './page/desc-row';
@@ -49,7 +55,18 @@ const _create1AnswerTable = (
   });
 };
 
-export const createPages = async (options: Options, solutions: Solutions[]) => {
+export const createPagesThenSave = async (
+  options: Options,
+  solutions: Solutions[]
+) => {
+  const savePath = await dialog.save({
+    defaultPath:
+      (await getCurrentResourceDir()) + '/' + options.file_name + '.docx',
+    filters: [{name: 'docx', extensions: ['docx']}],
+  });
+
+  if (!savePath) return;
+
   const getPageHeaderTitle = (order: number) => {
     return `${options.title.replaceAll(' ', '_')}-${order
       .toString()
@@ -125,9 +142,15 @@ export const createPages = async (options: Options, solutions: Solutions[]) => {
 
   try {
     const blob = await Packer.toBlob(file);
-    await saveFileBlob(blob, options.file_name + '.docx');
+    await saveFileBlob(blob, savePath);
 
     toast.success('파일 저장에 성공했습니다.');
+
+    const previousFileName = options.file_name;
+    const regex = new RegExp(defaultFileNameRegex);
+
+    const isUserCustomFileName = !regex.test(previousFileName);
+    if (isUserCustomFileName) return;
 
     useOptionStore.setState((prev) => {
       return {

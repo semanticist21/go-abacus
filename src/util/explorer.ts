@@ -10,8 +10,9 @@ export const openSavedFolderAsync = async () => {
 
   if (isWindows) {
     // FIXME curPath is escaped
-    new Command('explorer', curPath).spawn();
+
+    await new Command('explorer', String.raw`${curPath}`).execute();
   } else if (isMac) {
-    new Command('open', curPath).spawn();
+    await new Command('open', curPath).execute();
   }
 };

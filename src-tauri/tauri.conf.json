@@ -13,6 +13,10 @@
   "tauri": {
     "allowlist": {
       "all": false,
+      "dialog": {
+        "open": true,
+        "save": true
+      },
       "shell": {
         "all": true,
         "scope": [
@@ -38,8 +42,9 @@
       "fs": {
         "all": true,
         "scope": [
-          "$RESOURCE/data/*",
-          "$RESOURCE/data"
+          "**",
+          "**/*",
+          "/**/*"
         ]
       }
     },

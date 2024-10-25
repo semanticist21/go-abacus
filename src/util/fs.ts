@@ -25,15 +25,8 @@ export const saveFile = async (arrayBuffer: ArrayBuffer, filename: string) => {
   await fs.writeBinaryFile(fullPath, uint8Array);
 };
 
-export const saveFileBlob = async (blob: Blob, filename: string) => {
+export const saveFileBlob = async (blob: Blob, savePath: string) => {
   const uint8Array = new Uint8Array(await blob.arrayBuffer());
-  const fullPath = await _getFullPathWithCreation(filename);
 
-  const fileExists = await fs.exists(fullPath);
-
-  if (fileExists) {
-    await fs.removeFile(fullPath);
-  }
-
-  await fs.writeBinaryFile(fullPath, uint8Array);
+  await fs.writeBinaryFile(savePath, uint8Array);
 };

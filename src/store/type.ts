@@ -4,6 +4,8 @@ import {z} from 'zod';
 export const makeRandomFileName = () =>
   `주산덧셈뺄셈-${dayjs().format('YYYYMMDD-HHmmss')}`;
 
+export const defaultFileNameRegex = /^주산덧셈뺄셈-\d{8}-\d{6}$/;
+
 export const optionsSchema = z.object({
   file_name: z.string().default(makeRandomFileName()),
 
