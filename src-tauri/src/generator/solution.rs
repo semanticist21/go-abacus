@@ -9,7 +9,7 @@ pub struct Options {
     is_random_digit: bool,
     solutions_per_page: u16,
     number_counters_per_solution: u16,
-    min_original_digit: u16,
+    min_original_digit_solution_count: u16,
 }
 
 #[derive(Serialize)]
@@ -32,12 +32,12 @@ pub fn generate(options: Options) -> Solutions {
         is_random_digit,
         solutions_per_page,
         number_counters_per_solution,
-        min_original_digit,
+        min_original_digit_solution_count,
     } = options;
 
     println!(
         "Received options: pageCount={}, digitCount={}, includeMinus={}, randomDigit={}, solutionsPerPage={}, numberCountersPerSolution={}, minOriginalDigit={}",
-        options.page_count, options.digit, options.include_minus, options.is_random_digit, options.solutions_per_page, options.number_counters_per_solution, options.min_original_digit
+        options.page_count, options.digit, options.include_minus, options.is_random_digit, options.solutions_per_page, options.number_counters_per_solution, options.min_original_digit_solution_count
     );
 
     let mut current_sum = 0;
@@ -58,7 +58,7 @@ pub fn generate(options: Options) -> Solutions {
 
                     let remaining_count = number_counters_per_solution - i;
 
-                    if remaining_count < min_original_digit {
+                    if remaining_count < min_original_digit_solution_count {
                         is_force_original_digit = true;
                     }
 

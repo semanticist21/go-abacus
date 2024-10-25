@@ -100,15 +100,23 @@ export const createPages = async (options: Options, solutions: Solutions[]) => {
       default: PageHeader('정답'),
     },
     children: Array.from({length: options.page_count}, (_, idx) => {
-      return _create1AnswerTable(
-        getPageHeaderTitle(idx + 1),
-        options,
-        solutions.slice(
-          idx * options.solutions_per_page,
-          (idx + 1) * options.solutions_per_page
-        )
-      );
-    }),
+      const result = [
+        _create1AnswerTable(
+          getPageHeaderTitle(idx + 1),
+          options,
+          solutions.slice(
+            idx * options.solutions_per_page,
+            (idx + 1) * options.solutions_per_page
+          )
+        ),
+      ];
+
+      if (idx !== options.page_count - 1) {
+        result.push(spacer(0));
+      }
+
+      return result;
+    }).flat(1),
   };
 
   const file = new Document({

@@ -35,4 +35,4 @@ export const SIZES = {
 
 export const COLORS = {
   header: '#f8fff8',
-};
+} as const;

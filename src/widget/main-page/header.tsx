@@ -31,7 +31,7 @@ const Header = () => {
             <span className="font-semibold not-italic">• 제작: </span>
             <a
               className="group-hover:underline rounded-md border-none bg-transparent"
-              type="mail"
+              type="email"
               href="mailto:semanticist0@gmail.com"
               target="_blank"
               rel="noopener noreferrer"
@@ -44,7 +44,7 @@ const Header = () => {
             <span className="font-semibold not-italic">• 버그 문의: </span>
             <a
               className="group-hover:underline rounded-md border-none bg-transparent"
-              id="kakao-talk-link"
+              id="kakaotalk-link"
               type="link"
               href="https://open.kakao.com/o/s6LPfYJg"
               target="_blank"
@@ -80,9 +80,12 @@ const Header = () => {
           aria-labelledby="save"
           onClick={async () => {
             try {
-              const {success} = await optionsSchema.safeParseAsync(options);
+              const {success, error} =
+                await optionsSchema.safeParseAsync(options);
               if (!success) {
-                toast.error('옵션 검증에 실패했습니다.');
+                toast.error(
+                  error.errors.at(0)?.message ?? '옵션 검증에 실패했습니다.'
+                );
                 return;
               }
 
