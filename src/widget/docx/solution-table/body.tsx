@@ -8,6 +8,7 @@ import {SIZES} from '../shared/const';
 
 const SolutionTableBody = (
   solutions: Solutions[],
+  includeComma: boolean,
   length: number = 10,
   colLength: number = 6
 ) => {
@@ -19,7 +20,9 @@ const SolutionTableBody = (
       const isLast = idx === colLength - 1;
 
       const targetSolution = solutions[idx % (colLength - 1)];
-      const targetNumber = targetSolution.numbers[rowOrd].toString();
+      const targetNumber = includeComma
+        ? targetSolution.numbers[rowOrd].toLocaleString()
+        : targetSolution.numbers[rowOrd].toString();
 
       cells.push(
         new TableCell({

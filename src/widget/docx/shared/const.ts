@@ -28,6 +28,7 @@ export const SIZES = {
 
     height: {
       solution: 312,
+      answer: 312,
     },
   },
 } as const;

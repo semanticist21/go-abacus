@@ -59,11 +59,11 @@ const MainBody = () => {
 
         <MainOption
           containerClassName="flex-1"
-          label="자리 수(최대 7자리)"
+          label="자리 수(최대 6자리)"
           placeholder="자리 수 (ex. 4)"
           type="number"
           min={1}
-          max={7}
+          max={6}
           value={options.digit}
           onChange={(e) => setOptions({digit: Number(e.target.value)})}
           aria-labelledby="digit"
@@ -81,6 +81,13 @@ const MainBody = () => {
           checked={options.is_random_digit}
           onChange={(e) => setOptions({is_random_digit: e.target.checked})}
           aria-labelledby="is-random-digit"
+        />
+        <MainCheckbox
+          containerClassName="flex-1"
+          label="쉼표 여부"
+          checked={options.include_comma}
+          onChange={(e) => setOptions({include_comma: e.target.checked})}
+          aria-labelledby="include-comma"
         />
       </fieldset>
     </main>
