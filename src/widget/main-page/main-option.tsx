@@ -26,13 +26,13 @@ const MainOption = ({
         {label}
 
         {textCount && (
-          <output
+          <data
             className="text-gray-500 text-sm"
-            name={id}
             aria-label="현재 입력된 텍스트 길이"
+            value={textCount}
           >
-            {textCount}
-          </output>
+            ({textCount}자)
+          </data>
         )}
       </label>
       <input
