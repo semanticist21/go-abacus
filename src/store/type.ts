@@ -50,7 +50,7 @@ export const optionsSchema = z.object({
     .max(6, {
       message: '자리 수는 최대 6자리까지 입력할 수 있습니다.',
     })
-    .default(4),
+    .default(2),
   include_minus: z.boolean().default(false),
   is_random_digit: z.boolean().default(false),
   min_original_digit_solution_count: z.number().min(1).max(10).default(3),
