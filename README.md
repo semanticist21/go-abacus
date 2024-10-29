@@ -2,7 +2,7 @@
 
 ## 프레임워크
 - Tauri
-- Svelte
+- React
 
 ## 설명
 Windows용 주산암산 문제 생성기입니다. 
