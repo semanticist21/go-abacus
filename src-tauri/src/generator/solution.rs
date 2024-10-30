@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Deserialize)]
 pub struct Options {
     page_count: u16,
-    digit: u32,
+    digit: u16,
     include_minus: bool,
     is_random_digit: bool,
     solutions_per_page: u16,
