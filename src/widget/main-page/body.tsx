@@ -63,11 +63,11 @@ const MainBody = () => {
 
         <MainOption
           containerClassName="flex-1"
-          label="자리 수(최대 6자리)"
+          label="자리 수(최대 7자리)"
           placeholder="자리 수 (ex. 4)"
           type="number"
           min={1}
-          max={6}
+          max={7}
           value={options.digit}
           onChange={(e) => setOptions({digit: Number(e.target.value)})}
           aria-labelledby="digit"

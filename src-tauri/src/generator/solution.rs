@@ -15,7 +15,7 @@ pub struct Options {
 #[derive(Serialize)]
 pub struct Solution {
     numbers: Vec<i64>,
-    answer: i64,
+    answer: f64,
 }
 
 #[derive(Serialize)]
@@ -46,19 +46,19 @@ pub fn generate(options: Options) -> Solutions {
     let mut prev_num = 0;
 
     let solutions = (0..solutions_per_page * page_count)
-        .map(|_i| {
+        .map(|i| {
             let mut is_force_original_digit = false;
             let mut current_original_digit = 0;
 
             let questions = (0..number_counters_per_solution)
-                .map(|i| {
-                    let is_first: bool = i == 0;
+                .map(|j| {
+                    let is_first: bool = j == 0;
 
                     if is_first {
                         current_sum = 0;
                     }
 
-                    let remaining_count = number_counters_per_solution - i;
+                    let remaining_count = number_counters_per_solution - j;
 
                     if remaining_count < min_original_digit_solution_count {
                         is_force_original_digit = true;
@@ -67,14 +67,23 @@ pub fn generate(options: Options) -> Solutions {
                     let mut _digit = digit;
 
                     if is_random_digit && !is_force_original_digit && !is_first {
-                        let weights = (1..=digit).map(|x| x.pow(2)).collect::<Vec<u32>>();
+                        let weights = (1..=digit).map(|x| x * 3).collect::<Vec<u32>>();
                         let total_weight = weights.iter().sum::<u32>();
 
                         let mut random_value = rng.gen_range(0..=total_weight);
 
                         for (i, &weight) in weights.iter().enumerate() {
-                            // if digit diff is greater than 3, skip the first digit.
-                            if digit > 3 && i == 0 {
+                            // digit 3 > only 2,3
+                            // digit 4 > only 2,3,4
+                            // ...
+                            if digit == 3 && i == 0 {
+                                continue;
+                            }
+
+                            let is_big_digit = digit > 3;
+                            let gap = digit - 3;
+
+                            if is_big_digit && (i as u32) < gap {
                                 continue;
                             }
 
@@ -83,7 +92,14 @@ pub fn generate(options: Options) -> Solutions {
                                 break;
                             }
 
-                            random_value -= weight;
+                            let new_random_value = (random_value as i64 - weight as i64);
+
+                            if new_random_value < 0 {
+                                random_value = 0;
+                                continue;
+                            }
+
+                            random_value = new_random_value as u32;
                         }
                     }
 
@@ -100,13 +116,16 @@ pub fn generate(options: Options) -> Solutions {
                         return random_number;
                     }
 
-                    let is_plus: bool = is_first || rng.gen_bool(0.5);
-                    random_number = random_number * if is_plus { 1 } else { -1 };
+                    let is_only_positive_turns = i % 2 == 0;
+                    let should_positive: bool =
+                        is_first || is_only_positive_turns || rng.gen_bool(0.5);
+
+                    random_number = random_number * if should_positive { 1 } else { -1 };
 
                     // prevent zero
                     while current_sum + random_number == 0 || prev_num + random_number == 0 {
                         random_number =
-                            rng.gen_range(min..=max) as i64 * if is_plus { 1 } else { -1 };
+                            rng.gen_range(min..=max) as i64 * if should_positive { 1 } else { -1 };
                     }
 
                     if current_sum + random_number < 0 {
@@ -120,7 +139,7 @@ pub fn generate(options: Options) -> Solutions {
                 })
                 .collect::<Vec<i64>>();
 
-            let answer = questions.iter().sum::<i64>();
+            let answer = questions.iter().map(|x| *x as f64).sum::<f64>();
 
             Solution {
                 numbers: questions,

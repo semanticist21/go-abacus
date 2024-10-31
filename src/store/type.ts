@@ -47,8 +47,8 @@ export const optionsSchema = z.object({
     .min(1, {
       message: '자리 수는 최소한 1자리 이상 입력해야 합니다.',
     })
-    .max(6, {
-      message: '자리 수는 최대 6자리까지 입력할 수 있습니다.',
+    .max(7, {
+      message: '자리 수는 최대 7자리까지 입력할 수 있습니다.',
     })
     .default(2),
   include_minus: z.boolean().default(false),

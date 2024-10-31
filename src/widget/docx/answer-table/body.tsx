@@ -31,7 +31,7 @@ const AnswerTableBody = (
               children: [
                 new TextRun({
                   text: rowAnswers[idx].toLocaleString(),
-                  size: SIZES.font.solution * 0.95,
+                  size: SIZES.font.solution,
                   font: SIZES.family.solution,
                   characterSpacing: 15,
                 }),
