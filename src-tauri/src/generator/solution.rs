@@ -92,14 +92,7 @@ pub fn generate(options: Options) -> Solutions {
                                 break;
                             }
 
-                            let new_random_value = (random_value as i64 - weight as i64);
-
-                            if new_random_value < 0 {
-                                random_value = 0;
-                                continue;
-                            }
-
-                            random_value = new_random_value as u32;
+                            random_value -= weight;
                         }
                     }
 
