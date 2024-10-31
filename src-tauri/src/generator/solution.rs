@@ -72,23 +72,23 @@ pub fn generate(options: Options) -> Solutions {
 
                         let mut random_value = rng.gen_range(0..=total_weight);
 
-                        for (i, &weight) in weights.iter().enumerate() {
+                        for (k, &weight) in weights.iter().enumerate() {
                             // digit 3 > only 2,3
                             // digit 4 > only 2,3,4
                             // ...
-                            if digit == 3 && i == 0 {
+                            if digit == 3 && k == 0 {
                                 continue;
                             }
 
                             let is_big_digit = digit > 3;
                             let gap = digit - 3;
 
-                            if is_big_digit && (i as u32) < gap {
+                            if is_big_digit && (k as u32) < gap {
                                 continue;
                             }
 
                             if random_value < weight {
-                                _digit = i as u32 + 1;
+                                _digit = k as u32 + 1;
                                 break;
                             }
 
