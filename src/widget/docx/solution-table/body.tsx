@@ -4,6 +4,7 @@ import {Paragraph} from 'docx';
 import {TableCell} from 'docx';
 
 import {Options, Solutions} from '../../../store/type';
+import {addDotSeparate} from '../../../util/add-dot-separate';
 import {formatDigitNumber} from '../../../util/format-digit';
 import {SIZES} from '../shared/const';
 
@@ -24,11 +25,11 @@ const SolutionTableBody = (
       const targetNumber = targetSolution!.numbers[rowOrd];
 
       const digitFormattedNumber = options.is_decimal
-        ? formatDigitNumber(targetNumber ?? 0)
+        ? formatDigitNumber(targetNumber ?? 0, options.digit)
         : targetNumber;
 
       const formattedNumber = options.include_comma
-        ? digitFormattedNumber.toLocaleString()
+        ? addDotSeparate(digitFormattedNumber.toString())
         : digitFormattedNumber.toString();
 
       const cSpacing = options.digit >= 4 ? 30 : options.digit === 3 ? 50 : 70;
