@@ -3,12 +3,7 @@ import {Document, Packer, Table, TableRow, WidthType} from 'docx';
 import toast from 'react-hot-toast';
 
 import {useOptionStore} from '../../store/option-store';
-import {
-  Options,
-  Solutions,
-  defaultFileNameRegex,
-  makeRandomFileName,
-} from '../../store/type';
+import {Options, Solutions, defaultFileNameRegex, makeRandomFileName} from '../../store/type';
 import {getCurrentResourceDir, saveFileBlob} from '../../util/fs';
 import AnswerTableBodyCells from './answer-table/body';
 import AnswerTableHeaderCells from './answer-table/header';
@@ -33,11 +28,7 @@ const _make1Solution = (solutions: Solutions[], options: Options) => {
   });
 };
 
-const _create1AnswerTable = (
-  title: string,
-  options: Options,
-  solutions: Solutions[]
-) => {
+const _create1AnswerTable = (title: string, options: Options, solutions: Solutions[]) => {
   const rows: TableRow[] = [];
   const onlyAnswers = solutions.map((s) => s.answer);
 
@@ -53,61 +44,46 @@ const _create1AnswerTable = (
   });
 };
 
-export const createPagesThenSave = async (
-  options: Options,
-  solutions: Solutions[]
-) => {
+export const createPagesThenSave = async (options: Options, solutions: Solutions[]) => {
   const savePath = await dialog.save({
-    defaultPath:
-      (await getCurrentResourceDir()) + '/' + options.file_name + '.docx',
+    defaultPath: (await getCurrentResourceDir()) + '/' + options.file_name + '.docx',
     filters: [{name: 'docx', extensions: ['docx']}],
   });
 
   if (!savePath) return;
 
   const getPageHeaderTitle = (order: number) => {
-    return `${options.title.replaceAll(' ', '_')}-${order
-      .toString()
-      .padStart(3, '0')}`;
+    return `${options.title.replaceAll(' ', '_')}-${order.toString().padStart(3, '0')}`;
   };
 
   // solution table
-  const allSolutionTables = Array.from({length: options.page_count}).map(
-    (_, idx) => {
-      const aPageSolutions = solutions.slice(
-        idx * options.solutions_per_page,
-        idx * options.solutions_per_page + options.solutions_per_page
-      );
+  const allSolutionTables = Array.from({length: options.page_count}).map((_, idx) => {
+    const aPageSolutions = solutions.slice(
+      idx * options.solutions_per_page,
+      idx * options.solutions_per_page + options.solutions_per_page
+    );
 
-      const tableUnit =
-        options.solutions_per_page / options.solution_table_per_page;
+    const tableUnit = options.solutions_per_page / options.solution_table_per_page;
 
-      return {
-        headers: {
-          default: PageHeader(getPageHeaderTitle(idx + 1)),
-        },
-        children: [
-          pageTitle(`${options.title}`),
-          spacer(100),
-          pageDescRow(`${options.subtitle}`),
+    return {
+      headers: {
+        default: PageHeader(getPageHeaderTitle(idx + 1)),
+      },
+      children: [
+        pageTitle(`${options.title}`),
+        spacer(100),
+        pageDescRow(`${options.subtitle}`),
 
-          spacer(100),
+        spacer(100),
 
-          _make1Solution(aPageSolutions.slice(0, tableUnit), options),
-          spacer(0),
-          _make1Solution(
-            aPageSolutions.slice(tableUnit, 2 * tableUnit),
-            options
-          ),
-          spacer(0),
-          _make1Solution(
-            aPageSolutions.slice(2 * tableUnit, 3 * tableUnit),
-            options
-          ),
-        ],
-      };
-    }
-  );
+        _make1Solution(aPageSolutions.slice(0, tableUnit), options),
+        spacer(0),
+        _make1Solution(aPageSolutions.slice(tableUnit, 2 * tableUnit), options),
+        spacer(0),
+        _make1Solution(aPageSolutions.slice(2 * tableUnit, 3 * tableUnit), options),
+      ],
+    };
+  });
 
   // answer table
   const answerSectionChildren = {
@@ -119,10 +95,7 @@ export const createPagesThenSave = async (
         _create1AnswerTable(
           getPageHeaderTitle(idx + 1),
           options,
-          solutions.slice(
-            idx * options.solutions_per_page,
-            (idx + 1) * options.solutions_per_page
-          )
+          solutions.slice(idx * options.solutions_per_page, (idx + 1) * options.solutions_per_page)
         ),
       ];
 

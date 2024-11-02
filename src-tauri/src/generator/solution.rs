@@ -10,11 +10,12 @@ pub struct Options {
     solutions_per_page: u16,
     number_counters_per_solution: u16,
     min_original_digit_solution_count: u16,
+    is_decimal: bool,
 }
 
 #[derive(Serialize)]
 pub struct Solution {
-    numbers: Vec<i64>,
+    numbers: Vec<f64>,
     answer: f64,
 }
 
@@ -33,6 +34,7 @@ pub fn generate(options: Options) -> Solutions {
         solutions_per_page,
         number_counters_per_solution,
         min_original_digit_solution_count,
+        is_decimal,
     } = options;
 
     println!(
@@ -81,7 +83,7 @@ pub fn generate(options: Options) -> Solutions {
                             }
 
                             let is_big_digit = digit > 3;
-                            let gap = digit - 3;
+                            let gap = if is_big_digit { digit - 3 } else { 0 };
 
                             if is_big_digit && (k as u32) < gap {
                                 continue;
@@ -132,10 +134,29 @@ pub fn generate(options: Options) -> Solutions {
                 })
                 .collect::<Vec<i64>>();
 
-            let answer = questions.iter().map(|x| *x as f64).sum::<f64>();
+            let to_divide = if is_decimal {
+                if digit == 2 {
+                    10.0
+                } else {
+                    100.0
+                }
+            } else {
+                1.0
+            };
+
+            let digits_converted = if is_decimal {
+                questions
+                    .iter()
+                    .map(|x| *x as f64 / to_divide)
+                    .collect::<Vec<f64>>()
+            } else {
+                questions.iter().map(|x| *x as f64).collect::<Vec<f64>>()
+            };
+
+            let answer = digits_converted.iter().sum::<f64>();
 
             Solution {
-                numbers: questions,
+                numbers: digits_converted,
                 answer,
             }
         })

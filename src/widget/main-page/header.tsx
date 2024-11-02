@@ -74,6 +74,7 @@ const Header = () => {
             try {
               const {success, error} =
                 await optionsSchema.safeParseAsync(options);
+
               if (!success) {
                 toast.error(
                   error.errors.at(0)?.message ?? '옵션 검증에 실패했습니다.'
@@ -81,8 +82,13 @@ const Header = () => {
                 return;
               }
 
+              if (options.is_decimal && options.digit === 1) {
+                toast.error('소수점은 1자리 수로 생성할 수 없습니다.');
+                return;
+              }
+
               const result: ISolutions = await invoke('generate', {options});
-              createPagesThenSave(options, result.solutions);
+              await createPagesThenSave(options, result.solutions);
             } catch (_e) {
               toast.error('생성 중 오류가 발생했습니다.');
             }

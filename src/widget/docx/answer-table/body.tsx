@@ -5,18 +5,11 @@ import {TableCell} from 'docx';
 
 import {SIZES} from '../shared/const';
 
-const AnswerTableBody = (
-  answers: number[],
-  length: number = 3,
-  colLength: number = 5
-) => {
+const AnswerTableBody = (answers: number[], length: number = 3, colLength: number = 5) => {
   const makeRow = (rowOrd: number) => {
     const cells: TableCell[] = [];
 
-    const rowAnswers = answers.slice(
-      rowOrd * colLength,
-      (rowOrd + 1) * colLength
-    );
+    const rowAnswers = answers.slice(rowOrd * colLength, (rowOrd + 1) * colLength);
 
     const isLastRow = rowOrd === length - 1;
 

@@ -1,8 +1,7 @@
 import dayjs from 'dayjs';
 import {z} from 'zod';
 
-export const makeRandomFileName = () =>
-  `주산덧셈뺄셈-${dayjs().format('YYYYMMDD-HHmmss')}`;
+export const makeRandomFileName = () => `주산덧셈뺄셈-${dayjs().format('YYYYMMDD-HHmmss')}`;
 
 export const defaultFileNameRegex = /^주산덧셈뺄셈-\d{8}-\d{6}$/;
 
@@ -56,6 +55,7 @@ export const optionsSchema = z.object({
   min_original_digit_solution_count: z.number().min(1).max(10).default(3),
 
   include_comma: z.boolean().default(true),
+  is_decimal: z.boolean().default(false),
 });
 
 export const initialOptions = optionsSchema.parse({});

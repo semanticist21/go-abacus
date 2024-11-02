@@ -20,9 +20,7 @@ export const SIZES = {
     width: {
       first: 5.5,
       childColumn: (length: number) => {
-        return length === 1
-          ? 0
-          : (100 - SIZES.columns.width.first) / (length - 1);
+        return length === 1 ? 0 : (100 - SIZES.columns.width.first) / (length - 1);
       },
     },
 

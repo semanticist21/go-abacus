@@ -23,16 +23,12 @@
           {
             "name": "explorer",
             "cmd": "explorer",
-            "args": [
-              "*"
-            ]
+            "args": ["*"]
           },
           {
             "name": "open",
             "cmd": "open",
-            "args": [
-              "*"
-            ]
+            "args": ["*"]
           }
         ]
       },
@@ -41,11 +37,7 @@
       },
       "fs": {
         "all": true,
-        "scope": [
-          "**",
-          "**/*",
-          "/**/*"
-        ]
+        "scope": ["**", "**/*", "/**/*"]
       }
     },
     "windows": [

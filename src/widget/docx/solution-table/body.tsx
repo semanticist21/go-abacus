@@ -4,6 +4,7 @@ import {Paragraph} from 'docx';
 import {TableCell} from 'docx';
 
 import {Options, Solutions} from '../../../store/type';
+import {formatDigitNumber} from '../../../util/format-digit';
 import {SIZES} from '../shared/const';
 
 const SolutionTableBody = (
@@ -20,9 +21,15 @@ const SolutionTableBody = (
       const isLast = idx === colLength - 1;
 
       const targetSolution = solutions.at((idx - 1) % (colLength - 1));
-      const targetNumber = options.include_comma
-        ? targetSolution?.numbers[rowOrd].toLocaleString()
-        : targetSolution?.numbers[rowOrd].toString();
+      const targetNumber = targetSolution!.numbers[rowOrd];
+
+      const digitFormattedNumber = options.is_decimal
+        ? formatDigitNumber(targetNumber ?? 0)
+        : targetNumber;
+
+      const formattedNumber = options.include_comma
+        ? digitFormattedNumber.toLocaleString()
+        : digitFormattedNumber.toString();
 
       const cSpacing = options.digit >= 4 ? 30 : options.digit === 3 ? 50 : 70;
 
@@ -37,7 +44,7 @@ const SolutionTableBody = (
                       size: SIZES.font.numbering,
                     })
                   : new TextRun({
-                      text: targetNumber,
+                      text: formattedNumber,
                       size: SIZES.font.solution,
                       italics: true,
                       font: SIZES.family.solution,
