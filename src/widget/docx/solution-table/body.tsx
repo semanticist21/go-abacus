@@ -32,7 +32,7 @@ const SolutionTableBody = (
         ? addDotSeparate(digitFormattedNumber.toString())
         : digitFormattedNumber.toString();
 
-      const cSpacing = options.digit >= 4 ? 30 : options.digit === 3 ? 50 : 70;
+      const spacing = options.digit >= 4 ? 30 : options.digit === 3 ? 50 : 70;
 
       cells.push(
         new TableCell({
@@ -41,7 +41,7 @@ const SolutionTableBody = (
               children: [
                 isFirst
                   ? new TextRun({
-                      text: rowOrd.toString(),
+                      text: (rowOrd + 1).toString(),
                       size: SIZES.font.numbering,
                     })
                   : new TextRun({
@@ -49,7 +49,7 @@ const SolutionTableBody = (
                       size: SIZES.font.solution,
                       italics: true,
                       font: SIZES.family.solution,
-                      characterSpacing: cSpacing,
+                      characterSpacing: spacing,
                     }),
               ],
               alignment: isFirst ? AlignmentType.CENTER : AlignmentType.RIGHT,
