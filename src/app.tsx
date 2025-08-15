@@ -1,5 +1,5 @@
 import './App.css';
-import MainPage from './widget/main-page/page';
+import MainPage from './components/main-page/page';
 
 const App = () => {
   return <MainPage />;
