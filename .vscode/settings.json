@@ -1,7 +1,7 @@
 {
   "cSpell.words": ["tauri"],
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true,
+    "source.fixAll.eslint": "explicit",
     "source.sort.json": "explicit"
   },
   "editor.formatOnSave": true,
