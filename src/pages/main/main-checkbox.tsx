@@ -1,14 +1,12 @@
 import {HTMLAttributes, InputHTMLAttributes, useId} from 'react';
+import {Except} from 'type-fest';
 
 import {cn} from '../../util/cn';
 
 interface MainCheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
   containerClassName?: string;
-  containerProps?: Exclude<
-    HTMLAttributes<HTMLDivElement>,
-    'aria-controls' | 'className'
-  >;
+  containerProps?: Except<HTMLAttributes<HTMLDivElement>, 'aria-controls' | 'className'>;
 }
 
 export const MainCheckbox = ({
