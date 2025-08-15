@@ -3,7 +3,7 @@ import Header from './header';
 
 const MainPage = () => {
   return (
-    <div id="container">
+    <div className="min-w-2xl" id="container">
       <Header />
       <MainBody />
     </div>

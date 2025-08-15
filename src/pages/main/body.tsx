@@ -8,7 +8,7 @@ const MainBody = () => {
 
   return (
     <main className="p-4 flex flex-col gap-4">
-      <fieldset className="border w-full rounded-md p-4 flex justify-between items-center gap-2">
+      <fieldset className="border w-full rounded-md p-4 flex justify-between items-center gap-2 border-gray-200">
         <legend className="text-gray-900 rounded-md">파일 이름</legend>
 
         <MainOption
@@ -22,7 +22,7 @@ const MainBody = () => {
         />
       </fieldset>
 
-      <fieldset className="border w-full rounded-md p-4 flex justify-between items-center gap-2">
+      <fieldset className="border w-full rounded-md p-4 flex justify-between items-center gap-2 border-gray-200">
         <legend className="text-gray-900 rounded-md">문서 설정</legend>
 
         <MainOption
@@ -58,7 +58,7 @@ const MainBody = () => {
         />
       </fieldset>
 
-      <fieldset className="border w-full rounded-md p-4 grid grid-cols-3 justify-between items-end gap-8 text-nowrap flex-wrap">
+      <fieldset className="border w-full rounded-md p-4 grid grid-cols-3 justify-between items-end gap-8 text-nowrap flex-wrap border-gray-200">
         <legend className="text-gray-900 rounded-md">문제 설정</legend>
 
         <MainOption
@@ -89,8 +89,7 @@ const MainBody = () => {
           onChange={(e) => setOptions({is_random_digit: e.target.checked})}
           aria-labelledby="is-random-digit"
           containerProps={{
-            title:
-              '자리 수가 무작위로 설정됩니다. 본래 자리수가 뜰 확률이 더 높게 설정됩니다.',
+            title: '자리 수가 무작위로 설정됩니다. 본래 자리수가 뜰 확률이 더 높게 설정됩니다.',
           }}
         />
         <MainCheckbox
