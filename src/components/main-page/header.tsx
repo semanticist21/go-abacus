@@ -1,5 +1,4 @@
 import {invoke} from '@tauri-apps/api/tauri';
-import {isEqual} from 'lodash';
 import {useEffect, useState} from 'react';
 import toast from 'react-hot-toast';
 
@@ -7,6 +6,7 @@ import {Button} from '../../shared/button';
 import {useOptionStore} from '../../store/option-store';
 import {ISolutions, initialOptions, optionsSchema} from '../../store/type';
 import {createPagesThenSave} from '../docx/create-pages';
+import { isEqual } from 'lodash-es';
 
 const Header = () => {
   // store
@@ -77,7 +77,7 @@ const Header = () => {
 
               if (!success) {
                 toast.error(
-                  error.errors.at(0)?.message ?? '옵션 검증에 실패했습니다.'
+                  error.issues[0]?.message ?? '옵션 검증에 실패했습니다.'
                 );
                 return;
               }
