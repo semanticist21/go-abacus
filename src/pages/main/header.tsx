@@ -3,10 +3,11 @@ import {isEqual} from 'lodash-es';
 import {Bug, Pickaxe} from 'lucide-react';
 import {useEffect, useState} from 'react';
 import toast from 'react-hot-toast';
+
 import {createPagesThenSave} from '../../components/docx/create-pages';
 import {Button} from '../../components/ui/button';
 import {useOptionStore} from '../../store/option-store';
-import {ISolutions, initialOptions, optionsSchema} from '../../store/type';
+import {initialOptions, ISolutions, optionsSchema} from '../../store/type';
 
 const Header = () => {
   // store
@@ -21,46 +22,46 @@ const Header = () => {
 
   return (
     <header
-      className="px-3 bg-gray-50 flex justify-between items-center border-b border-gray-300 gap-2 h-16"
+      className="flex h-16 items-center justify-between gap-2 border-b border-gray-300 bg-gray-50 px-3"
       id="header"
     >
       <address className="pl-3">
-        <ul className="flex items-center text-gray-600 gap-2 text-sm">
-          <li className="group flex items-center gap-1" aria-label="creator">
-            <span id="creator-label" className="font-semibold not-italic flex items-center gap-1">
+        <ul className="flex items-center gap-2 text-sm text-gray-600">
+          <li aria-label="creator" className="group flex items-center gap-1">
+            <span className="flex items-center gap-1 font-semibold not-italic" id="creator-label">
               <Pickaxe className="size-3" />
               제작
             </span>
             <a
-              className="group-hover:underline rounded-md border-none bg-transparent px-0"
-              type="email"
-              href="mailto:semanticist0@gmail.com"
-              target="_blank"
-              rel="noopener noreferrer"
               aria-describedby="creator-label"
+              className="rounded-md border-none bg-transparent px-0 group-hover:underline"
+              href="mailto:semanticist0@gmail.com"
+              rel="noopener noreferrer"
+              target="_blank"
+              type="email"
             >
               semanticist0@gmail.com
             </a>
           </li>
 
-          <hr className="h-4 w-px border-gray-300 border-l" />
+          <hr className="h-4 w-px border-l border-gray-300" />
 
           <li className="group flex items-center gap-1">
             <span
+              className="flex items-center gap-1 font-semibold not-italic"
               id="bug-inquiry-label"
-              className="font-semibold not-italic flex items-center gap-1"
             >
               <Bug className="size-3" />
               버그 문의
             </span>
             <a
-              className="group-hover:underline rounded-md border-none bg-transparent not-italic"
-              id="kakaotalk-link"
-              type="link"
-              href="https://open.kakao.com/o/s6LPfYJg"
-              target="_blank"
-              rel="noopener noreferrer"
               aria-describedby="bug-inquiry-label"
+              className="rounded-md border-none bg-transparent not-italic group-hover:underline"
+              href="https://open.kakao.com/o/s6LPfYJg"
+              id="kakaotalk-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              type="link"
             >
               카카오톡
             </a>
@@ -68,11 +69,11 @@ const Header = () => {
         </ul>
       </address>
 
-      <div className="flex gap-2 items-center">
+      <div className="flex items-center gap-2">
         <Button
-          className="bg-gray-600 disabled:bg-gray-400 transition-all duration-300 hover:bg-gray-700"
-          type="reset"
+          className="bg-gray-600 transition-all duration-300 hover:bg-gray-700 disabled:bg-gray-400"
           disabled={!isEqualToInitial}
+          type="reset"
           onClick={(e) => {
             e.preventDefault();
 
@@ -83,7 +84,7 @@ const Header = () => {
           초기화
         </Button>
         <Button
-          className="disabled:bg-gray-400 transition-all duration-300"
+          className="transition-all duration-300 disabled:bg-gray-400"
           type="submit"
           onClick={async (e) => {
             e.preventDefault();

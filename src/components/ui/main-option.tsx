@@ -1,4 +1,5 @@
 import {InputHTMLAttributes, ReactNode, useId} from 'react';
+
 import {cn} from '../../util/cn';
 
 interface MainOptionProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -20,19 +21,19 @@ const MainOption = ({
   const id = useId();
 
   return (
-    <div className={containerClassName} aria-controls={id}>
+    <div aria-controls={id} className={containerClassName}>
       <label
+        className="mb-2 flex items-center justify-between pr-3 text-sm font-medium text-gray-900"
         htmlFor={id}
-        className="mb-2 text-sm font-medium text-gray-900 flex justify-between items-center pr-3"
       >
         {label}
 
         {formProps && (
           <data
-            className="text-gray-500 text-xs data-[invalid=true]:text-red-500 font-normal"
             aria-label="현재 입력된 텍스트 길이"
-            value={formProps.textCount}
+            className="text-xs font-normal text-gray-500 data-[invalid=true]:text-red-500"
             data-invalid={formProps.textCount > formProps.maxLength || formProps.textCount === 0}
+            value={formProps.textCount}
           >
             ({formProps.textCount}/{formProps.maxLength})자
           </data>
@@ -40,11 +41,11 @@ const MainOption = ({
       </label>
       <input
         id={id}
+        type="text"
         className={cn(
-          'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 transition-all',
+          'block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 transition-all focus:border-blue-500 focus:ring-blue-500',
           className
         )}
-        type="text"
         required
         {...rest}
       />

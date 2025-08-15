@@ -1,7 +1,5 @@
-import {AlignmentType, TableRow, WidthType} from 'docx';
-import {TextRun} from 'docx';
-import {Paragraph} from 'docx';
-import {TableCell} from 'docx';
+import {AlignmentType, Paragraph, TableCell, TableRow, TextRun, WidthType} from 'docx';
+
 import {COLORS, SIZES} from '../shared/const';
 
 const SolutionTableHeaderCells = (length: number = 6) => {

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {cn} from '../../util/cn';
 
 interface ShinyTextProps {
@@ -18,7 +19,7 @@ const ShinyText: React.FC<ShinyTextProps> = ({
 
   return (
     <div
-      className={cn('inline-block relative', className)}
+      className={cn('relative inline-block', className)}
       style={{
         animationDuration: animationDuration,
       }}

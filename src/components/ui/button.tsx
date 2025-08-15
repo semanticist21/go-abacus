@@ -1,4 +1,5 @@
 import {ButtonHTMLAttributes} from 'react';
+
 import {cn} from '../../util/cn';
 
 interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
@@ -10,7 +11,7 @@ export const Button = ({children, className, ...props}: ButtonProps) => {
     <button
       type="button"
       className={cn(
-        'text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-md text-sm px-5 py-2.5 cursor-pointer',
+        'cursor-pointer rounded-md bg-gray-800 px-5 py-2.5 text-sm font-medium text-white hover:bg-gray-900 focus:ring-4 focus:ring-gray-300 focus:outline-none',
         className
       )}
       {...props}

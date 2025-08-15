@@ -1,7 +1,5 @@
-import {AlignmentType, TableRow, WidthType} from 'docx';
-import {TextRun} from 'docx';
-import {Paragraph} from 'docx';
-import {TableCell} from 'docx';
+import {AlignmentType, Paragraph, TableCell, TableRow, TextRun, WidthType} from 'docx';
+
 import {Options, Solutions} from '../../../store/type';
 import {addDotSeparate} from '../../../util/add-dot-separate';
 import {formatDigitNumber} from '../../../util/format-digit';

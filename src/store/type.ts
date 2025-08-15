@@ -65,10 +65,10 @@ export const solutionsSchema = z.object({
   answer: z.number(),
 });
 
-export const ISolutions = z.object({
+export const iSolutionsSchema = z.object({
   solutions: z.array(solutionsSchema),
 });
 
 export type Options = z.output<typeof optionsSchema>;
 export type Solutions = z.output<typeof solutionsSchema>;
-export type ISolutions = z.output<typeof ISolutions>;
+export type ISolutions = z.output<typeof iSolutionsSchema>;

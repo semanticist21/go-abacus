@@ -9,12 +9,9 @@ const config = {
   bracketSpacing: false,
   arrowParens: 'always',
   endOfLine: 'lf',
-  importOrder: ['^@/(.*)$', '^[./]'],
-  importOrderSeparation: false,
-  importOrderSortSpecifiers: false,
   tailwindStylesheet: './src/app.css',
   tailwindFunctions: ['cn', 'clsx'],
-  plugins: ['prettier-plugin-tailwindcss', '@trivago/prettier-plugin-sort-imports'],
+  plugins: ['prettier-plugin-organize-imports', 'prettier-plugin-tailwindcss'],
 };
 
 export default config;

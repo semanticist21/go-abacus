@@ -1,5 +1,6 @@
 import {HTMLAttributes, InputHTMLAttributes, useId} from 'react';
 import {Except} from 'type-fest';
+
 import {cn} from '../../util/cn';
 
 interface MainCheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -18,19 +19,19 @@ export const MainCheckbox = ({
 
   return (
     <div
-      className={cn('flex items-center cursor-pointer', containerClassName)}
       aria-controls={id}
+      className={cn('flex cursor-pointer items-center', containerClassName)}
       {...divProps}
     >
       <input
-        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+        className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500"
         id={id}
         type="checkbox"
         {...rest}
       />
       <label
+        className="ms-2 cursor-pointer text-sm font-medium text-gray-900 select-none"
         htmlFor={id}
-        className="ms-2 text-sm font-medium text-gray-900 select-none cursor-pointer"
       >
         {label}
       </label>

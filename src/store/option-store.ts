@@ -1,6 +1,7 @@
 import {create} from 'zustand';
 import {createJSONStorage, persist} from 'zustand/middleware';
-import {Options, initialOptions, optionsSchema} from './type';
+
+import {initialOptions, Options, optionsSchema} from './type';
 
 type StoreOptions = {
   options: Options;
