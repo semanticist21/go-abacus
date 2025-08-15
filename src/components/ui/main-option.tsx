@@ -1,8 +1,8 @@
-import {InputHTMLAttributes, useId} from 'react';
+import {InputHTMLAttributes, ReactNode, useId} from 'react';
 import {cn} from '../../util/cn';
 
 interface MainOptionProps extends InputHTMLAttributes<HTMLInputElement> {
-  label: string;
+  label: ReactNode;
   containerClassName?: string;
   formProps?: {
     textCount: number;
@@ -29,7 +29,7 @@ const MainOption = ({
 
         {formProps && (
           <data
-            className="text-gray-500 text-sm data-[invalid=true]:text-red-500"
+            className="text-gray-500 text-xs data-[invalid=true]:text-red-500 font-normal"
             aria-label="현재 입력된 텍스트 길이"
             value={formProps.textCount}
             data-invalid={formProps.textCount > formProps.maxLength || formProps.textCount === 0}

@@ -51,7 +51,11 @@ const MainBody = () => {
         />
         <MainOption
           containerClassName="flex-1"
-          label="생성할 페이지 수 (최대 100p)"
+          label={
+            <>
+              생성할 페이지 수<span className="text-xs text-gray-400"> (~100p)</span>
+            </>
+          }
           placeholder="생성할 문제 페이지 수 (ex. 10)"
           type="number"
           min={1}
