@@ -1,8 +1,22 @@
 @import 'tailwindcss';
+@import './styles/fonts.css';
+
+/* Tailwind v4 theme configuration */
+@theme {
+  --font-family-sans:
+    'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto,
+    'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic',
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+}
 
 @layer base {
   html {
     scrollbar-width: thin;
     scrollbar-color: #888 transparent;
+    color: var(--color-gray-900);
+  }
+
+  button {
+    cursor: pointer;
   }
 }

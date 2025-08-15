@@ -9,7 +9,7 @@ const MainBody = () => {
   return (
     <main className="p-4 flex flex-col gap-4">
       <fieldset className="border w-full rounded-md p-4 flex justify-between items-center gap-2 border-gray-200">
-        <legend className="text-gray-900 rounded-md">파일 이름</legend>
+        <legend className="text-gray-500 rounded-md italic">Files</legend>
 
         <MainOption
           containerClassName="flex-1"
@@ -23,7 +23,7 @@ const MainBody = () => {
       </fieldset>
 
       <fieldset className="border w-full rounded-md p-4 flex justify-between items-center gap-2 border-gray-200">
-        <legend className="text-gray-900 rounded-md">문서 설정</legend>
+        <legend className="text-gray-500 rounded-md italic">Documents</legend>
 
         <MainOption
           containerClassName="flex-1"
@@ -62,7 +62,7 @@ const MainBody = () => {
       </fieldset>
 
       <fieldset className="border w-full rounded-md p-4 grid grid-cols-3 justify-between items-end gap-8 text-nowrap flex-wrap border-gray-200">
-        <legend className="text-gray-900 rounded-md">문제 설정</legend>
+        <legend className="text-gray-500 rounded-md italic">Solutions</legend>
 
         <MainOption
           containerClassName="flex-1"

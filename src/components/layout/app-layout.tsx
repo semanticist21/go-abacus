@@ -8,12 +8,14 @@ const AppLayout = () => {
   return (
     <div className="flex h-screen">
       <aside className="w-36 bg-gray-100 border-r border-gray-200 p-4 shrink-0">
-        <h1 className="text-lg font-semibold text-gray-800 mb-6 font-serif italic">Go Abacus</h1>
+        <h1 className="select-none text-lg font-semibold text-gray-800 mb-6 font-serif italic">
+          Go Abacus
+        </h1>
         <nav className="space-y-2">
           <button
             type="button"
             onClick={() => setActiveTab(0)}
-            className="flex items-center gap-1 w-full px-3 text-left py-2 rounded-md transition-colors aria-[current=page]:text-blue-700 aria-[current=page]:font-medium aria-[current=page]:bg-blue-100 text-gray-600 hover:text-gray-900 hover:bg-gray-50 text-sm"
+            className="flex items-center gap-1 w-full px-3 text-left py-2 rounded-md aria-[current=page]:text-blue-700 aria-[current=page]:font-medium aria-[current=page]:bg-blue-100 text-gray-600 hover:text-gray-900 hover:bg-gray-50 text-sm transition-colors"
             aria-current={activeTab === 0 ? 'page' : false}
           >
             <SquarePlus className="size-3 text-blue-500" />
@@ -22,7 +24,7 @@ const AppLayout = () => {
           <button
             type="button"
             onClick={() => setActiveTab(1)}
-            className="flex items-center gap-1 w-full px-3 text-left py-2 rounded-md transition-colors aria-[current=page]:text-blue-700 aria-[current=page]:font-medium aria-[current=page]:bg-blue-100 text-gray-600 hover:text-gray-900 hover:bg-gray-50 text-sm"
+            className="flex items-center gap-1 w-full px-3 text-left py-2 rounded-md aria-[current=page]:text-blue-700 aria-[current=page]:font-medium aria-[current=page]:bg-blue-100 text-gray-600 hover:text-gray-900 hover:bg-gray-50 text-sm transition-colors"
             aria-current={activeTab === 1 ? 'page' : false}
           >
             <SquareDivide className="size-3 text-blue-500" />
