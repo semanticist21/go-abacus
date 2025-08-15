@@ -1,0 +1,9 @@
+{
+  "cSpell.words": ["tauri"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.sort.json": "explicit"
+  },
+  "editor.formatOnSave": true,
+  "typescript.experimental.useTsgo": true
+}
