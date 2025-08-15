@@ -1,4 +1,4 @@
-import {invoke} from '@tauri-apps/api/tauri';
+import {invoke} from '@tauri-apps/api/core';
 import {isEqual} from 'lodash-es';
 import {useEffect, useState} from 'react';
 import toast from 'react-hot-toast';
@@ -86,7 +86,8 @@ const Header = () => {
 
               const result: ISolutions = await invoke('generate', {options});
               await createPagesThenSave(options, result.solutions);
-            } catch (_e) {
+            } catch (e) {
+              console.error(e);
               toast.error('생성 중 오류가 발생했습니다.');
             }
           }}

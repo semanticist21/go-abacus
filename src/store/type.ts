@@ -69,6 +69,6 @@ export const ISolutions = z.object({
   solutions: z.array(solutionsSchema),
 });
 
-export type Options = z.infer<typeof optionsSchema>;
-export type Solutions = z.infer<typeof solutionsSchema>;
-export type ISolutions = z.infer<typeof ISolutions>;
+export type Options = z.output<typeof optionsSchema>;
+export type Solutions = z.output<typeof solutionsSchema>;
+export type ISolutions = z.output<typeof ISolutions>;

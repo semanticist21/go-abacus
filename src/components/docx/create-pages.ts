@@ -1,4 +1,4 @@
-import {dialog} from '@tauri-apps/api';
+import {save} from '@tauri-apps/plugin-dialog';
 import {Document, Packer, Table, TableRow, WidthType} from 'docx';
 import toast from 'react-hot-toast';
 
@@ -45,8 +45,10 @@ const _create1AnswerTable = (title: string, options: Options, solutions: Solutio
 };
 
 export const createPagesThenSave = async (options: Options, solutions: Solutions[]) => {
-  const savePath = await dialog.save({
-    defaultPath: (await getCurrentResourceDir()) + '/' + options.file_name + '.docx',
+  const resDir = await getCurrentResourceDir();
+
+  const savePath = await save({
+    defaultPath: resDir + '/' + options.file_name + '.docx',
     filters: [{name: 'docx', extensions: ['docx']}],
   });
 

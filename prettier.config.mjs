@@ -10,7 +10,7 @@ const config = {
   arrowParens: 'always',
   endOfLine: 'lf',
   importOrder: ['^@/(.*)$', '^[./]'],
-  importOrderSeparation: true,
+  importOrderSeparation: false,
   importOrderSortSpecifiers: true,
   plugins: ['prettier-plugin-tailwindcss', '@trivago/prettier-plugin-sort-imports'],
 };
