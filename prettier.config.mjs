@@ -12,6 +12,8 @@ const config = {
   importOrder: ['^@/(.*)$', '^[./]'],
   importOrderSeparation: false,
   importOrderSortSpecifiers: false,
+  tailwindStylesheet: './src/app.css',
+  tailwindFunctions: ['cn', 'clsx'],
   plugins: ['prettier-plugin-tailwindcss', '@trivago/prettier-plugin-sort-imports'],
 };
 

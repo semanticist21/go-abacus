@@ -1,5 +1,6 @@
 import {invoke} from '@tauri-apps/api/core';
 import {isEqual} from 'lodash-es';
+import {Bug, Pickaxe} from 'lucide-react';
 import {useEffect, useState} from 'react';
 import toast from 'react-hot-toast';
 import {createPagesThenSave} from '../../components/docx/create-pages';
@@ -24,22 +25,34 @@ const Header = () => {
       id="header"
     >
       <address className="pl-3">
-        <ul className="flex items-center text-gray-600 hover:text-gray-900 gap-2">
-          <li className="group" aria-label="creator">
-            <span className="font-semibold not-italic">• 제작: </span>
+        <ul className="flex items-center text-gray-600 gap-2 text-sm">
+          <li className="group flex items-center gap-1" aria-label="creator">
+            <span id="creator-label" className="font-semibold not-italic flex items-center gap-1">
+              <Pickaxe className="size-3" />
+              제작
+            </span>
             <a
               className="group-hover:underline rounded-md border-none bg-transparent px-0"
               type="email"
               href="mailto:semanticist0@gmail.com"
               target="_blank"
               rel="noopener noreferrer"
+              aria-describedby="creator-label"
             >
               semanticist0@gmail.com
             </a>
           </li>
 
-          <li className="group" aria-label="bug-inquiry">
-            <span className="font-semibold not-italic">• 버그 문의: </span>
+          <hr className="h-4 w-px border-gray-300 border-l" />
+
+          <li className="group flex items-center gap-1">
+            <span
+              id="bug-inquiry-label"
+              className="font-semibold not-italic flex items-center gap-1"
+            >
+              <Bug className="size-3" />
+              버그 문의
+            </span>
             <a
               className="group-hover:underline rounded-md border-none bg-transparent not-italic"
               id="kakaotalk-link"
@@ -47,6 +60,7 @@ const Header = () => {
               href="https://open.kakao.com/o/s6LPfYJg"
               target="_blank"
               rel="noopener noreferrer"
+              aria-describedby="bug-inquiry-label"
             >
               카카오톡
             </a>
@@ -56,10 +70,12 @@ const Header = () => {
 
       <div className="flex gap-2 items-center">
         <Button
-          className="bg-gray-700 disabled:bg-gray-400 transition-all duration-300"
-          aria-labelledby="reset"
+          className="bg-gray-600 disabled:bg-gray-400 transition-all duration-300 hover:bg-gray-700"
+          type="reset"
           disabled={!isEqualToInitial}
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
+
             reset();
             toast.success('초기화되었습니다.');
           }}
@@ -68,8 +84,10 @@ const Header = () => {
         </Button>
         <Button
           className="disabled:bg-gray-400 transition-all duration-300"
-          aria-labelledby="save"
-          onClick={async () => {
+          type="submit"
+          onClick={async (e) => {
+            e.preventDefault();
+
             try {
               const {success, error} = await optionsSchema.safeParseAsync(options);
 

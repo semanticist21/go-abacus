@@ -1,13 +1,22 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "go-abacus",
-  "version": "0.2.0",
-  "identifier": "com.go-abacus.app",
+  "app": {
+    "security": {
+      "csp": null
+    },
+    "windows": [
+      {
+        "height": 600,
+        "title": "go-abacus v0.2.0",
+        "width": 900
+      }
+    ]
+  },
   "build": {
     "beforeBuildCommand": "bun run build",
     "beforeDevCommand": "bun run dev",
-    "frontendDist": "../dist",
-    "devUrl": "http://localhost:1420"
+    "devUrl": "http://localhost:1420",
+    "frontendDist": "../dist"
   },
   "bundle": {
     "active": true,
@@ -20,17 +29,8 @@
     ],
     "targets": "all"
   },
-  "app": {
-    "windows": [
-      {
-        "height": 600,
-        "title": "go-abacus v0.2.0",
-        "width": 900
-      }
-    ],
-    "security": {
-      "csp": null
-    }
-  },
-  "plugins": {}
+  "identifier": "com.go-abacus.app",
+  "plugins": {},
+  "productName": "go-abacus",
+  "version": "0.2.0"
 }
