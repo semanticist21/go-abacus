@@ -1,12 +1,12 @@
 import {invoke} from '@tauri-apps/api/tauri';
+import {isEqual} from 'lodash-es';
 import {useEffect, useState} from 'react';
 import toast from 'react-hot-toast';
 
+import {createPagesThenSave} from '../../components/docx/create-pages';
 import {Button} from '../../shared/button';
 import {useOptionStore} from '../../store/option-store';
 import {ISolutions, initialOptions, optionsSchema} from '../../store/type';
-import {createPagesThenSave} from '../docx/create-pages';
-import { isEqual } from 'lodash-es';
 
 const Header = () => {
   // store
@@ -72,13 +72,10 @@ const Header = () => {
           aria-labelledby="save"
           onClick={async () => {
             try {
-              const {success, error} =
-                await optionsSchema.safeParseAsync(options);
+              const {success, error} = await optionsSchema.safeParseAsync(options);
 
               if (!success) {
-                toast.error(
-                  error.issues[0]?.message ?? '옵션 검증에 실패했습니다.'
-                );
+                toast.error(error.issues[0]?.message ?? '옵션 검증에 실패했습니다.');
                 return;
               }
 
