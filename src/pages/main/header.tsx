@@ -24,7 +24,7 @@ const Header = () => {
       className="px-3 bg-gray-50 flex justify-between items-center border-b border-gray-300 gap-2 h-16"
       id="header"
     >
-      <address>
+      <address className="pl-3">
         <ul className="flex items-center text-gray-600 hover:text-gray-900 gap-2">
           <li className="group" aria-label="creator">
             <span className="font-semibold not-italic">• 제작: </span>
