@@ -28,7 +28,10 @@ const MainBody = () => {
         <MainOption
           containerClassName="flex-1"
           label="문서 제목"
-          textCount={options.title.length.toLocaleString()}
+          formProps={{
+            textCount: options.title.length,
+            maxLength: 30,
+          }}
           placeholder="문서 제목 (ex. LEVEL 1)"
           value={options.title}
           onChange={(e) => setOptions({title: e.target.value})}
@@ -38,7 +41,10 @@ const MainBody = () => {
         <MainOption
           containerClassName="flex-1"
           label="문서 부제목"
-          textCount={options.subtitle.length.toLocaleString()}
+          formProps={{
+            textCount: options.subtitle.length,
+            maxLength: 30,
+          }}
           placeholder="문서 부제목 (ex. 주산 암산)"
           value={options.subtitle}
           onChange={(e) => setOptions({subtitle: e.target.value})}
@@ -47,7 +53,7 @@ const MainBody = () => {
         />
         <MainOption
           containerClassName="flex-1"
-          label="생성할 페이지 수 (최대 20p)"
+          label="생성할 페이지 수 (최대 100p)"
           placeholder="생성할 문제 페이지 수 (ex. 10)"
           type="number"
           min={1}

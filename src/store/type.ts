@@ -31,8 +31,8 @@ export const optionsSchema = z.object({
     .min(1, {
       message: '생성할 페이지 수는 최소한 1페이지 이상 입력해야 합니다.',
     })
-    .max(20, {
-      message: '생성할 페이지 수는 최대 20페이지까지 입력할 수 있습니다.',
+    .max(100, {
+      message: '생성할 페이지 수는 최대 100페이지까지 입력할 수 있습니다.',
     })
     .default(5),
   solutions_per_page: z.number().min(1).default(15),

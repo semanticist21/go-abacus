@@ -4,15 +4,18 @@ import {cn} from '../../util/cn';
 
 interface MainOptionProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  textCount?: string;
   containerClassName?: string;
+  formProps?: {
+    textCount: number;
+    maxLength: number;
+  };
 }
 
 const MainOption = ({
   label,
-  textCount,
   containerClassName,
   className,
+  formProps,
   ...rest
 }: MainOptionProps) => {
   const id = useId();
@@ -25,20 +28,21 @@ const MainOption = ({
       >
         {label}
 
-        {textCount && (
+        {formProps && (
           <data
-            className="text-gray-500 text-sm"
+            className="text-gray-500 text-sm data-[invalid=true]:text-red-500"
             aria-label="현재 입력된 텍스트 길이"
-            value={textCount}
+            value={formProps.textCount}
+            data-invalid={formProps.textCount > formProps.maxLength}
           >
-            ({textCount}자)
+            ({formProps.textCount}/{formProps.maxLength})자
           </data>
         )}
       </label>
       <input
         id={id}
         className={cn(
-          'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+          'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 transition-all',
           className
         )}
         type="text"
