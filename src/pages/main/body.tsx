@@ -1,5 +1,5 @@
-import {MainCheckbox} from '../../components/shared/main-checkbox';
-import MainOption from '../../components/shared/main-option';
+import {MainCheckbox} from '../../components/ui/main-checkbox';
+import MainOption from '../../components/ui/main-option';
 import {useOptionStore} from '../../store/option-store';
 
 const MainBody = () => {

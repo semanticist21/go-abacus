@@ -7,6 +7,13 @@
     'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto,
     'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic',
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+
+  --animate-shine: shine 5s linear infinite;
+}
+
+@keyframes shine {
+  0% { background-position: 100%; }
+  100% { background-position: -100%; }
 }
 
 @layer base {

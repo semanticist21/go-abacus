@@ -4,7 +4,7 @@ import {Bug, Pickaxe} from 'lucide-react';
 import {useEffect, useState} from 'react';
 import toast from 'react-hot-toast';
 import {createPagesThenSave} from '../../components/docx/create-pages';
-import {Button} from '../../components/shared/button';
+import {Button} from '../../components/ui/button';
 import {useOptionStore} from '../../store/option-store';
 import {ISolutions, initialOptions, optionsSchema} from '../../store/type';
 

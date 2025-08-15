@@ -1,6 +1,7 @@
 import {SquareDivide, SquarePlus} from 'lucide-react';
 import {useState} from 'react';
 import MainPage from '../../pages/main';
+import ShinyText from '../ui/shiny-text';
 
 const AppLayout = () => {
   const [activeTab, setActiveTab] = useState<number>(0);
@@ -8,8 +9,8 @@ const AppLayout = () => {
   return (
     <div className="flex h-screen">
       <aside className="w-36 bg-gray-100 border-r border-gray-200 p-4 shrink-0">
-        <h1 className="select-none text-lg font-semibold text-gray-800 mb-6 font-serif italic">
-          Go Abacus
+        <h1 className="select-none text-lg font-semibold mb-6 font-sans cursor-default text-center">
+          <ShinyText text="GoAbacus" />
         </h1>
         <nav className="space-y-2">
           <button
