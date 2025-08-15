@@ -65,7 +65,7 @@ const MainBody = () => {
         />
       </fieldset>
 
-      <fieldset className="border w-full rounded-md p-4 grid grid-cols-3 justify-between items-end gap-8 text-nowrap flex-wrap border-gray-200">
+      <fieldset className="border w-full rounded-md p-4 flex justify-between items-end gap-8 text-nowrap flex-wrap border-gray-200">
         <legend className="text-gray-500 rounded-md italic">Solutions</legend>
 
         <MainOption
@@ -78,40 +78,38 @@ const MainBody = () => {
           value={options.digit}
           onChange={(e) => setOptions({digit: Number(e.target.value)})}
         />
-        <MainCheckbox
-          containerClassName="flex-1"
-          label="마이너스 문제 포함"
-          checked={options.include_minus}
-          onChange={(e) => setOptions({include_minus: e.target.checked})}
-          containerProps={{
-            title: '마이너스 문제가 번갈아서 포함됩니다.',
-          }}
-        />
-        <MainCheckbox
-          containerClassName="flex-1"
-          label="자리 수 무작위"
-          checked={options.is_random_digit}
-          onChange={(e) => setOptions({is_random_digit: e.target.checked})}
-          containerProps={{
-            title: '자리 수가 무작위로 설정됩니다. 본래 자리수가 뜰 확률이 더 높게 설정됩니다.',
-          }}
-        />
-        <MainCheckbox
-          containerClassName="flex-1"
-          label="쉼표 여부"
-          checked={options.include_comma}
-          onChange={(e) => setOptions({include_comma: e.target.checked})}
-        />
-        <MainCheckbox
-          containerClassName="flex-1"
-          label="소수점 계산"
-          checked={options.is_decimal}
-          onChange={(e) => setOptions({is_decimal: e.target.checked})}
-          containerProps={{
-            title:
-              '2자리 수 이상만 가능하며, 2자리는 소수점 1자리, 그 이상은 소수점 2자리로 표시됩니다.',
-          }}
-        />
+        <div className="grid grid-cols-3 gap-2 w-full flex-2">
+          <MainCheckbox
+            label="마이너스 문제 포함"
+            checked={options.include_minus}
+            onChange={(e) => setOptions({include_minus: e.target.checked})}
+            containerProps={{
+              title: '마이너스 문제가 번갈아서 포함됩니다.',
+            }}
+          />
+          <MainCheckbox
+            label="자리 수 무작위"
+            checked={options.is_random_digit}
+            onChange={(e) => setOptions({is_random_digit: e.target.checked})}
+            containerProps={{
+              title: '자리 수가 무작위로 설정됩니다. 본래 자리수가 뜰 확률이 더 높게 설정됩니다.',
+            }}
+          />
+          <MainCheckbox
+            label="쉼표 여부"
+            checked={options.include_comma}
+            onChange={(e) => setOptions({include_comma: e.target.checked})}
+          />
+          <MainCheckbox
+            label="소수점 계산"
+            checked={options.is_decimal}
+            onChange={(e) => setOptions({is_decimal: e.target.checked})}
+            containerProps={{
+              title:
+                '2자리 수 이상만 가능하며, 2자리는 소수점 1자리, 그 이상은 소수점 2자리로 표시됩니다.',
+            }}
+          />
+        </div>
       </fieldset>
     </main>
   );
