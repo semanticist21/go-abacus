@@ -33,7 +33,7 @@ const MainOption = ({
             className="text-gray-500 text-sm data-[invalid=true]:text-red-500"
             aria-label="현재 입력된 텍스트 길이"
             value={formProps.textCount}
-            data-invalid={formProps.textCount > formProps.maxLength}
+            data-invalid={formProps.textCount > formProps.maxLength || formProps.textCount === 0}
           >
             ({formProps.textCount}/{formProps.maxLength})자
           </data>
