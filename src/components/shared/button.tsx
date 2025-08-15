@@ -1,6 +1,5 @@
 import {ButtonHTMLAttributes} from 'react';
-
-import {cn} from '../util/cn';
+import {cn} from '../../util/cn';
 
 interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
   children: React.ReactNode;

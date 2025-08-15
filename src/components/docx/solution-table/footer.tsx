@@ -2,7 +2,6 @@ import {AlignmentType, TableRow, WidthType} from 'docx';
 import {TextRun} from 'docx';
 import {Paragraph} from 'docx';
 import {TableCell} from 'docx';
-
 import {SIZES} from '../shared/const';
 
 const SolutionTableFooterCells = (length: number = 6) => {

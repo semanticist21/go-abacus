@@ -1,6 +1,5 @@
 import {HTMLAttributes, InputHTMLAttributes, useId} from 'react';
 import {Except} from 'type-fest';
-
 import {cn} from '../../util/cn';
 
 interface MainCheckboxProps extends InputHTMLAttributes<HTMLInputElement> {

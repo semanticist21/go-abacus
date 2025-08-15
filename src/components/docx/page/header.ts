@@ -1,5 +1,4 @@
 import {AlignmentType, Header, Paragraph, TextRun} from 'docx';
-
 import {SIZES} from '../shared/const';
 
 const PageHeader = (text: string) => {

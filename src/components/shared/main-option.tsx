@@ -1,5 +1,4 @@
 import {InputHTMLAttributes, useId} from 'react';
-
 import {cn} from '../../util/cn';
 
 interface MainOptionProps extends InputHTMLAttributes<HTMLInputElement> {

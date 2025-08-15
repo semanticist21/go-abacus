@@ -11,7 +11,7 @@ const config = {
   endOfLine: 'lf',
   importOrder: ['^@/(.*)$', '^[./]'],
   importOrderSeparation: false,
-  importOrderSortSpecifiers: true,
+  importOrderSortSpecifiers: false,
   plugins: ['prettier-plugin-tailwindcss', '@trivago/prettier-plugin-sort-imports'],
 };
 

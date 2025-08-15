@@ -2,7 +2,6 @@ import {AlignmentType, TableRow} from 'docx';
 import {TextRun} from 'docx';
 import {Paragraph} from 'docx';
 import {TableCell} from 'docx';
-
 import {COLORS, SIZES} from '../shared/const';
 
 const AnswerTableHeaderCells = (title: string, length: number = 6) => {

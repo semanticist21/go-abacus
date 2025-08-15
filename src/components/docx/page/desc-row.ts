@@ -8,7 +8,6 @@ import {
   VerticalAlign,
   WidthType,
 } from 'docx';
-
 import {SIZES} from '../shared/const';
 
 const pageDescRow = (text: string) => {
