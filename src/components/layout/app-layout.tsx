@@ -10,7 +10,7 @@ const AppLayout = () => {
     <div className="flex h-screen">
       <aside className="w-36 bg-gray-100 border-r border-gray-200 p-4 shrink-0">
         <h1 className="select-none text-lg font-semibold mb-6 font-sans cursor-default text-center">
-          <ShinyText text="GoAbacus" />
+          <ShinyText text="Go! Abacus" />
         </h1>
         <nav className="space-y-2">
           <button
