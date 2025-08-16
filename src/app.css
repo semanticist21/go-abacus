@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import './styles/fonts.css';
+@import './styles/scrollbar.css';
 
 /* Tailwind v4 theme configuration */
 @theme {
@@ -22,9 +23,22 @@
 
 @layer base {
   html {
-    scrollbar-width: thin;
-    scrollbar-color: #888 transparent;
     color: var(--color-gray-900);
+    height: 100dvh;
+    width: 100dvw;
+
+    min-width: 800px;
+    min-height: 550px;
+  }
+
+  body {
+    height: 100%;
+    width: 100%;
+  }
+
+  #root {
+    height: 100%;
+    width: 100%;
   }
 
   button {

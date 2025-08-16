@@ -6,9 +6,9 @@
     },
     "windows": [
       {
-        "height": 600,
+        "height": 650,
         "title": "go-abacus v0.2.0",
-        "width": 900
+        "width": 1000
       }
     ]
   },

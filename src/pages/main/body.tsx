@@ -1,5 +1,6 @@
 import {useOptionStore} from '@/pages/main/store';
 
+import {BookText, File, Star} from 'lucide-react';
 import {Checkbox} from '../../components/ui/checkbox';
 import Input from '../../components/ui/input';
 
@@ -9,11 +10,12 @@ const MainBody = () => {
 
   return (
     <main className="flex flex-col gap-4 p-4">
-      <fieldset className="flex w-full items-center justify-between gap-2 rounded-md border border-gray-200 p-4">
-        <legend className="rounded-md text-gray-500 italic">Files</legend>
+      <fieldset className="flex w-full items-center justify-between gap-2 rounded-md border border-gray-200 p-4 focus-within:*:text-gray-900">
+        <legend className="flex items-center gap-2 rounded-md text-gray-400 transition-colors">
+          <File className="size-4" /> File
+        </legend>
 
         <Input
-          aria-labelledby="file-name"
           containerClassName="flex-1"
           label="파일 이름"
           placeholder="저장할 파일 이름 (ex. 주산덧셈뺄셈)"
@@ -23,8 +25,10 @@ const MainBody = () => {
         />
       </fieldset>
 
-      <fieldset className="flex w-full items-center justify-between gap-2 rounded-md border border-gray-200 p-4">
-        <legend className="rounded-md text-gray-500 italic">Documents</legend>
+      <fieldset className="flex w-full items-center justify-between gap-2 rounded-md border border-gray-200 p-4 focus-within:*:text-gray-900">
+        <legend className="flex items-center gap-2 rounded-md text-gray-400 transition-colors">
+          <BookText className="size-4" /> Document
+        </legend>
 
         <Input
           containerClassName="flex-1"
@@ -66,8 +70,10 @@ const MainBody = () => {
         />
       </fieldset>
 
-      <fieldset className="flex w-full flex-wrap items-end justify-between gap-8 rounded-md border border-gray-200 p-4 text-nowrap">
-        <legend className="rounded-md text-gray-500 italic">Solutions</legend>
+      <fieldset className="flex w-full flex-wrap items-end justify-between gap-8 rounded-md border border-gray-200 p-4 text-nowrap focus-within:*:text-gray-900">
+        <legend className="flex w-max items-center gap-2 rounded-md text-gray-400 transition-colors">
+          <Star className="size-5" /> Solutions
+        </legend>
 
         <Input
           containerClassName="flex-1"

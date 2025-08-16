@@ -9,7 +9,7 @@ const Layout = () => {
   const [activeTab, setActiveTab] = useState<number>(0);
 
   return (
-    <div className="flex h-screen">
+    <div className="align-stretch flex h-full">
       <aside className="w-36 shrink-0 border-r border-gray-200 bg-gray-100 p-4">
         <h1 className="mb-6 cursor-default text-center font-sans text-lg font-semibold select-none">
           <ShinyText
