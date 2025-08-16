@@ -13,6 +13,8 @@ interface RangeSliderProps {
   onChange: (value: [number, number]) => void;
   step?: number;
   tooltip?: string;
+  hasError?: boolean;
+  onBlur?: () => void;
 }
 
 const RangeSlider = ({
@@ -24,6 +26,8 @@ const RangeSlider = ({
   onChange,
   step = 1,
   tooltip,
+  hasError = false,
+  onBlur,
 }: RangeSliderProps) => {
   const labelContent = (
     <span className="cursor-help text-sm font-medium text-gray-700">{label}</span>
@@ -44,18 +48,19 @@ const RangeSlider = ({
           max={max}
           value={value}
           onChange={(val) => onChange(val as [number, number])}
+          onAfterChange={onBlur}
           step={step}
           styles={{
             rail: {
-              backgroundColor: '#e5e7eb',
+              backgroundColor: hasError ? '#fecaca' : '#e5e7eb',
               height: 4,
             },
             track: {
-              backgroundColor: '#3b82f6',
+              backgroundColor: hasError ? '#ef4444' : '#3b82f6',
               height: 4,
             },
             handle: {
-              backgroundColor: '#3b82f6',
+              backgroundColor: hasError ? '#ef4444' : '#3b82f6',
               border: '2px solid #ffffff',
               boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
               width: 16,

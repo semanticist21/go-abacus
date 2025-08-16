@@ -11,10 +11,12 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <Toaster
         position="bottom-center"
         toastOptions={{
+          duration: 4000,
           style: {
             fontSize: '0.875rem',
           },
         }}
+        gutter={8}
       />
       <App />
     </TooltipProvider>

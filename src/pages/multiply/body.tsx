@@ -2,6 +2,8 @@ import {useMultiplyOptionStore} from '@/pages/multiply/store';
 
 import Select from '@/components/ui/select';
 import {BookText, DivideIcon, Save, X} from 'lucide-react';
+import {useState} from 'react';
+import toast from 'react-hot-toast';
 import {Checkbox} from '../../components/ui/checkbox';
 import Input from '../../components/ui/input';
 import RangeSlider from '../../components/ui/range-slider';
@@ -9,6 +11,30 @@ import {Tooltip} from '../../components/ui/tooltip';
 
 const MultiplyBody = () => {
   const {options, setOptions} = useMultiplyOptionStore();
+  const [divideRangeError, setDivideRangeError] = useState(false);
+  const [multiplyRangeError, setMultiplyRangeError] = useState(false);
+
+  const validateDivideRanges = () => {
+    if (options.big_divide_min_digit < options.small_divide_max_digit) {
+      setDivideRangeError(true);
+      toast.dismiss();
+      toast.error('큰 수의 최소 자리수가 작은 수의 최대 자리수보다 작을 수 없습니다.');
+      return false;
+    }
+    setDivideRangeError(false);
+    return true;
+  };
+
+  const validateMultiplyRanges = () => {
+    if (options.multiply_min_digit > options.multiply_max_digit) {
+      setMultiplyRangeError(true);
+      toast.dismiss();
+      toast.error('최소 자리수가 최대 자리수보다 클 수 없습니다.');
+      return false;
+    }
+    setMultiplyRangeError(false);
+    return true;
+  };
 
   return (
     <main className="scrollbar-overlay flex flex-1 flex-col gap-4 overflow-x-hidden overflow-y-auto p-4">
@@ -118,12 +144,14 @@ const MultiplyBody = () => {
               min={1}
               tooltip="나눗셈에서 피제수(나누어지는 수)의 자릿수 범위를 설정합니다."
               value={[options.big_divide_min_digit, options.big_divide_max_digit]}
+              hasError={divideRangeError}
               onChange={([min, max]) =>
                 setOptions({
                   big_divide_min_digit: min,
                   big_divide_max_digit: max,
                 })
               }
+              onBlur={validateDivideRanges}
             />
             <RangeSlider
               label="작은 수 자리수 범위"
@@ -131,12 +159,14 @@ const MultiplyBody = () => {
               min={1}
               tooltip="나눗셈에서 제수(나누는 수)의 자릿수 범위를 설정합니다."
               value={[options.small_divide_min_digit, options.small_divide_max_digit]}
+              hasError={divideRangeError}
               onChange={([min, max]) =>
                 setOptions({
                   small_divide_min_digit: min,
                   small_divide_max_digit: max,
                 })
               }
+              onBlur={validateDivideRanges}
             />
           </div>
         </fieldset>
@@ -170,12 +200,14 @@ const MultiplyBody = () => {
               min={1}
               tooltip="곱셈에서 사용할 숫자의 자릿수 범위를 설정합니다."
               value={[options.multiply_min_digit, options.multiply_max_digit]}
+              hasError={multiplyRangeError}
               onChange={([min, max]) =>
                 setOptions({
                   multiply_min_digit: min,
                   multiply_max_digit: max,
                 })
               }
+              onBlur={validateMultiplyRanges}
             />
           </div>
         </fieldset>
