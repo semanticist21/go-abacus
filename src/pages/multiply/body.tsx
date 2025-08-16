@@ -3,7 +3,7 @@ import {useMultiplyOptionStore} from '@/pages/multiply/store';
 import Select from '@/components/ui/select';
 import {BookText, DivideIcon, Save, X} from 'lucide-react';
 import {useState} from 'react';
-import toast from 'react-hot-toast';
+import {toast} from 'sonner';
 import {Checkbox} from '../../components/ui/checkbox';
 import Input from '../../components/ui/input';
 import RangeSlider from '../../components/ui/range-slider';
@@ -18,7 +18,9 @@ const MultiplyBody = () => {
     if (options.big_divide_min_digit < options.small_divide_max_digit) {
       setDivideRangeError(true);
       toast.dismiss();
-      toast.error('큰 수의 최소 자리수가 작은 수의 최대 자리수보다 작을 수 없습니다.');
+      toast.error('에러', {
+        description: '큰 수의 최소 자리수가 작은 수의 최대 자리수보다 작을 수 없습니다.',
+      });
       return false;
     }
     setDivideRangeError(false);
@@ -29,7 +31,9 @@ const MultiplyBody = () => {
     if (options.multiply_min_digit > options.multiply_max_digit) {
       setMultiplyRangeError(true);
       toast.dismiss();
-      toast.error('최소 자리수가 최대 자리수보다 클 수 없습니다.');
+      toast.error('에러', {
+        description: '최소 자리수가 최대 자리수보다 클 수 없습니다.',
+      });
       return false;
     }
     setMultiplyRangeError(false);

@@ -1,6 +1,6 @@
 import {save} from '@tauri-apps/plugin-dialog';
 import {Document, Packer, Table, TableRow, WidthType} from 'docx';
-import toast from 'react-hot-toast';
+import {toast} from 'sonner';
 
 import {useOptionStore} from '../../pages/main/store';
 import {defaultFileNameRegex, makeRandomFileName, Options, Solutions} from '../../pages/main/type';
@@ -117,7 +117,9 @@ export const createPagesThenSave = async (options: Options, solutions: Solutions
     const blob = await Packer.toBlob(file);
     await saveFileBlob(blob, savePath);
 
-    toast.success('파일 저장에 성공했습니다.');
+    toast.success('성공', {
+      description: '파일 저장에 성공했습니다.',
+    });
 
     const previousFileName = options.file_name;
     const regex = new RegExp(defaultFileNameRegex);
@@ -136,8 +138,8 @@ export const createPagesThenSave = async (options: Options, solutions: Solutions
     });
   } catch (e) {
     console.error(e);
-    toast.error(
-      '파일 저장에 실패했습니다.\n 혹시 동일한 이름을 가진 문서가\n 열려있다면 닫아주세요.'
-    );
+    toast.error('에러', {
+      description: '파일 저장에 실패했습니다.\n 혹시 동일한 이름을 가진 문서가\n 열려있다면 닫아주세요.',
+    });
   }
 };

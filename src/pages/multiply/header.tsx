@@ -1,6 +1,6 @@
 import {isEqual} from 'lodash-es';
 import {useEffect, useState} from 'react';
-import toast from 'react-hot-toast';
+import {toast} from 'sonner';
 
 import {MouseEvent} from 'react';
 
@@ -23,7 +23,9 @@ const MultiplyHeader = () => {
   const handleReset = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     reset();
-    toast.success('초기화되었습니다.');
+    toast.success('성공', {
+      description: '초기화되었습니다.',
+    });
   };
 
   return (
