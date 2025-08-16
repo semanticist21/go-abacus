@@ -2,23 +2,24 @@ import {create as createMutative} from 'mutative';
 import {create} from 'zustand';
 import {createJSONStorage, persist} from 'zustand/middleware';
 
-import {initialOptions, Options, optionsSchema} from './type';
+import {initialOptions, MultiplyOptions, multiplyOptionsSchema} from './type';
 
-type StoreOptions = {
-  options: Options;
-  setOptions: (options: Partial<Options>) => void;
+interface StoreOptions {
+  options: MultiplyOptions;
+  setOptions: (options: Partial<MultiplyOptions>) => void;
   reset: () => void;
-};
+}
 
 export const useMultiplyOptionStore = create(
   persist<StoreOptions>(
     (set) => ({
       options: initialOptions,
-      setOptions: (options) => set((state) => 
-        createMutative(state, (draft) => {
-          Object.assign(draft.options, options);
-        })
-      ),
+      setOptions: (options) =>
+        set((state) =>
+          createMutative(state, (draft) => {
+            Object.assign(draft.options, options);
+          })
+        ),
       reset: () => set({options: initialOptions}),
     }),
     {
@@ -27,9 +28,9 @@ export const useMultiplyOptionStore = create(
       onRehydrateStorage: () => (state) => {
         if (!state) return;
 
-        useMultiplyOptionStore.setState((prev) => 
+        useMultiplyOptionStore.setState((prev) =>
           createMutative(prev, (draft) => {
-            draft.options = optionsSchema.parse(state);
+            draft.options = multiplyOptionsSchema.parse(state);
           })
         );
       },

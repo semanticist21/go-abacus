@@ -4,11 +4,11 @@ import {createJSONStorage, persist} from 'zustand/middleware';
 
 import {initialOptions, Options, optionsSchema} from './type';
 
-type StoreOptions = {
+interface StoreOptions {
   options: Options;
   setOptions: (options: Partial<Options>) => void;
   reset: () => void;
-};
+}
 
 export const useOptionStore = create(
   persist<StoreOptions>(

@@ -6,7 +6,7 @@ export const makeRandomFileName = () => `주산덧셈뺄셈-${dayjs().format('YY
 export const defaultFileNameRegex = /^주산덧셈뺄셈-\d{8}-\d{6}$/;
 
 export const optionsSchema = z.object({
-  file_name: z.string().default(makeRandomFileName()),
+  file_name: z.string().default(() => makeRandomFileName()),
 
   title: titleSchema,
   subtitle: subtitleSchema,

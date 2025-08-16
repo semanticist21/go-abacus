@@ -3,6 +3,8 @@ import {isEqual} from 'lodash-es';
 import {useEffect, useState} from 'react';
 import toast from 'react-hot-toast';
 
+import {MouseEvent} from 'react';
+
 import {createPagesThenSave} from '../../components/docx/create-pages';
 import Header from '../../components/ui/header';
 import {useOptionStore} from './store';
@@ -20,14 +22,14 @@ const MainHeader = () => {
   }, [options]);
 
   // 초기화 event handler
-  const handleReset = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleReset = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     reset();
     toast.success('초기화되었습니다.');
   };
 
   // 생성 및 저장 event handler
-  const handleCreateAndSave = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleCreateAndSave = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     try {
