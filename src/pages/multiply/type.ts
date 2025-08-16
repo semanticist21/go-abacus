@@ -1,40 +1,16 @@
+import {page_countSchema, subtitleSchema, titleSchema} from '@/types/schema';
 import dayjs from 'dayjs';
 import {z} from 'zod';
 
-export const makeRandomFileName = () => `주산덧셈뺄셈-${dayjs().format('YYYYMMDD-HHmmss')}`;
-
-export const defaultFileNameRegex = /^주산덧셈뺄셈-\d{8}-\d{6}$/;
+export const makeRandomFileName = () => `주산곱셈뺄셈-${dayjs().format('YYYYMMDD-HHmmss')}`;
+export const defaultFileNameRegex = /^주산곱셈뺄셈-\d{8}-\d{6}$/;
 
 export const optionsSchema = z.object({
   file_name: z.string().default(makeRandomFileName()),
 
-  title: z
-    .string()
-    .min(1, {
-      message: '제목은 최소한 1자 이상 입력해야 합니다.',
-    })
-    .max(30, {
-      message: '제목은 최대 30자까지 입력할 수 있습니다.',
-    })
-    .default('LEVEL 0'),
-  subtitle: z
-    .string()
-    .min(1, {
-      message: '부제목은 최소한 1자 이상 입력해야 합니다.',
-    })
-    .max(30, {
-      message: '부제목은 최대 30자까지 입력할 수 있습니다.',
-    })
-    .default('주산 암산'),
-  page_count: z
-    .number()
-    .min(1, {
-      message: '생성할 페이지 수는 최소한 1페이지 이상 입력해야 합니다.',
-    })
-    .max(100, {
-      message: '생성할 페이지 수는 최대 100페이지까지 입력할 수 있습니다.',
-    })
-    .default(5),
+  title: titleSchema,
+  subtitle: subtitleSchema,
+  page_count: page_countSchema,
   solutions_per_page: z.number().min(1).default(15),
   number_counters_per_solution: z.number().min(1).default(10),
 
