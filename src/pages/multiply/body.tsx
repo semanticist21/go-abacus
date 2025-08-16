@@ -1,18 +1,18 @@
 import {useMultiplyOptionStore} from '@/pages/multiply/store';
 
-import {BookText, DivideIcon, File, X} from 'lucide-react';
+import Select from '@/components/ui/select';
+import {BookText, DivideIcon, Save, X} from 'lucide-react';
 import {Checkbox} from '../../components/ui/checkbox';
 import Input from '../../components/ui/input';
-import Select from '../../components/ui/select';
 
 const MultiplyBody = () => {
   const {options, setOptions} = useMultiplyOptionStore();
 
   return (
-    <main className="flex flex-1 flex-col gap-4 overflow-x-hidden overflow-y-auto p-4">
+    <main className="scrollbar-overlay flex flex-1 flex-col gap-4 overflow-x-hidden overflow-y-auto p-4">
       <fieldset className="flex w-full items-center justify-between gap-2 rounded-md border border-gray-200 p-4 focus-within:*:text-gray-900">
         <legend className="flex items-center gap-2 rounded-md text-gray-400 transition-colors">
-          <File className="size-4" /> File
+          <Save className="size-4" /> 저장
         </legend>
 
         <Input
@@ -27,10 +27,10 @@ const MultiplyBody = () => {
 
       <fieldset className="flex w-full flex-col gap-4 rounded-md border border-gray-200 p-4 focus-within:*:text-gray-900">
         <legend className="flex w-max items-center gap-2 rounded-md text-gray-400 transition-colors">
-          <BookText className="size-4" /> Document
+          <BookText className="size-4" /> 문서
         </legend>
 
-        <div className="flex w-full items-center justify-between gap-2">
+        <div className="grid w-full grid-cols-3 gap-2">
           <Input
             containerClassName="flex-1"
             label="문서 제목"
@@ -69,8 +69,6 @@ const MultiplyBody = () => {
             }
             onChange={(e) => setOptions({page_count: Number(e.target.value)})}
           />
-        </div>
-        <div className="flex justify-start">
           <Select
             containerClassName="w-48"
             label="문제 유형"
@@ -83,102 +81,112 @@ const MultiplyBody = () => {
             <option value="multiply">곱셈만</option>
             <option value="divide">나눗셈만</option>
           </Select>
-        </div>
-      </fieldset>
-
-      <fieldset className="flex w-full flex-col gap-4 rounded-md border border-gray-200 p-4 focus-within:*:text-gray-900">
-        <legend className="flex w-max items-center gap-2 rounded-md text-gray-400 transition-colors">
-          <DivideIcon className="size-4" /> 나눗셈 설정
-        </legend>
-
-        <div className="flex justify-start">
-          <Input
-            containerClassName="w-48"
-            label="나눗셈 자리 수"
-            max={7}
-            min={1}
-            placeholder="자리 수 (ex. 2)"
-            type="number"
-            value={options.big_divide_min_digit}
-            onChange={(e) => setOptions({big_divide_min_digit: Number(e.target.value)})}
+          <Checkbox
+            checked={options.exclude_easy}
+            label="쉬운 문제 제외"
+            containerProps={{
+              title: '0, 1이 포함된 쉬운 문제를 제외합니다.',
+            }}
+            onChange={(e) => setOptions({exclude_easy: e.target.checked})}
           />
         </div>
-        <div className="grid w-full grid-cols-2 gap-4">
-          <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium text-gray-700">큰 수 자리수 범위</label>
-            <div className="flex gap-2">
-              <Input
-                containerClassName="flex-1"
-                label=""
-                max={7}
-                min={1}
-                placeholder="최소"
-                type="number"
-                value={options.big_divide_min_digit}
-                onChange={(e) => setOptions({big_divide_min_digit: Number(e.target.value)})}
-              />
-              <Input
-                containerClassName="flex-1"
-                label=""
-                max={7}
-                min={1}
-                placeholder="최대"
-                type="number"
-                value={options.big_divide_max_digit}
-                onChange={(e) => setOptions({big_divide_max_digit: Number(e.target.value)})}
-              />
-            </div>
-          </div>
-          <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium text-gray-700">작은 수 자리수 범위</label>
-            <div className="flex gap-2">
-              <Input
-                containerClassName="flex-1"
-                max={7}
-                min={1}
-                placeholder="최소"
-                type="number"
-                value={options.small_divide_min_digit}
-                onChange={(e) => setOptions({small_divide_min_digit: Number(e.target.value)})}
-              />
-              <Input
-                containerClassName="flex-1"
-                max={7}
-                min={1}
-                placeholder="최대"
-                type="number"
-                value={options.small_divide_max_digit}
-                onChange={(e) => setOptions({small_divide_max_digit: Number(e.target.value)})}
-              />
-            </div>
-          </div>
-        </div>
       </fieldset>
 
-      <fieldset className="flex w-full flex-col gap-4 rounded-md border border-gray-200 p-4 focus-within:*:text-gray-900">
-        <legend className="flex w-max items-center gap-2 rounded-md text-gray-400 transition-colors">
-          <X className="size-5" /> 곱셈 설정
-        </legend>
+      {(options.generation_mode === 'divide' || options.generation_mode === 'mix') && (
+        <fieldset className="flex w-full flex-col gap-4 rounded-md border border-gray-200 p-4 focus-within:*:text-gray-900">
+          <legend className="flex w-max items-center gap-2 rounded-md text-gray-400 transition-colors">
+            <DivideIcon className="size-4" /> 나눗셈 설정
+          </legend>
 
-        <div className="flex justify-start">
-          <Select
-            containerClassName="w-48"
-            label="곱셈 순서"
-            value={options.multiply_order}
-            onChange={(e) =>
-              setOptions({
-                multiply_order: e.target.value as 'mix' | 'large_first' | 'small_first' | 'swap',
-              })
-            }
-          >
-            <option value="mix">혼합</option>
-            <option value="large_first">큰 수 먼저</option>
-            <option value="small_first">작은 수 먼저</option>
-            <option value="swap">교대로</option>
-          </Select>
-        </div>
-        <div className="flex items-center justify-between">
-          <div className="grid flex-1 grid-cols-2 gap-4">
+          <div className="flex justify-start">
+            <Input
+              containerClassName="w-48"
+              label="나눗셈 자리 수"
+              max={7}
+              min={1}
+              placeholder="자리 수 (ex. 2)"
+              type="number"
+              value={options.big_divide_min_digit}
+              onChange={(e) => setOptions({big_divide_min_digit: Number(e.target.value)})}
+            />
+          </div>
+          <div className="grid w-full grid-cols-2 gap-4">
+            <div className="flex flex-col gap-2">
+              <label className="text-sm font-medium text-gray-700">큰 수 자리수 범위</label>
+              <div className="flex gap-2">
+                <Input
+                  containerClassName="flex-1"
+                  label=""
+                  max={7}
+                  min={1}
+                  placeholder="최소"
+                  type="number"
+                  value={options.big_divide_min_digit}
+                  onChange={(e) => setOptions({big_divide_min_digit: Number(e.target.value)})}
+                />
+                <Input
+                  containerClassName="flex-1"
+                  label=""
+                  max={7}
+                  min={1}
+                  placeholder="최대"
+                  type="number"
+                  value={options.big_divide_max_digit}
+                  onChange={(e) => setOptions({big_divide_max_digit: Number(e.target.value)})}
+                />
+              </div>
+            </div>
+            <div className="flex flex-col gap-2">
+              <label className="text-sm font-medium text-gray-700">작은 수 자리수 범위</label>
+              <div className="flex gap-2">
+                <Input
+                  containerClassName="flex-1"
+                  max={7}
+                  min={1}
+                  placeholder="최소"
+                  type="number"
+                  value={options.small_divide_min_digit}
+                  onChange={(e) => setOptions({small_divide_min_digit: Number(e.target.value)})}
+                />
+                <Input
+                  containerClassName="flex-1"
+                  max={7}
+                  min={1}
+                  placeholder="최대"
+                  type="number"
+                  value={options.small_divide_max_digit}
+                  onChange={(e) => setOptions({small_divide_max_digit: Number(e.target.value)})}
+                />
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      )}
+
+      {(options.generation_mode === 'multiply' || options.generation_mode === 'mix') && (
+        <fieldset className="flex w-full flex-col gap-4 rounded-md border border-gray-200 p-4 focus-within:*:text-gray-900">
+          <legend className="flex w-max items-center gap-2 rounded-md text-gray-400 transition-colors">
+            <X className="size-5" /> 곱셈 설정
+          </legend>
+
+          <div className="flex justify-start">
+            <Select
+              containerClassName="w-48"
+              label="곱셈 순서"
+              value={options.multiply_order}
+              onChange={(e) =>
+                setOptions({
+                  multiply_order: e.target.value as 'mix' | 'large_first' | 'small_first' | 'swap',
+                })
+              }
+            >
+              <option value="mix">혼합</option>
+              <option value="large_first">큰 수 먼저</option>
+              <option value="small_first">작은 수 먼저</option>
+              <option value="swap">교대로</option>
+            </Select>
+          </div>
+          <div className="grid w-full grid-cols-2 gap-4">
             <div className="flex flex-col gap-2">
               <label className="text-sm font-medium text-gray-700">큰 수 자리수 범위</label>
               <div className="flex gap-2">
@@ -226,18 +234,8 @@ const MultiplyBody = () => {
               </div>
             </div>
           </div>
-          <div className="ml-8 flex items-end">
-            <Checkbox
-              checked={options.exclude_easy}
-              label="쉬운 문제 제외"
-              containerProps={{
-                title: '0, 1이 포함된 쉬운 문제를 제외합니다.',
-              }}
-              onChange={(e) => setOptions({exclude_easy: e.target.checked})}
-            />
-          </div>
-        </div>
-      </fieldset>
+        </fieldset>
+      )}
     </main>
   );
 };

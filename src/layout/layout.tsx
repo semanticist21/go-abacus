@@ -1,4 +1,4 @@
-import {SquareDivide, SquarePlus} from 'lucide-react';
+import {SquarePlus, SquareX} from 'lucide-react';
 import {useState} from 'react';
 
 import ShinyText from '../components/ui/shiny-text';
@@ -36,7 +36,7 @@ const Layout = () => {
             type="button"
             onClick={() => setActiveTab(1)}
           >
-            <SquareDivide className="size-3 text-blue-500" />
+            <SquareX className="size-3 text-blue-500" />
             곱셈나눗셈
           </button>
         </nav>

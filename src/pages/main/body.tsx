@@ -1,6 +1,6 @@
 import {useOptionStore} from '@/pages/main/store';
 
-import {BookText, File, Star} from 'lucide-react';
+import {BookText, Save, Star} from 'lucide-react';
 import {Checkbox} from '../../components/ui/checkbox';
 import Input from '../../components/ui/input';
 
@@ -9,10 +9,10 @@ const MainBody = () => {
   const {options, setOptions} = useOptionStore();
 
   return (
-    <main className="flex flex-1 flex-col gap-4 overflow-x-hidden overflow-y-auto p-4">
+    <main className="scrollbar-overlay flex flex-1 flex-col gap-4 overflow-x-hidden overflow-y-auto p-4">
       <fieldset className="flex w-full items-center justify-between gap-2 rounded-md border border-gray-200 p-4 focus-within:*:text-gray-900">
         <legend className="flex items-center gap-2 rounded-md text-gray-400 transition-colors">
-          <File className="size-4" /> File
+          <Save className="size-4" /> 저장
         </legend>
 
         <Input
@@ -27,7 +27,7 @@ const MainBody = () => {
 
       <fieldset className="flex w-full items-center justify-between gap-2 rounded-md border border-gray-200 p-4 focus-within:*:text-gray-900">
         <legend className="flex items-center gap-2 rounded-md text-gray-400 transition-colors">
-          <BookText className="size-4" /> Document
+          <BookText className="size-4" /> 문서
         </legend>
 
         <Input
@@ -72,7 +72,7 @@ const MainBody = () => {
 
       <fieldset className="flex w-full flex-wrap items-end justify-between gap-8 rounded-md border border-gray-200 p-4 text-nowrap focus-within:*:text-gray-900">
         <legend className="flex w-max items-center gap-2 rounded-md text-gray-400 transition-colors">
-          <Star className="size-5" /> Solutions
+          <Star className="size-5" /> 문제 설정
         </legend>
 
         <Input
