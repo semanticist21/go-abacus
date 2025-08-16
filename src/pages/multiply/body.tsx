@@ -3,6 +3,7 @@ import {useMultiplyOptionStore} from '@/pages/multiply/store';
 import {BookText, DivideIcon, File, X} from 'lucide-react';
 import {Checkbox} from '../../components/ui/checkbox';
 import Input from '../../components/ui/input';
+import Select from '../../components/ui/select';
 
 const MultiplyBody = () => {
   const {options, setOptions} = useMultiplyOptionStore();
@@ -70,20 +71,18 @@ const MultiplyBody = () => {
           />
         </div>
         <div className="flex justify-start">
-          <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium text-gray-700">문제 유형</label>
-            <select
-              className="rounded border border-gray-300 px-3 py-2 text-sm"
-              value={options.generation_mode}
-              onChange={(e) =>
-                setOptions({generation_mode: e.target.value as 'divide' | 'multiply' | 'mix'})
-              }
-            >
-              <option value="mix">곱셈 + 나눗셈</option>
-              <option value="multiply">곱셈만</option>
-              <option value="divide">나눗셈만</option>
-            </select>
-          </div>
+          <Select
+            containerClassName="w-48"
+            label="문제 유형"
+            value={options.generation_mode}
+            onChange={(e) =>
+              setOptions({generation_mode: e.target.value as 'divide' | 'multiply' | 'mix'})
+            }
+          >
+            <option value="mix">곱셈 + 나눗셈</option>
+            <option value="multiply">곱셈만</option>
+            <option value="divide">나눗셈만</option>
+          </Select>
         </div>
       </fieldset>
 
@@ -162,23 +161,21 @@ const MultiplyBody = () => {
         </legend>
 
         <div className="flex justify-start">
-          <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium text-gray-700">곱셈 순서</label>
-            <select
-              className="rounded border border-gray-300 px-3 py-2 text-sm"
-              value={options.multiply_order}
-              onChange={(e) =>
-                setOptions({
-                  multiply_order: e.target.value as 'mix' | 'large_first' | 'small_first' | 'swap',
-                })
-              }
-            >
-              <option value="mix">혼합</option>
-              <option value="large_first">큰 수 먼저</option>
-              <option value="small_first">작은 수 먼저</option>
-              <option value="swap">교대로</option>
-            </select>
-          </div>
+          <Select
+            containerClassName="w-48"
+            label="곱셈 순서"
+            value={options.multiply_order}
+            onChange={(e) =>
+              setOptions({
+                multiply_order: e.target.value as 'mix' | 'large_first' | 'small_first' | 'swap',
+              })
+            }
+          >
+            <option value="mix">혼합</option>
+            <option value="large_first">큰 수 먼저</option>
+            <option value="small_first">작은 수 먼저</option>
+            <option value="swap">교대로</option>
+          </Select>
         </div>
         <div className="flex items-center justify-between">
           <div className="grid flex-1 grid-cols-2 gap-4">
