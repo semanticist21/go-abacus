@@ -1,5 +1,5 @@
 import './app.css';
 
-import AppLayout from './components/layout/app-layout';
+import Layout from './layout/layout';
 
-export default AppLayout;
+export default Layout;

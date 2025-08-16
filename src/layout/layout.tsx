@@ -1,17 +1,24 @@
 import {SquareDivide, SquarePlus} from 'lucide-react';
 import {useState} from 'react';
 
-import MainPage from '../../pages/main';
-import ShinyText from '../ui/shiny-text';
+import ShinyText from '../components/ui/shiny-text';
+import MainPage from '../pages/main';
+import MultiplyPage from '../pages/multiply';
 
-const AppLayout = () => {
+const Layout = () => {
   const [activeTab, setActiveTab] = useState<number>(0);
 
   return (
     <div className="flex h-screen">
       <aside className="w-36 shrink-0 border-r border-gray-200 bg-gray-100 p-4">
         <h1 className="mb-6 cursor-default text-center font-sans text-lg font-semibold select-none">
-          <ShinyText text="Go! Abacus" />
+          <ShinyText
+            text={
+              <span>
+                <i>Go!</i> Abacus
+              </span>
+            }
+          />
         </h1>
         <nav className="space-y-2">
           <button
@@ -36,21 +43,10 @@ const AppLayout = () => {
       </aside>
       <main className="flex-1">
         {activeTab === 0 && <MainPage />}
-        {activeTab === 1 && (
-          <div className="min-w-2xl" id="container">
-            <div className="flex h-16 items-center justify-between gap-2 border-b border-gray-300 bg-gray-50 px-3">
-              <div className="flex-1 text-center text-gray-500">
-                <h2 className="text-lg font-semibold">곱셈나눗셈</h2>
-              </div>
-            </div>
-            <div className="mt-20 p-4 text-center text-gray-500">
-              <p>여기에 새로운 기능을 구현하세요.</p>
-            </div>
-          </div>
-        )}
+        {activeTab === 1 && <MultiplyPage />}
       </main>
     </div>
   );
 };
 
-export default AppLayout;
+export default Layout;

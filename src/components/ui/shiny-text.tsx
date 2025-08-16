@@ -1,9 +1,9 @@
-import {FC} from 'react';
+import {FC, ReactNode} from 'react';
 
 import {cn} from '../../util/cn';
 
 interface ShinyTextProps {
-  text: string;
+  text: ReactNode;
   disabled?: boolean;
   speed?: number;
   className?: string;
