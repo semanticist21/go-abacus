@@ -25,7 +25,7 @@ const MultiplyBody = () => {
       </fieldset>
 
       <fieldset className="flex w-full flex-col gap-4 rounded-md border border-gray-200 p-4 focus-within:*:text-gray-900">
-        <legend className="flex items-center gap-2 rounded-md text-gray-400 transition-colors">
+        <legend className="flex w-max items-center gap-2 rounded-md text-gray-400 transition-colors">
           <BookText className="size-4" /> Document
         </legend>
 
