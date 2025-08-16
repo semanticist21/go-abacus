@@ -132,16 +132,6 @@ const MultiplyBody = () => {
           </legend>
 
           <div className="grid w-full grid-cols-3 gap-4">
-            <Input
-              containerClassName="flex-1"
-              label="나눗셈 자리 수"
-              max={7}
-              min={1}
-              placeholder="자리 수 (ex. 2)"
-              type="number"
-              value={options.big_divide_min_digit}
-              onChange={(e) => setOptions({big_divide_min_digit: Number(e.target.value)})}
-            />
             <RangeSlider
               label="큰 수 자리수 범위"
               max={7}
