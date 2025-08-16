@@ -39,7 +39,7 @@ const Input: FC<MainOptionProps> = ({label, containerClassName, className, formP
         id={id}
         type="text"
         className={cn(
-          'block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 transition-all focus:border-blue-500 focus:ring-blue-500',
+          'block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 placeholder:text-gray-400 transition-all focus:border-blue-500 focus:ring-blue-500',
           className
         )}
         required

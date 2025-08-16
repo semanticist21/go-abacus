@@ -4,6 +4,7 @@ import Select from '@/components/ui/select';
 import {BookText, DivideIcon, Save, X} from 'lucide-react';
 import {Checkbox} from '../../components/ui/checkbox';
 import Input from '../../components/ui/input';
+import RangeSlider from '../../components/ui/range-slider';
 
 const MultiplyBody = () => {
   const {options, setOptions} = useMultiplyOptionStore();
@@ -98,9 +99,9 @@ const MultiplyBody = () => {
             <DivideIcon className="size-4" /> 나눗셈 설정
           </legend>
 
-          <div className="flex justify-start">
+          <div className="grid w-full grid-cols-3 gap-4">
             <Input
-              containerClassName="w-48"
+              containerClassName="flex-1"
               label="나눗셈 자리 수"
               max={7}
               min={1}
@@ -109,56 +110,30 @@ const MultiplyBody = () => {
               value={options.big_divide_min_digit}
               onChange={(e) => setOptions({big_divide_min_digit: Number(e.target.value)})}
             />
-          </div>
-          <div className="grid w-full grid-cols-2 gap-4">
-            <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium text-gray-700">큰 수 자리수 범위</label>
-              <div className="flex gap-2">
-                <Input
-                  containerClassName="flex-1"
-                  label=""
-                  max={7}
-                  min={1}
-                  placeholder="최소"
-                  type="number"
-                  value={options.big_divide_min_digit}
-                  onChange={(e) => setOptions({big_divide_min_digit: Number(e.target.value)})}
-                />
-                <Input
-                  containerClassName="flex-1"
-                  label=""
-                  max={7}
-                  min={1}
-                  placeholder="최대"
-                  type="number"
-                  value={options.big_divide_max_digit}
-                  onChange={(e) => setOptions({big_divide_max_digit: Number(e.target.value)})}
-                />
-              </div>
-            </div>
-            <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium text-gray-700">작은 수 자리수 범위</label>
-              <div className="flex gap-2">
-                <Input
-                  containerClassName="flex-1"
-                  max={7}
-                  min={1}
-                  placeholder="최소"
-                  type="number"
-                  value={options.small_divide_min_digit}
-                  onChange={(e) => setOptions({small_divide_min_digit: Number(e.target.value)})}
-                />
-                <Input
-                  containerClassName="flex-1"
-                  max={7}
-                  min={1}
-                  placeholder="최대"
-                  type="number"
-                  value={options.small_divide_max_digit}
-                  onChange={(e) => setOptions({small_divide_max_digit: Number(e.target.value)})}
-                />
-              </div>
-            </div>
+            <RangeSlider
+              label="큰 수 자리수 범위"
+              max={7}
+              min={1}
+              value={[options.big_divide_min_digit, options.big_divide_max_digit]}
+              onChange={([min, max]) =>
+                setOptions({
+                  big_divide_min_digit: min,
+                  big_divide_max_digit: max,
+                })
+              }
+            />
+            <RangeSlider
+              label="작은 수 자리수 범위"
+              max={7}
+              min={1}
+              value={[options.small_divide_min_digit, options.small_divide_max_digit]}
+              onChange={([min, max]) =>
+                setOptions({
+                  small_divide_min_digit: min,
+                  small_divide_max_digit: max,
+                })
+              }
+            />
           </div>
         </fieldset>
       )}
@@ -169,9 +144,9 @@ const MultiplyBody = () => {
             <X className="size-5" /> 곱셈 설정
           </legend>
 
-          <div className="flex justify-start">
+          <div className="grid w-full grid-cols-3 gap-4">
             <Select
-              containerClassName="w-48"
+              containerClassName="flex-1"
               label="곱셈 순서"
               value={options.multiply_order}
               onChange={(e) =>
@@ -185,54 +160,30 @@ const MultiplyBody = () => {
               <option value="small_first">작은 수 먼저</option>
               <option value="swap">교대로</option>
             </Select>
-          </div>
-          <div className="grid w-full grid-cols-2 gap-4">
-            <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium text-gray-700">큰 수 자리수 범위</label>
-              <div className="flex gap-2">
-                <Input
-                  containerClassName="flex-1"
-                  max={7}
-                  min={1}
-                  placeholder="최소"
-                  type="number"
-                  value={options.big_multiply_min_digit}
-                  onChange={(e) => setOptions({big_multiply_min_digit: Number(e.target.value)})}
-                />
-                <Input
-                  containerClassName="flex-1"
-                  max={7}
-                  min={1}
-                  placeholder="최대"
-                  type="number"
-                  value={options.big_multiply_max_digit}
-                  onChange={(e) => setOptions({big_multiply_max_digit: Number(e.target.value)})}
-                />
-              </div>
-            </div>
-            <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium text-gray-700">작은 수 자리수 범위</label>
-              <div className="flex gap-2">
-                <Input
-                  containerClassName="flex-1"
-                  max={7}
-                  min={1}
-                  placeholder="최소"
-                  type="number"
-                  value={options.small_multiply_min_digit}
-                  onChange={(e) => setOptions({small_multiply_min_digit: Number(e.target.value)})}
-                />
-                <Input
-                  containerClassName="flex-1"
-                  max={7}
-                  min={1}
-                  placeholder="최대"
-                  type="number"
-                  value={options.small_multiply_max_digit}
-                  onChange={(e) => setOptions({small_multiply_max_digit: Number(e.target.value)})}
-                />
-              </div>
-            </div>
+            <RangeSlider
+              label="큰 수 자리수 범위"
+              max={7}
+              min={1}
+              value={[options.big_multiply_min_digit, options.big_multiply_max_digit]}
+              onChange={([min, max]) =>
+                setOptions({
+                  big_multiply_min_digit: min,
+                  big_multiply_max_digit: max,
+                })
+              }
+            />
+            <RangeSlider
+              label="작은 수 자리수 범위"
+              max={7}
+              min={1}
+              value={[options.small_multiply_min_digit, options.small_multiply_max_digit]}
+              onChange={([min, max]) =>
+                setOptions({
+                  small_multiply_min_digit: min,
+                  small_multiply_max_digit: max,
+                })
+              }
+            />
           </div>
         </fieldset>
       )}
