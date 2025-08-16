@@ -1,6 +1,6 @@
 import {AlignmentType, Paragraph, TableCell, TableRow, TextRun, WidthType} from 'docx';
 
-import {Options, Solutions} from '../../../store/type';
+import {Options, Solutions} from '../../../pages/main/type';
 import {addDotSeparate} from '../../../util/add-dot-separate';
 import {formatDigitNumber} from '../../../util/format-digit';
 import {SIZES} from '../shared/const';

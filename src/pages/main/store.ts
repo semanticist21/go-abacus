@@ -1,3 +1,4 @@
+import {create as createMutative} from 'mutative';
 import {create} from 'zustand';
 import {createJSONStorage, persist} from 'zustand/middleware';
 
@@ -11,9 +12,14 @@ type StoreOptions = {
 
 export const useOptionStore = create(
   persist<StoreOptions>(
-    (set, get) => ({
+    (set) => ({
       options: initialOptions,
-      setOptions: (options) => set({options: {...get().options, ...options}}),
+      setOptions: (options) =>
+        set((state) =>
+          createMutative(state, (draft) => {
+            Object.assign(draft.options, options);
+          })
+        ),
       reset: () => set({options: initialOptions}),
     }),
     {
@@ -22,10 +28,11 @@ export const useOptionStore = create(
       onRehydrateStorage: () => (state) => {
         if (!state) return;
 
-        useOptionStore.setState((prev) => ({
-          ...prev,
-          options: optionsSchema.parse(state),
-        }));
+        useOptionStore.setState((prev) =>
+          createMutative(prev, (draft) => {
+            draft.options = optionsSchema.parse(state);
+          })
+        );
       },
     }
   )

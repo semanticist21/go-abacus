@@ -2,8 +2,8 @@ import {save} from '@tauri-apps/plugin-dialog';
 import {Document, Packer, Table, TableRow, WidthType} from 'docx';
 import toast from 'react-hot-toast';
 
-import {useOptionStore} from '../../store/option-store';
-import {defaultFileNameRegex, makeRandomFileName, Options, Solutions} from '../../store/type';
+import {useOptionStore} from '../../pages/main/store';
+import {defaultFileNameRegex, makeRandomFileName, Options, Solutions} from '../../pages/main/type';
 import {getCurrentResourceDir, saveFileBlob} from '../../util/fs';
 import AnswerTableBodyCells from './answer-table/body';
 import AnswerTableHeaderCells from './answer-table/header';

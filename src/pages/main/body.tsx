@@ -1,6 +1,6 @@
 import {Checkbox} from '../../components/ui/checkbox';
 import Input from '../../components/ui/input';
-import {useOptionStore} from '../../store/option-store';
+import {useOptionStore} from './store';
 
 const MainBody = () => {
   // store

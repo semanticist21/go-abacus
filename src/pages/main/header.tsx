@@ -5,8 +5,8 @@ import toast from 'react-hot-toast';
 
 import {createPagesThenSave} from '../../components/docx/create-pages';
 import Header from '../../components/ui/header';
-import {useOptionStore} from '../../store/option-store';
-import {initialOptions, ISolutions, optionsSchema} from '../../store/type';
+import {useOptionStore} from './store';
+import {initialOptions, ISolutions, optionsSchema} from './type';
 
 const MainHeader = () => {
   // store
