@@ -9,7 +9,7 @@ const MainBody = () => {
   const {options, setOptions} = useOptionStore();
 
   return (
-    <main className="flex flex-col gap-4 p-4">
+    <main className="flex flex-1 flex-col gap-4 overflow-x-hidden overflow-y-auto p-4">
       <fieldset className="flex w-full items-center justify-between gap-2 rounded-md border border-gray-200 p-4 focus-within:*:text-gray-900">
         <legend className="flex items-center gap-2 rounded-md text-gray-400 transition-colors">
           <File className="size-4" /> File

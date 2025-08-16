@@ -14,9 +14,6 @@ export const multiplyOptionsSchema = z.object({
 
   generation_mode: z.enum(['divide', 'multiply', 'mix']).default('mix'),
 
-  // 나눗셈
-  divide_digit: z.number().min(1).max(7).default(2),
-
   // 나눗셈 - 자리수 고정
   big_divide_min_digit: z.number().min(1).max(7).default(2),
   big_divide_max_digit: z.number().min(1).max(7).default(2),

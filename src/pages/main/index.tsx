@@ -3,7 +3,7 @@ import Header from './header';
 
 const MainPage = () => {
   return (
-    <div id="container">
+    <div id="container" className="flex h-full flex-col">
       <Header />
       <MainBody />
     </div>
