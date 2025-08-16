@@ -2,6 +2,7 @@ import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
 import {cn} from '@/util/cn';
+import {Tooltip} from './tooltip';
 
 interface RangeSliderProps {
   label?: string;
@@ -11,6 +12,7 @@ interface RangeSliderProps {
   value: [number, number];
   onChange: (value: [number, number]) => void;
   step?: number;
+  tooltip?: string;
 }
 
 const RangeSlider = ({
@@ -21,10 +23,20 @@ const RangeSlider = ({
   value,
   onChange,
   step = 1,
+  tooltip,
 }: RangeSliderProps) => {
+  const labelContent = (
+    <span className="cursor-help text-sm font-medium text-gray-700">{label}</span>
+  );
+
   return (
     <div className={cn('flex flex-col gap-3', containerClassName)}>
-      {label && <label className="text-sm font-medium text-gray-700">{label}</label>}
+      {label &&
+        (tooltip ? (
+          <Tooltip content={tooltip}>{labelContent}</Tooltip>
+        ) : (
+          <label className="text-sm font-medium text-gray-700">{label}</label>
+        ))}
       <div className="px-1">
         <Slider
           range

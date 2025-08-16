@@ -22,11 +22,8 @@ export const multiplyOptionsSchema = z.object({
   small_divide_max_digit: z.number().min(1).max(7).default(2),
 
   // 곱하기
-  big_multiply_max_digit: z.number().min(1).max(7).default(2),
-  big_multiply_min_digit: z.number().min(1).max(7).default(2),
-
-  small_multiply_max_digit: z.number().min(1).max(7).default(2),
-  small_multiply_min_digit: z.number().min(1).max(7).default(2),
+  multiply_max_digit: z.number().min(1).max(7).default(2),
+  multiply_min_digit: z.number().min(1).max(7).default(2),
 
   multiply_order: z.enum(['mix', 'large_first', 'small_first', 'swap']).default('mix'),
 

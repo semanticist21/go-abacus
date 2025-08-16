@@ -5,6 +5,7 @@ import {BookText, DivideIcon, Save, X} from 'lucide-react';
 import {Checkbox} from '../../components/ui/checkbox';
 import Input from '../../components/ui/input';
 import RangeSlider from '../../components/ui/range-slider';
+import {Tooltip} from '../../components/ui/tooltip';
 
 const MultiplyBody = () => {
   const {options, setOptions} = useMultiplyOptionStore();
@@ -31,7 +32,7 @@ const MultiplyBody = () => {
           <BookText className="size-4" /> 문서
         </legend>
 
-        <div className="grid w-full grid-cols-3 gap-2">
+        <div className="grid w-full grid-cols-3 items-end gap-2">
           <Input
             containerClassName="flex-1"
             label="문서 제목"
@@ -82,14 +83,15 @@ const MultiplyBody = () => {
             <option value="multiply">곱셈만</option>
             <option value="divide">나눗셈만</option>
           </Select>
-          <Checkbox
-            checked={options.exclude_easy}
-            label="쉬운 문제 제외"
-            containerProps={{
-              title: '0, 1이 포함된 쉬운 문제를 제외합니다.',
-            }}
-            onChange={(e) => setOptions({exclude_easy: e.target.checked})}
-          />
+          <Tooltip content="0, 1이 포함된 쉬운 문제를 제외합니다.">
+            <div className="cursor-help">
+              <Checkbox
+                checked={options.exclude_easy}
+                label="쉬운 문제 제외"
+                onChange={(e) => setOptions({exclude_easy: e.target.checked})}
+              />
+            </div>
+          </Tooltip>
         </div>
       </fieldset>
 
@@ -114,6 +116,7 @@ const MultiplyBody = () => {
               label="큰 수 자리수 범위"
               max={7}
               min={1}
+              tooltip="나눗셈에서 피제수(나누어지는 수)의 자릿수 범위를 설정합니다."
               value={[options.big_divide_min_digit, options.big_divide_max_digit]}
               onChange={([min, max]) =>
                 setOptions({
@@ -126,6 +129,7 @@ const MultiplyBody = () => {
               label="작은 수 자리수 범위"
               max={7}
               min={1}
+              tooltip="나눗셈에서 제수(나누는 수)의 자릿수 범위를 설정합니다."
               value={[options.small_divide_min_digit, options.small_divide_max_digit]}
               onChange={([min, max]) =>
                 setOptions({
@@ -161,26 +165,15 @@ const MultiplyBody = () => {
               <option value="swap">교대로</option>
             </Select>
             <RangeSlider
-              label="큰 수 자리수 범위"
+              label="자리수 범위"
               max={7}
               min={1}
-              value={[options.big_multiply_min_digit, options.big_multiply_max_digit]}
+              tooltip="곱셈에서 사용할 숫자의 자릿수 범위를 설정합니다."
+              value={[options.multiply_min_digit, options.multiply_max_digit]}
               onChange={([min, max]) =>
                 setOptions({
-                  big_multiply_min_digit: min,
-                  big_multiply_max_digit: max,
-                })
-              }
-            />
-            <RangeSlider
-              label="작은 수 자리수 범위"
-              max={7}
-              min={1}
-              value={[options.small_multiply_min_digit, options.small_multiply_max_digit]}
-              onChange={([min, max]) =>
-                setOptions({
-                  small_multiply_min_digit: min,
-                  small_multiply_max_digit: max,
+                  multiply_min_digit: min,
+                  multiply_max_digit: max,
                 })
               }
             />

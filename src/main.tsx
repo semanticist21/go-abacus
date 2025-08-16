@@ -3,17 +3,20 @@ import ReactDOM from 'react-dom/client';
 import {Toaster} from 'react-hot-toast';
 
 import App from './app';
+import {TooltipProvider} from './components/ui/tooltip';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <Toaster
-      position="bottom-center"
-      toastOptions={{
-        style: {
-          fontSize: '0.875rem',
-        },
-      }}
-    />
-    <App />
+    <TooltipProvider>
+      <Toaster
+        position="bottom-center"
+        toastOptions={{
+          style: {
+            fontSize: '0.875rem',
+          },
+        }}
+      />
+      <App />
+    </TooltipProvider>
   </React.StrictMode>
 );
