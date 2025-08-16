@@ -6,5 +6,6 @@
     "source.sort.json": "explicit"
   },
   "editor.formatOnSave": true,
-  "typescript.experimental.useTsgo": true
+  "typescript.experimental.useTsgo": true,
+  "typescript.preferences.importModuleSpecifier": "non-relative"
 }

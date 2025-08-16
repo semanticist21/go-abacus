@@ -42,9 +42,10 @@
     "vite": "^7.1.2"
   },
   "name": "go-abacus",
+  "packageManager": "bun@1.2.20",
   "private": true,
   "scripts": {
-    "build": "tsc && vite build",
+    "build": "tsgo --noEmit && vite build",
     "dev": "vite",
     "lint": "eslint . --ext .ts,.tsx --fix",
     "preview": "vite preview",
