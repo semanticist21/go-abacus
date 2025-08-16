@@ -1,5 +1,5 @@
-import {MainCheckbox} from '../../components/ui/main-checkbox';
-import MainOption from '../../components/ui/main-option';
+import {Checkbox} from '../../components/ui/checkbox';
+import Input from '../../components/ui/input';
 import {useOptionStore} from '../../store/option-store';
 
 const MainBody = () => {
@@ -11,7 +11,7 @@ const MainBody = () => {
       <fieldset className="flex w-full items-center justify-between gap-2 rounded-md border border-gray-200 p-4">
         <legend className="rounded-md text-gray-500 italic">Files</legend>
 
-        <MainOption
+        <Input
           aria-labelledby="file-name"
           containerClassName="flex-1"
           label="파일 이름"
@@ -25,7 +25,7 @@ const MainBody = () => {
       <fieldset className="flex w-full items-center justify-between gap-2 rounded-md border border-gray-200 p-4">
         <legend className="rounded-md text-gray-500 italic">Documents</legend>
 
-        <MainOption
+        <Input
           containerClassName="flex-1"
           label="문서 제목"
           placeholder="문서 제목 (ex. LEVEL 1)"
@@ -37,7 +37,7 @@ const MainBody = () => {
           }}
           onChange={(e) => setOptions({title: e.target.value})}
         />
-        <MainOption
+        <Input
           containerClassName="flex-1"
           label="문서 부제목"
           placeholder="문서 부제목 (ex. 주산 암산)"
@@ -49,7 +49,7 @@ const MainBody = () => {
           }}
           onChange={(e) => setOptions({subtitle: e.target.value})}
         />
-        <MainOption
+        <Input
           containerClassName="flex-1"
           max={20}
           min={1}
@@ -68,7 +68,7 @@ const MainBody = () => {
       <fieldset className="flex w-full flex-wrap items-end justify-between gap-8 rounded-md border border-gray-200 p-4 text-nowrap">
         <legend className="rounded-md text-gray-500 italic">Solutions</legend>
 
-        <MainOption
+        <Input
           containerClassName="flex-1"
           label="자리 수(최대 7자리)"
           max={7}
@@ -79,7 +79,7 @@ const MainBody = () => {
           onChange={(e) => setOptions({digit: Number(e.target.value)})}
         />
         <div className="grid w-full flex-2 grid-cols-3 gap-2">
-          <MainCheckbox
+          <Checkbox
             checked={options.include_minus}
             label="마이너스 문제 포함"
             containerProps={{
@@ -87,7 +87,7 @@ const MainBody = () => {
             }}
             onChange={(e) => setOptions({include_minus: e.target.checked})}
           />
-          <MainCheckbox
+          <Checkbox
             checked={options.is_random_digit}
             label="자리 수 무작위"
             containerProps={{
@@ -95,12 +95,12 @@ const MainBody = () => {
             }}
             onChange={(e) => setOptions({is_random_digit: e.target.checked})}
           />
-          <MainCheckbox
+          <Checkbox
             checked={options.include_comma}
             label="쉼표 여부"
             onChange={(e) => setOptions({include_comma: e.target.checked})}
           />
-          <MainCheckbox
+          <Checkbox
             checked={options.is_decimal}
             label="소수점 계산"
             containerProps={{

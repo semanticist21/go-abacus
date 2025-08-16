@@ -1,4 +1,4 @@
-import {ButtonHTMLAttributes} from 'react';
+import {ButtonHTMLAttributes, FC} from 'react';
 
 import {cn} from '../../util/cn';
 
@@ -6,7 +6,7 @@ interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'chi
   children: React.ReactNode;
 }
 
-export const Button = ({children, className, ...props}: ButtonProps) => {
+export const Button: FC<ButtonProps> = ({children, className, ...props}) => {
   return (
     <button
       type="button"

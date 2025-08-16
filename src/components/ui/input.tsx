@@ -1,4 +1,4 @@
-import {InputHTMLAttributes, ReactNode, useId} from 'react';
+import {FC, InputHTMLAttributes, ReactNode, useId} from 'react';
 
 import {cn} from '../../util/cn';
 
@@ -11,13 +11,7 @@ interface MainOptionProps extends InputHTMLAttributes<HTMLInputElement> {
   };
 }
 
-const MainOption = ({
-  label,
-  containerClassName,
-  className,
-  formProps,
-  ...rest
-}: MainOptionProps) => {
+const Input: FC<MainOptionProps> = ({label, containerClassName, className, formProps, ...rest}) => {
   const id = useId();
 
   return (
@@ -53,4 +47,4 @@ const MainOption = ({
   );
 };
 
-export default MainOption;
+export default Input;

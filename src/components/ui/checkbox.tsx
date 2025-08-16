@@ -1,4 +1,4 @@
-import {HTMLAttributes, InputHTMLAttributes, useId} from 'react';
+import {FC, HTMLAttributes, InputHTMLAttributes, useId} from 'react';
 import {Except} from 'type-fest';
 
 import {cn} from '../../util/cn';
@@ -9,12 +9,12 @@ interface MainCheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   containerProps?: Except<HTMLAttributes<HTMLDivElement>, 'aria-controls' | 'className'>;
 }
 
-export const MainCheckbox = ({
+export const Checkbox: FC<MainCheckboxProps> = ({
   label,
   containerClassName,
   containerProps: divProps,
   ...rest
-}: MainCheckboxProps) => {
+}) => {
   const id = useId();
 
   return (
