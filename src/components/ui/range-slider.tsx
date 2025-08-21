@@ -29,7 +29,7 @@ const RangeSlider = ({
   min,
 }: RangeSliderProps) => {
   const labelContent = (
-    <span className="cursor-help text-sm font-medium text-gray-700">{label}</span>
+    <span className="text-sm font-medium text-gray-700">{label}</span>
   );
 
   return (

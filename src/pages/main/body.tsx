@@ -1,6 +1,7 @@
 import {BookText, Save, Star} from 'lucide-react';
 import {useOptionStore} from '@/pages/main/store';
 import {Checkbox} from '../../components/ui/checkbox';
+import {Tooltip} from '../../components/ui/tooltip';
 import Input from '../../components/ui/input';
 
 const MainBody = () => {
@@ -85,36 +86,34 @@ const MainBody = () => {
           min={1}
         />
         <div className="grid w-full flex-2 grid-cols-3 gap-2">
-          <Checkbox
-            containerProps={{
-              title: '마이너스 문제가 번갈아서 포함됩니다.',
-            }}
-            onChange={(e) => setOptions({include_minus: e.target.checked})}
-            checked={options.include_minus}
-            label="마이너스 문제 포함"
-          />
-          <Checkbox
-            containerProps={{
-              title: '자리 수가 무작위로 설정됩니다. 본래 자리수가 뜰 확률이 더 높게 설정됩니다.',
-            }}
-            onChange={(e) => setOptions({is_random_digit: e.target.checked})}
-            checked={options.is_random_digit}
-            label="자리 수 무작위"
-          />
-          <Checkbox
-            onChange={(e) => setOptions({include_comma: e.target.checked})}
-            checked={options.include_comma}
-            label="쉼표 여부"
-          />
-          <Checkbox
-            containerProps={{
-              title:
-                '2자리 수 이상만 가능하며, 2자리는 소수점 1자리, 그 이상은 소수점 2자리로 표시됩니다.',
-            }}
-            onChange={(e) => setOptions({is_decimal: e.target.checked})}
-            checked={options.is_decimal}
-            label="소수점 계산"
-          />
+          <Tooltip content="마이너스 문제가 번갈아서 포함됩니다.">
+            <Checkbox
+              onChange={(e) => setOptions({include_minus: e.target.checked})}
+              checked={options.include_minus}
+              label="마이너스 문제 포함"
+            />
+          </Tooltip>
+          <Tooltip content="자리 수가 무작위로 설정됩니다. 본래 자리수가 뜰 확률이 더 높게 설정됩니다.">
+            <Checkbox
+              onChange={(e) => setOptions({is_random_digit: e.target.checked})}
+              checked={options.is_random_digit}
+              label="자리 수 무작위"
+            />
+          </Tooltip>
+          <Tooltip content="숫자에 쉼표(,)를 포함하여 표시합니다. 예: 1,234 + 5,678">
+            <Checkbox
+              onChange={(e) => setOptions({include_comma: e.target.checked})}
+              checked={options.include_comma}
+              label="쉼표 여부"
+            />
+          </Tooltip>
+          <Tooltip content="2자리 수 이상만 가능하며, 2자리는 소수점 1자리, 그 이상은 소수점 2자리로 표시됩니다.">
+            <Checkbox
+              onChange={(e) => setOptions({is_decimal: e.target.checked})}
+              checked={options.is_decimal}
+              label="소수점 계산"
+            />
+          </Tooltip>
         </div>
       </fieldset>
     </main>

@@ -112,14 +112,12 @@ const MultiplyBody = () => {
             <option value="multiply">곱셈만</option>
             <option value="divide">나눗셈만</option>
           </Select>
-          <Tooltip content="0, 1이 포함된 쉬운 문제를 제외합니다.">
-            <div className="cursor-help">
-              <Checkbox
-                onChange={(e) => setOptions({exclude_easy: e.target.checked})}
-                checked={options.exclude_easy}
-                label="쉬운 문제 제외"
-              />
-            </div>
+          <Tooltip content="11×2, 3333÷11 같은 쉬운 문제를 제외합니다.">
+            <Checkbox
+              onChange={(e) => setOptions({exclude_easy: e.target.checked})}
+              checked={options.exclude_easy}
+              label="쉬운 문제 제외"
+            />
           </Tooltip>
         </div>
       </fieldset>
