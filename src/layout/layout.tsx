@@ -1,9 +1,8 @@
 import {SquarePlus, SquareX} from 'lucide-react';
 import {useState} from 'react';
-
 import ShinyText from '../components/ui/shiny-text';
-import MainPage from '../pages/main';
 import MultiplyPage from '../pages/multiply';
+import MainPage from '../pages/main';
 
 const Layout = () => {
   const [activeTab, setActiveTab] = useState<number>(0);
@@ -22,19 +21,19 @@ const Layout = () => {
         </h1>
         <nav className="space-y-2">
           <button
-            aria-current={activeTab === 0 ? 'page' : false}
             className="flex w-full items-center gap-1 rounded-md px-3 py-2 text-left text-sm text-gray-600 transition-colors hover:bg-blue-50 hover:text-blue-600 aria-[current=page]:bg-blue-100 aria-[current=page]:font-medium aria-[current=page]:text-blue-700"
-            type="button"
+            aria-current={activeTab === 0 ? 'page' : false}
             onClick={() => setActiveTab(0)}
+            type="button"
           >
             <SquarePlus className="size-3 text-blue-500" />
             덧셈뺄셈
           </button>
           <button
-            aria-current={activeTab === 1 ? 'page' : false}
             className="flex w-full items-center gap-1 rounded-md px-3 py-2 text-left text-sm text-gray-600 transition-colors hover:bg-blue-50 hover:text-blue-600 aria-[current=page]:bg-blue-100 aria-[current=page]:font-medium aria-[current=page]:text-blue-700"
-            type="button"
+            aria-current={activeTab === 1 ? 'page' : false}
             onClick={() => setActiveTab(1)}
+            type="button"
           >
             <SquareX className="size-3 text-blue-500" />
             곱셈나눗셈

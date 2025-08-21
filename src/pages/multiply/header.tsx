@@ -1,16 +1,14 @@
-import {isEqual} from 'lodash-es';
 import {useEffect, useState} from 'react';
-import {toast} from 'sonner';
-
+import {isEqual} from 'lodash-es';
 import {MouseEvent} from 'react';
-
+import {toast} from 'sonner';
 import Header from '../../components/ui/header';
 import {useMultiplyOptionStore} from './store';
 import {initialOptions} from './type';
 
 const MultiplyHeader = () => {
   // store
-  const {reset, options} = useMultiplyOptionStore();
+  const {options, reset} = useMultiplyOptionStore();
 
   // state props
   const [isEqualToInitial, setIsEqualToInitial] = useState(true);
@@ -30,10 +28,10 @@ const MultiplyHeader = () => {
 
   return (
     <Header
-      isEqualToInitial={isEqualToInitial}
       onCreateAndSave={async (_e: MouseEvent<HTMLButtonElement>) => {
         throw new Error('Function not implemented.');
       }}
+      isEqualToInitial={isEqualToInitial}
       onReset={handleReset}
     />
   );

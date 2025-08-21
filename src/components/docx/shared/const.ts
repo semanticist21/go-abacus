@@ -1,10 +1,24 @@
 export const SIZES = {
+  columns: {
+    width: {
+      childColumn: (length: number) => {
+        return length === 1 ? 0 : (100 - SIZES.columns.width.first) / (length - 1);
+      },
+      first: 5.5,
+    },
+
+    height: {
+      solution: 312,
+      answer: 312,
+    },
+  },
+
   font: {
-    title: 28,
+    numbering: 24,
     solution: 24,
     subtitle: 20,
-    numbering: 24,
     empty: 32,
+    title: 28,
   },
 
   family: {
@@ -12,22 +26,8 @@ export const SIZES = {
   },
 
   border: {
-    double: 5,
     single: 15,
-  },
-
-  columns: {
-    width: {
-      first: 5.5,
-      childColumn: (length: number) => {
-        return length === 1 ? 0 : (100 - SIZES.columns.width.first) / (length - 1);
-      },
-    },
-
-    height: {
-      solution: 312,
-      answer: 312,
-    },
+    double: 5,
   },
 } as const;
 

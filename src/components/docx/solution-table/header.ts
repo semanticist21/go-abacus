@@ -1,5 +1,4 @@
-import {AlignmentType, Paragraph, TableCell, TableRow, TextRun, WidthType} from 'docx';
-
+import {AlignmentType, Paragraph, TableCell, WidthType, TableRow, TextRun} from 'docx';
 import {COLORS, SIZES} from '../shared/const';
 
 const SolutionTableHeaderCells = (length: number = 6) => {
@@ -16,29 +15,16 @@ const SolutionTableHeaderCells = (length: number = 6) => {
             children: [
               isFirst
                 ? new TextRun({
+                    size: SIZES.font.numbering,
                     text: 'No.',
                     bold: true,
-                    size: SIZES.font.numbering,
                   })
-                : new TextRun({text: j.toString(), size: SIZES.font.numbering}),
+                : new TextRun({size: SIZES.font.numbering, text: j.toString()}),
             ],
             alignment: isFirst ? AlignmentType.LEFT : AlignmentType.CENTER,
           }),
         ],
-        shading: {
-          fill: COLORS.header,
-        },
-        width: isFirst
-          ? {size: SIZES.columns.width.first, type: WidthType.PERCENTAGE}
-          : {
-              size: SIZES.columns.width.childColumn(length),
-              type: WidthType.PERCENTAGE,
-            },
         borders: {
-          top: {
-            size: SIZES.border.single,
-            style: 'single',
-          },
           left: {
             size: isFirst ? SIZES.border.single : undefined,
             style: 'single',
@@ -47,6 +33,19 @@ const SolutionTableHeaderCells = (length: number = 6) => {
             size: isLast ? SIZES.border.single : undefined,
             style: 'single',
           },
+          top: {
+            size: SIZES.border.single,
+            style: 'single',
+          },
+        },
+        width: isFirst
+          ? {size: SIZES.columns.width.first, type: WidthType.PERCENTAGE}
+          : {
+              size: SIZES.columns.width.childColumn(length),
+              type: WidthType.PERCENTAGE,
+            },
+        shading: {
+          fill: COLORS.header,
         },
       })
     );

@@ -1,5 +1,4 @@
-import {AlignmentType, Paragraph, TableCell, TableRow, TextRun, WidthType} from 'docx';
-
+import {AlignmentType, Paragraph, TableCell, WidthType, TableRow, TextRun} from 'docx';
 import {SIZES} from '../shared/const';
 
 const SolutionTableFooterCells = (length: number = 6) => {
@@ -11,12 +10,26 @@ const SolutionTableFooterCells = (length: number = 6) => {
 
     cells.push(
       new TableCell({
+        borders: {
+          left: {
+            size: isFirst ? SIZES.border.single : undefined,
+            style: 'single',
+          },
+          right: {
+            size: isLast ? SIZES.border.single : undefined,
+            style: 'single',
+          },
+          bottom: {
+            size: SIZES.border.single,
+            style: 'single',
+          },
+        },
         children: [
           new Paragraph({
             children: [
               isFirst
-                ? new TextRun({text: '計', size: SIZES.font.numbering})
-                : new TextRun({text: '', size: SIZES.font.empty}),
+                ? new TextRun({size: SIZES.font.numbering, text: '計'})
+                : new TextRun({size: SIZES.font.empty, text: ''}),
             ],
             alignment: AlignmentType.CENTER,
           }),
@@ -27,20 +40,6 @@ const SolutionTableFooterCells = (length: number = 6) => {
               size: SIZES.columns.width.childColumn(length),
               type: WidthType.PERCENTAGE,
             },
-        borders: {
-          bottom: {
-            size: SIZES.border.single,
-            style: 'single',
-          },
-          left: {
-            size: isFirst ? SIZES.border.single : undefined,
-            style: 'single',
-          },
-          right: {
-            size: isLast ? SIZES.border.single : undefined,
-            style: 'single',
-          },
-        },
       })
     );
   });

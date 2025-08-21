@@ -1,19 +1,17 @@
+import {createJSONStorage, persist} from 'zustand/middleware';
 import {create as createMutative} from 'mutative';
 import {create} from 'zustand';
-import {createJSONStorage, persist} from 'zustand/middleware';
-
-import {initialOptions, MultiplyOptions, multiplyOptionsSchema} from './type';
+import {multiplyOptionsSchema, MultiplyOptions, initialOptions} from './type';
 
 interface StoreOptions {
-  options: MultiplyOptions;
   setOptions: (options: Partial<MultiplyOptions>) => void;
+  options: MultiplyOptions;
   reset: () => void;
 }
 
 export const useMultiplyOptionStore = create(
   persist<StoreOptions>(
     (set) => ({
-      options: initialOptions,
       setOptions: (options) =>
         set((state) =>
           createMutative(state, (draft) => {
@@ -21,10 +19,9 @@ export const useMultiplyOptionStore = create(
           })
         ),
       reset: () => set({options: initialOptions}),
+      options: initialOptions,
     }),
     {
-      name: 'multiply-options-storage',
-      storage: createJSONStorage(() => localStorage),
       onRehydrateStorage: () => (state) => {
         if (!state) return;
 
@@ -34,6 +31,8 @@ export const useMultiplyOptionStore = create(
           })
         );
       },
+      storage: createJSONStorage(() => localStorage),
+      name: 'multiply-options-storage',
     }
   )
 );

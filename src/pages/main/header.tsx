@@ -1,18 +1,16 @@
 import {invoke} from '@tauri-apps/api/core';
-import {isEqual} from 'lodash-es';
 import {useEffect, useState} from 'react';
-import {toast} from 'sonner';
-
+import {isEqual} from 'lodash-es';
 import {MouseEvent} from 'react';
-
+import {toast} from 'sonner';
 import {createPagesThenSave} from '../../components/docx/create-pages';
+import {initialOptions, optionsSchema, ISolutions} from './type';
 import Header from '../../components/ui/header';
 import {useOptionStore} from './store';
-import {initialOptions, ISolutions, optionsSchema} from './type';
 
 const MainHeader = () => {
   // store
-  const {reset, options} = useOptionStore();
+  const {options, reset} = useOptionStore();
 
   // state props
   const [isEqualToInitial, setIsEqualToInitial] = useState(true);
@@ -63,8 +61,8 @@ const MainHeader = () => {
 
   return (
     <Header
-      isEqualToInitial={isEqualToInitial}
       onCreateAndSave={handleCreateAndSave}
+      isEqualToInitial={isEqualToInitial}
       onReset={handleReset}
     />
   );

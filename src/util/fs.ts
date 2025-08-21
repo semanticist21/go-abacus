@@ -1,5 +1,5 @@
-import {join, resolve, resourceDir} from '@tauri-apps/api/path';
-import {mkdir, readDir, writeFile} from '@tauri-apps/plugin-fs';
+import {resourceDir, resolve, join} from '@tauri-apps/api/path';
+import {writeFile, readDir, mkdir} from '@tauri-apps/plugin-fs';
 
 export const getCurrentResourceDir = async () => {
   const resDir = await resourceDir();

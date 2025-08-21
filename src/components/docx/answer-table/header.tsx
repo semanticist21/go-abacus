@@ -1,5 +1,4 @@
 import {AlignmentType, Paragraph, TableCell, TableRow, TextRun} from 'docx';
-
 import {COLORS, SIZES} from '../shared/const';
 
 const AnswerTableHeaderCells = (title: string, length: number = 6) => {
@@ -7,27 +6,11 @@ const AnswerTableHeaderCells = (title: string, length: number = 6) => {
 
   cells.push(
     new TableCell({
-      children: [
-        new Paragraph({
-          children: [
-            new TextRun({
-              text: title,
-              size: SIZES.font.solution,
-            }),
-          ],
-          alignment: AlignmentType.CENTER,
-        }),
-      ],
-      columnSpan: length,
-      verticalAlign: 'center',
-      shading: {
-        fill: COLORS.header,
-      },
-      margins: {
-        top: 100,
-        bottom: 100,
-      },
       borders: {
+        right: {
+          size: SIZES.border.single,
+          style: 'single',
+        },
         left: {
           size: SIZES.border.single,
           style: 'single',
@@ -36,11 +19,27 @@ const AnswerTableHeaderCells = (title: string, length: number = 6) => {
           size: SIZES.border.single,
           style: 'single',
         },
-        right: {
-          size: SIZES.border.single,
-          style: 'single',
-        },
       },
+      children: [
+        new Paragraph({
+          children: [
+            new TextRun({
+              size: SIZES.font.solution,
+              text: title,
+            }),
+          ],
+          alignment: AlignmentType.CENTER,
+        }),
+      ],
+      margins: {
+        bottom: 100,
+        top: 100,
+      },
+      shading: {
+        fill: COLORS.header,
+      },
+      verticalAlign: 'center',
+      columnSpan: length,
     })
   );
 

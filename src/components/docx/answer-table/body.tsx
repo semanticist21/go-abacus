@@ -1,5 +1,4 @@
 import {AlignmentType, Paragraph, TableCell, TableRow, TextRun} from 'docx';
-
 import {SIZES} from '../shared/const';
 
 const AnswerTableBody = (answers: number[], length: number = 3, colLength: number = 5) => {
@@ -16,28 +15,10 @@ const AnswerTableBody = (answers: number[], length: number = 3, colLength: numbe
 
       cells.push(
         new TableCell({
-          children: [
-            new Paragraph({
-              children: [
-                new TextRun({
-                  text: rowAnswers[idx].toLocaleString(),
-                  size: SIZES.font.solution,
-                  font: SIZES.family.solution,
-                  characterSpacing: 15,
-                }),
-              ],
-              alignment: AlignmentType.CENTER,
-            }),
-          ],
-          verticalAlign: 'center',
           borders: {
             left: {
               size: isFirst ? SIZES.border.single : undefined,
               style: isFirst ? 'single' : 'none',
-            },
-            top: {
-              size: SIZES.border.single,
-              style: 'none',
             },
             right: {
               size: isLast ? SIZES.border.single : undefined,
@@ -47,18 +28,36 @@ const AnswerTableBody = (answers: number[], length: number = 3, colLength: numbe
               size: isLastRow ? SIZES.border.single : undefined,
               style: 'single',
             },
+            top: {
+              size: SIZES.border.single,
+              style: 'none',
+            },
           },
+          children: [
+            new Paragraph({
+              children: [
+                new TextRun({
+                  text: rowAnswers[idx].toLocaleString(),
+                  font: SIZES.family.solution,
+                  size: SIZES.font.solution,
+                  characterSpacing: 15,
+                }),
+              ],
+              alignment: AlignmentType.CENTER,
+            }),
+          ],
           margins: {
-            top: 100,
             bottom: 100,
+            top: 100,
           },
+          verticalAlign: 'center',
         })
       );
     });
 
     return new TableRow({
+      height: {value: SIZES.columns.height.answer, rule: 'atLeast'},
       children: cells,
-      height: {rule: 'atLeast', value: SIZES.columns.height.answer},
     });
   };
 

@@ -1,14 +1,13 @@
 import {
   AlignmentType,
+  VerticalAlign,
   Paragraph,
-  Table,
   TableCell,
+  WidthType,
   TableRow,
   TextRun,
-  VerticalAlign,
-  WidthType,
+  Table,
 } from 'docx';
-
 import {SIZES} from '../shared/const';
 
 const pageDescRow = (text: string) => {
@@ -21,50 +20,49 @@ const pageDescRow = (text: string) => {
               new Paragraph({
                 children: [
                   new TextRun({
-                    text,
                     bold: true,
+                    text,
                   }),
                 ],
               }),
             ],
-            verticalAlign: VerticalAlign.CENTER,
             borders: {
               right: {
                 style: 'double',
               },
             },
+            verticalAlign: VerticalAlign.CENTER,
           }),
           new TableCell({
             children: [
               new Paragraph({
                 children: [
                   new TextRun({
-                    text: '점',
                     bold: true,
+                    text: '점',
                     size: 20,
                   }),
                 ],
-                alignment: AlignmentType.RIGHT,
+                spacing: {
+                  lineRule: 'auto',
+                  line: 360,
+                },
                 indent: {
                   right: 100,
                 },
-                spacing: {
-                  line: 360,
-                  lineRule: 'auto',
-                },
+                alignment: AlignmentType.RIGHT,
               }),
             ],
-            verticalAlign: VerticalAlign.CENTER,
-            width: {
-              size: 15,
-              type: WidthType.PERCENTAGE,
-            },
             borders: {
-              left: {
+              bottom: {
                 size: SIZES.border.double,
                 style: 'double',
               },
               right: {
+                size: SIZES.border.double,
+                style: 'double',
+              },
+              left: {
                 size: SIZES.border.double,
                 style: 'double',
               },
@@ -72,32 +70,33 @@ const pageDescRow = (text: string) => {
                 size: SIZES.border.double,
                 style: 'double',
               },
-              bottom: {
-                size: SIZES.border.double,
-                style: 'double',
-              },
             },
+            width: {
+              type: WidthType.PERCENTAGE,
+              size: 15,
+            },
+            verticalAlign: VerticalAlign.CENTER,
           }),
         ],
       }),
     ],
-    width: {
-      size: 100,
-      type: WidthType.PERCENTAGE,
-    },
     borders: {
       bottom: {
-        style: 'none',
-      },
-      top: {
-        style: 'none',
-      },
-      left: {
         style: 'none',
       },
       right: {
         style: 'none',
       },
+      left: {
+        style: 'none',
+      },
+      top: {
+        style: 'none',
+      },
+    },
+    width: {
+      type: WidthType.PERCENTAGE,
+      size: 100,
     },
   });
 };

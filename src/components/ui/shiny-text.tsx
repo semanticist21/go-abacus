@@ -1,36 +1,35 @@
-import {FC, ReactNode} from 'react';
-
+import {ReactNode, FC} from 'react';
 import {cn} from '../../util/cn';
 
 interface ShinyTextProps {
-  text: ReactNode;
-  disabled?: boolean;
-  speed?: number;
   className?: string;
+  disabled?: boolean;
+  text: ReactNode;
+  speed?: number;
 }
 
-const ShinyText: FC<ShinyTextProps> = ({text, disabled = false, speed = 5, className = ''}) => {
+const ShinyText: FC<ShinyTextProps> = ({disabled = false, className = '', speed = 5, text}) => {
   const animationDuration = `${speed}s`;
 
   return (
     <div
-      className={cn('relative inline-block', className)}
       style={{
         animationDuration: animationDuration,
       }}
+      className={cn('relative inline-block', className)}
     >
       <span
-        className={cn('relative z-10', !disabled && 'animate-shine')}
         style={{
           background: !disabled
             ? 'linear-gradient(120deg, #6B7280 30%, #D1D5DB 50%, #6B7280 70%)'
             : '#6B7280',
-          backgroundSize: '200% 100%',
-          WebkitBackgroundClip: 'text',
-          backgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
           animationDuration: animationDuration,
+          WebkitTextFillColor: 'transparent',
+          WebkitBackgroundClip: 'text',
+          backgroundSize: '200% 100%',
+          backgroundClip: 'text',
         }}
+        className={cn('relative z-10', !disabled && 'animate-shine')}
       >
         {text}
       </span>

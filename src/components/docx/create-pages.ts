@@ -1,18 +1,17 @@
+import {WidthType, Document, TableRow, Packer, Table} from 'docx';
 import {save} from '@tauri-apps/plugin-dialog';
-import {Document, Packer, Table, TableRow, WidthType} from 'docx';
 import {toast} from 'sonner';
-
-import {useOptionStore} from '../../pages/main/store';
-import {defaultFileNameRegex, makeRandomFileName, Options, Solutions} from '../../pages/main/type';
+import {defaultFileNameRegex, makeRandomFileName, Solutions, Options} from '../../pages/main/type';
 import {getCurrentResourceDir, saveFileBlob} from '../../util/fs';
-import AnswerTableBodyCells from './answer-table/body';
+import SolutionTableFooterCells from './solution-table/footer';
+import SolutionTableHeaderCells from './solution-table/header';
 import AnswerTableHeaderCells from './answer-table/header';
+import AnswerTableBodyCells from './answer-table/body';
+import {useOptionStore} from '../../pages/main/store';
+import SolutionTableBody from './solution-table/body';
 import pageDescRow from './page/desc-row';
 import PageHeader from './page/header';
 import pageTitle from './page/title';
-import SolutionTableBody from './solution-table/body';
-import SolutionTableFooterCells from './solution-table/footer';
-import SolutionTableHeaderCells from './solution-table/header';
 import spacer from './spacer';
 
 const _make1Solution = (solutions: Solutions[], options: Options) => {
@@ -23,8 +22,8 @@ const _make1Solution = (solutions: Solutions[], options: Options) => {
   rows.push(SolutionTableFooterCells());
 
   return new Table({
+    width: {type: WidthType.PERCENTAGE, size: 100},
     rows: rows,
-    width: {size: 100, type: WidthType.PERCENTAGE},
   });
 };
 
@@ -39,8 +38,8 @@ const _create1AnswerTable = (title: string, options: Options, solutions: Solutio
   ).forEach((row) => rows.push(row));
 
   return new Table({
+    width: {type: WidthType.PERCENTAGE, size: 100},
     rows: rows,
-    width: {size: 100, type: WidthType.PERCENTAGE},
   });
 };
 
@@ -49,7 +48,7 @@ export const createPagesThenSave = async (options: Options, solutions: Solutions
 
   const savePath = await save({
     defaultPath: resDir + '/' + options.file_name + '.docx',
-    filters: [{name: 'docx', extensions: ['docx']}],
+    filters: [{extensions: ['docx'], name: 'docx'}],
   });
 
   if (!savePath) return;
@@ -68,9 +67,6 @@ export const createPagesThenSave = async (options: Options, solutions: Solutions
     const tableUnit = options.solutions_per_page / options.solution_table_per_page;
 
     return {
-      headers: {
-        default: PageHeader(getPageHeaderTitle(idx + 1)),
-      },
       children: [
         pageTitle(`${options.title}`),
         spacer(100),
@@ -84,14 +80,14 @@ export const createPagesThenSave = async (options: Options, solutions: Solutions
         spacer(0),
         _make1Solution(aPageSolutions.slice(2 * tableUnit, 3 * tableUnit), options),
       ],
+      headers: {
+        default: PageHeader(getPageHeaderTitle(idx + 1)),
+      },
     };
   });
 
   // answer table
   const answerSectionChildren = {
-    headers: {
-      default: PageHeader('정답'),
-    },
     children: Array.from({length: options.page_count}, (_, idx) => {
       const result = [
         _create1AnswerTable(
@@ -107,6 +103,9 @@ export const createPagesThenSave = async (options: Options, solutions: Solutions
 
       return result;
     }).flat(1),
+    headers: {
+      default: PageHeader('정답'),
+    },
   };
 
   const file = new Document({

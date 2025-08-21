@@ -1,8 +1,7 @@
-import {AlignmentType, Paragraph, TableCell, TableRow, TextRun, WidthType} from 'docx';
-
-import {Options, Solutions} from '../../../pages/main/type';
+import {AlignmentType, Paragraph, TableCell, WidthType, TableRow, TextRun} from 'docx';
 import {addDotSeparate} from '../../../util/add-dot-separate';
 import {formatDigitNumber} from '../../../util/format-digit';
+import {Solutions, Options} from '../../../pages/main/type';
 import {SIZES} from '../shared/const';
 
 const SolutionTableBody = (
@@ -42,31 +41,20 @@ const SolutionTableBody = (
                       size: SIZES.font.numbering,
                     })
                   : new TextRun({
-                      text: formattedNumber,
-                      size: SIZES.font.solution,
-                      italics: true,
                       font: SIZES.family.solution,
                       characterSpacing: spacing,
+                      size: SIZES.font.solution,
+                      text: formattedNumber,
+                      italics: true,
                     }),
               ],
               alignment: isFirst ? AlignmentType.CENTER : AlignmentType.RIGHT,
             }),
           ],
-          width: isFirst
-            ? {size: SIZES.columns.width.first, type: WidthType.PERCENTAGE}
-            : {
-                size: SIZES.columns.width.childColumn(colLength),
-                type: WidthType.PERCENTAGE,
-              },
-          verticalAlign: 'center',
           borders: {
             left: {
               size: isFirst ? SIZES.border.single : undefined,
               style: isFirst ? 'single' : 'none',
-            },
-            top: {
-              size: SIZES.border.single,
-              style: 'none',
             },
             right: {
               size: isLast ? SIZES.border.single : undefined,
@@ -76,14 +64,25 @@ const SolutionTableBody = (
               size: SIZES.border.single,
               style: 'none',
             },
+            top: {
+              size: SIZES.border.single,
+              style: 'none',
+            },
           },
+          width: isFirst
+            ? {size: SIZES.columns.width.first, type: WidthType.PERCENTAGE}
+            : {
+                size: SIZES.columns.width.childColumn(colLength),
+                type: WidthType.PERCENTAGE,
+              },
+          verticalAlign: 'center',
         })
       );
     });
 
     return new TableRow({
+      height: {value: SIZES.columns.height.solution, rule: 'atLeast'},
       children: cells,
-      height: {rule: 'atLeast', value: SIZES.columns.height.solution},
     });
   };
 

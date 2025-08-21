@@ -3,7 +3,7 @@ import Header from './header';
 
 const MultiplyPage = () => {
   return (
-    <div id="container" className="flex h-full flex-col">
+    <div className="flex h-full flex-col" id="container">
       <Header />
       <MultiplyBody />
     </div>

@@ -1,23 +1,22 @@
+import {InputHTMLAttributes, HTMLAttributes, ChangeEvent, useId, FC} from 'react';
 import {Check} from 'lucide-react';
-import {ChangeEvent, FC, HTMLAttributes, InputHTMLAttributes, useId} from 'react';
 import {Except} from 'type-fest';
-
 import {cn} from '../../util/cn';
 
 interface MainCheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
-  label: string;
-  containerClassName?: string;
   containerProps?: Except<HTMLAttributes<HTMLDivElement>, 'aria-controls' | 'className'>;
+  containerClassName?: string;
+  label: string;
 }
 
 export const Checkbox: FC<MainCheckboxProps> = ({
-  label,
-  containerClassName,
   containerProps: divProps,
+  containerClassName,
   className,
-  checked,
-  onChange,
   disabled,
+  onChange,
+  checked,
+  label,
   ...rest
 }) => {
   const id = useId();
@@ -32,7 +31,6 @@ export const Checkbox: FC<MainCheckboxProps> = ({
       {...divProps}
     >
       <label
-        htmlFor={id}
         className={cn(
           'relative flex h-5 w-5 cursor-pointer items-center justify-center rounded-lg border-2 transition-all duration-200 ease-in-out',
           'border-gray-300 bg-white shadow-xs',
@@ -42,14 +40,15 @@ export const Checkbox: FC<MainCheckboxProps> = ({
           'group-hover:border-blue-400',
           disabled && 'cursor-not-allowed hover:border-gray-300 hover:shadow-xs'
         )}
+        htmlFor={id}
       >
         <input
           className={cn('absolute inset-0 opacity-0', className)}
-          id={id}
-          type="checkbox"
-          checked={checked}
-          onChange={onChange}
           disabled={disabled}
+          onChange={onChange}
+          checked={checked}
+          type="checkbox"
+          id={id}
           {...rest}
         />
         <Check
@@ -57,8 +56,8 @@ export const Checkbox: FC<MainCheckboxProps> = ({
             'pointer-events-none h-3 w-3 text-white transition-all duration-200',
             checked ? 'scale-100 opacity-100' : 'scale-75 opacity-0'
           )}
-          strokeWidth={3}
           aria-hidden="true"
+          strokeWidth={3}
         />
       </label>
       <label

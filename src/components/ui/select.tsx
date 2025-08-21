@@ -1,14 +1,13 @@
-import {ChevronDown} from 'lucide-react';
 import {SelectHTMLAttributes} from 'react';
-
+import {ChevronDown} from 'lucide-react';
 import {cn} from '@/util/cn';
 
 interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
-  label?: string;
   containerClassName?: string;
+  label?: string;
 }
 
-const Select = ({label, containerClassName, className, children, ...props}: SelectProps) => {
+const Select = ({containerClassName, className, children, label, ...props}: SelectProps) => {
   return (
     <div className={cn('flex flex-col gap-1', containerClassName)}>
       {label && <label className="text-sm font-medium text-gray-700">{label}</label>}
