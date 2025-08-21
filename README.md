@@ -1,5 +1,9 @@
 # Go-abacus - 주산암산 덧셈뺄셈 자동문제 생성기
 
+## CONTRIBUTION
+
+- icon source: <https://www.iconarchive.com/show/fluentui-emoji-3d-icons-by-microsoft/Abacus-3d-icon.html>
+
 ## 프레임워크
 
 - Tauri
